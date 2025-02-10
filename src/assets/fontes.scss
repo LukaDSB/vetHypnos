@@ -1,0 +1,95 @@
+@import 'bootstrap/scss/bootstrap';
+@import './cores.scss';
+
+$font-primary: 'Poppins', sans-serif;
+$font-secondary: 'Open Sans', sans-serif;
+
+$font-sizes: (
+  "h1": 2rem,
+  "h2": 1.75rem,
+  "h3": 1.5rem,
+  "h4": 1.25rem,
+  "body-large": 1.125rem,
+  "body": 1rem,
+  "small": 0.875rem,
+  "TituloGrande": 3rem
+);
+
+$font-weights: (
+  "light": 300,
+  "regular": 400,
+  "medium": 500,
+  "bold": 700
+);
+
+$text-colors: (
+  "primary": #2c3e50,
+  "secondary": #7f8c8d,
+  "success": #27ae60,
+  "danger": #e74c3c,
+  "warning": #f39c12
+);
+
+$breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px
+);
+
+
+.hypnosText {
+  font-family: $font-primary;
+
+  &--TituloGrande {
+    font-size: map-get($font-sizes, "TituloGrande");
+    font-weight: map-get($font-weights, "medium");
+    line-height: 1.2;
+    color: $creme;
+
+    @media (max-width: map-get($breakpoints, "md")) {
+      font-size: 2.5rem;
+    }
+
+    @media (max-width: map-get($breakpoints, "sm")) {
+      font-size: 2rem;
+    }
+  }
+
+  &--h1 {
+    font-size: map-get($font-sizes, "h1");
+    font-weight: map-get($font-weights, "bold");
+    line-height: 1.2;
+
+    @media (max-width: map-get($breakpoints, "md")) {
+      font-size: 1.75rem;
+    }
+
+    @media (max-width: map-get($breakpoints, "sm")) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &--fonte1 {
+    font-size: map-get($font-sizes, "h3");
+    font-weight: map-get($font-weights, "medium");
+
+    @media (max-width: map-get($breakpoints, "sm")) {
+      font-size: 1.25rem;
+    }
+  }
+
+  &--fonte2 {
+    font-size: map-get($font-sizes, "body");
+    font-weight: map-get($font-weights, "medium");
+
+    @media (max-width: map-get($breakpoints, "sm")) {
+      font-size: 0.875rem;
+    }
+  }
+
+  &--small {
+    font-size: map-get($font-sizes, "small");
+    font-weight: map-get($font-weights, "regular");
+  }
+}

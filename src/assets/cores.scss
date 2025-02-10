@@ -1,0 +1,37 @@
+@import 'bootstrap/scss/bootstrap';
+
+$verde1: #359830;
+$verde2: rgba(#359830, 0.5);
+$creme: #FFFDFA;
+$cinza: #969696;
+$amarelo: #FFC20E;
+$vermelho: #FF0000;
+$branco: #FFFF;
+
+.hypnosColor{
+  color: $branco;
+
+  &--verde1{
+    color: #359830;
+  }
+
+  &--verde2{
+    color: rgba(#359830, 0.5);
+  }
+
+  &--creme{
+    color: #FFFDFA;
+  }
+  &--cinza{
+    color: #969696;
+  }
+  &--amarelo{
+    color: #FFC20E;
+  }
+  &--vermelho{
+    color: #FF0000;
+  }
+  &--branco{
+    color: #FFFF;;
+  }
+}

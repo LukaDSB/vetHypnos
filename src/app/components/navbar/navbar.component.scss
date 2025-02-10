@@ -1,10 +1,5 @@
-@import '/src/assets/fontes.scss';
-@import '/src/assets/cores.scss';
-
-*{
-  margin: 0;
-  padding: 0;
-}
+@import '../../../assets/fontes.scss';
+@import '../../../assets/cores.scss';
 
 .navbar {
   display: flex;
@@ -68,6 +63,11 @@
   height: 60px;
   margin-bottom: 24px;
   border-radius: 8px;
+  font-weight: 800;
+  i{
+    font-size: 30px;
+    margin-right: 10px;
+  }
 }
 
 .nav {
@@ -79,15 +79,22 @@
 
 .nav-item {
   margin: 8px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .nav-link {
   display: block;
+  width: 100%;
   padding: 10px 16px;
   color: #ecf0f1;
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.3s;
+  i{
+    margin-right: 5px;
+  }
 }
 
 .nav-link:hover {
@@ -97,6 +104,13 @@
 .logout {
   margin-top: auto;
   margin-bottom: 16px;
+  button{
+    width: 12vw;
+    i{
+      font-size: .8em;
+      margin-right: .3vw;
+    }
+  }
 }
 
 .logout button {
@@ -118,22 +132,4 @@ footer {
   font-size: 12px;
   color: #bdc3c7;
   margin-top: 16px;
-}
-
-.layout {
-  display: flex;
-  height: 100vh;
-}
-
-app-navbar {
-  width: 250px;
-  flex-shrink: 0;
-  background-color: #f4f4f4;
-  height: 100vh;
-}
-
-.content {
-  flex-grow: 1;
-  padding: 20px;
-  overflow-y: auto;
 }
