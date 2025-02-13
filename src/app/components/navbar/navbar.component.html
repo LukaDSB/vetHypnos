@@ -13,18 +13,18 @@
     </div>
   </div>
 
-  <button class="painelPrincipal hypnosText--fonte1" type="button"><i class="fa-solid fa-chart-line"></i>Painel principal</button>
+  <button class="painelPrincipal hypnosText--fonte1" type="button" [routerLink]="'/principal'"><i class="fa-solid fa-chart-line"></i>Painel principal</button>
 
   <ul class="nav flex-column">
     <li class="nav-item hypnosText--fonte1" *ngFor="let item of menuItems">
       <a class="nav-link" [routerLink]="item.route">
-        <i class="{{ item.icon }}"></i> {{ item.text }}
+        <i  [ngClass]="item.icon"></i> {{ item.text }}
       </a>
     </li>
   </ul>
 
   <div class="logout">
-    <button class="hypnosText--fonte1"><i class="fa-solid fa-power-off"></i> Sair</button>
+    <button class="hypnosText--fonte1" (click)="logout()"><i class="fa-solid fa-power-off"></i> Sair</button>
   </div>
 
   <footer>

@@ -1,0 +1,95 @@
+<div *ngIf="isLoginModalOpen" class="modal">
+  <div class="modal-content">
+
+    <div class="realizarCadastro">
+      <div class="items">
+        <h1 class="hypnosText--fonte1">Bem-vindo de volta</h1>
+        <h1 class="hypnosText--fonte2">ou</h1>
+        <h1 class="hypnosText--fonte2">Realize seu cadastro</h1>
+        <button (click)="openCadastro()" type="submit" class="btn btn-primary mb-3">Cadastro</button>
+      </div>
+    </div>
+
+    <div class="formularioLogin">
+      <h2 class="hypnosText--h1">Acessar conta</h2>
+      <div class="form">
+
+        <div class="mb-3 row">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-regular fa-envelope"></i>
+            </span>
+            <input [(ngModel)]="email" type="text" class="form-control text-center" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input [(ngModel)]="senha" type="text" class="form-control text-center" placeholder="Senha">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-auto">
+        <button (click)="login()" type="submit" class="hypnosButtom btn btn-primary mb-3">Entrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="isCadastroModalOpen" class="modal">
+  <div class="modal-content">
+
+    <div class="realizarCadastro">
+      <div class="items">
+        <h1 class="hypnosText--fonte1">Cadastre-se!</h1>
+        <h1 class="hypnosText--fonte2">ou</h1>
+        <h1 class="hypnosText--fonte2">Acesse sua conta</h1>
+        <button (click)="closeCadastro()" type="submit" class="btn btn-primary mb-3">Login</button>
+      </div>
+    </div>
+
+    <div class="formularioLogin">
+      <h2 class="hypnosText--h1">Crie sua  conta</h2>
+      <div class="form">
+        <div class="mb-3 row">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-solid fa-user"></i>
+            </span>
+            <input [(ngModel)]="nome" type="text" class="form-control text-center" placeholder="Nome">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-regular fa-envelope"></i>
+            </span>
+            <input [(ngModel)]="email" type="text" class="form-control text-center" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input [(ngModel)]="senha" type="text" class="form-control text-center" placeholder="Senha">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-auto">
+        <button (click)="login()" type="submit" class="hypnosButtom btn btn-primary mb-3">Cadastrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

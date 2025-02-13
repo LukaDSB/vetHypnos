@@ -122,11 +122,10 @@ footer {
 
 .layout {
   display: flex;
-  height: 100vh;
+  flex-direction: row;
 }
 
 app-navbar {
-  width: 250px;
   flex-shrink: 0;
   background-color: #f4f4f4;
   height: 100vh;

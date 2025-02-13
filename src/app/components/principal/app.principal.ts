@@ -8,5 +8,4 @@ import { NavbarComponent } from "../navbar/navbar.component";
   styleUrls: ['./app.principal.scss']
 })
 export class AppPrincipal {
-  title = 'projetoTeste';
 }

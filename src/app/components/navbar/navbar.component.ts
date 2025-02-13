@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -11,4 +11,9 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   @Input() menuItems: { text: string; icon: string; route: string }[] = [];
+  @Output() logoff = new EventEmitter<void>();
+
+  logout() {
+    this.logoff.emit();
+  }
 }
