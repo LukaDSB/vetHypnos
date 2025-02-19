@@ -1,1 +1,17 @@
 @import '../../../styles.scss';
+@import '/src/assets/cores.scss';
+
+
+.scrollCards{
+  display: flex;
+  flex-direction: row;
+  gap: 1.5vw;
+}
+
+.conteudoPrincipal{
+  background-color: $branco;
+  width: 100%;
+  height: 80%;
+  border-radius: 40px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

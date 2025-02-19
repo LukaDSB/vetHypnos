@@ -1,0 +1,12 @@
+<div *ngFor="let item of cardItems" class="d-flex justify-content-center align-items-center card text-white p-2 pe-auto"  [ngClass]="[item.cor]" style="width: 15rem; height: 12vh; border-radius: 12px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);cursor:pointer;">
+
+  <div [routerLink]="item.rota" class="card-body d-flex align-items-center">
+      <div class="me-3">
+        <i [ngClass]="item.icone" style="font-size: 5em;"></i>
+      </div>
+      <div>
+          <h4 class="mb-0" style="padding-left: 20px;">{{item.numero}}</h4>
+          <p class="mb-0">{{item.texto}}</p>
+      </div>
+  </div>
+</div>
