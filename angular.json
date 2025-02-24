@@ -31,7 +31,9 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/components/hdk/cores.scss",
+              "src/app/components/hdk/fontes.scss"
             ],
             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
           },
@@ -96,6 +98,11 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/components/hdk"
+              ]
+            },
             "scripts": []
           }
         }

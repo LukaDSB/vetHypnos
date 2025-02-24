@@ -1,57 +1,88 @@
 @import 'bootstrap/scss/bootstrap';
 
-$verde1: #359830;
-$verde2: rgba(#359830, 0.5);
+$verde: #359830;
+$verdeOpaco: rgba(#359830, 0.5);
 $creme: #fcf6ed;
 $bg-creme: #fcf6ed;
 $cinza: #969696;
 $amarelo: #FFC20E;
 $vermelho: #FF0000;
 $branco: #FFFF;
+$azul: #E3EDF9;
+$preto: #232423;
 
-.hypnosColor{
+.hdk{
   color: $branco;
 
-  &--verde1{
+  &-verde{
     color: #359830;
+  }
+
+  &-bg-verde{
     background-color: #359830;
   }
 
-  &--verde2{
+  &-verde2{
     color: rgba(#2b7c26, 0.5);
+  }
+
+  &-bg-verde2{
     background-color: rgba(#2b7c26, 0.5);
   }
 
-  &--creme{
+  &-creme{
     color: #FFFDFA;
+  }
+
+  &-bg-creme{
     background-color: #FFFDFA;
   }
 
-  &--cinza{
+  &-cinza{
     color: #969696;
+  }
+
+  &-bg-cinza{
     background-color: #969696;
   }
 
-  &--amarelo{
+  &-amarelo{
     color: #FFC20E;
   }
 
-  &--bg-amarelo{
+  &-bg-amarelo{
     background-color: #FFC20E;
   }
 
-  &--vermelho{
+  &-vermelho{
     color: #FF0000;
+  }
+
+  &-bg-vermelho{
     background-color: #FF0000;
   }
 
-  &--branco{
+  &-branco{
     color: #FFFF;
+  }
+
+  &-bg-branco{
     background-color: #FFFF;
   }
 
-  &--azul{
+  &-azul{
     color: rgba(37, 61, 144, 1);
+  }
+
+  &-bg-azul{
     background-color: rgba(37, 61, 144, 1);
+  }
+
+  &-preto{
+    color: #232423;
+  }
+
+  &-bg-preto{
+    background-color: #232423;
   }
 }

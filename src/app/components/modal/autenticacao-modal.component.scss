@@ -1,6 +1,6 @@
 @import '../../../styles.scss';
-@import '../../../assets/cores.scss';
-@import '../../../assets/fontes.scss';
+@import '../hdk/cores.scss';
+@import '../hdk/fontes.scss';
 
 .modal {
   position: fixed;
@@ -24,7 +24,7 @@
 }
 
 .realizarCadastro{
-  background-color: $verde1;
+  background-color: $verde;
   width: 15vw;
   display: flex;
   justify-content: center;
@@ -36,7 +36,7 @@
 }
 
 .formularioLogin{
-  background-color: $verde2;
+  background-color: $verdeOpaco;
   width: 30vw;
   display: flex;
   flex-direction: column;
@@ -52,5 +52,5 @@
 }
 
 .hypnosButtom{
-  background-color: $verde1;
+  background-color: $verde;
 }

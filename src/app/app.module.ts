@@ -8,10 +8,12 @@ import { MedicamentosComponent } from './components/medicamentos/medicamentos.co
 import { FormsModule } from '@angular/forms';
 import { AutenticacaoModalComponent } from "./components/modal/autenticacao-modal.component";
 import { AppComponent } from './app.component';
+import { HdkButtonComponent } from './components/hdk/button/hdk-button.component';
+import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
 
 @NgModule({
   declarations: [
-    AppComponent,MedicamentosComponent
+    AppComponent,MedicamentosComponent, HdkButtonComponent, HdkDivisor
   ],
   imports: [
     BrowserModule,

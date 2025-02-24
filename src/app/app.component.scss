@@ -1,5 +1,5 @@
-@import '/src/assets/fontes.scss';
-@import '/src/assets/cores.scss';
+@import '../app/components/hdk/fontes.scss';
+@import '../app/components/hdk/cores.scss';
 
 *{
   margin: 0;
@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $verde1;
+  background-color: $verde;
   width: 300px;
   height: 100vh;
   padding: 16px;
@@ -123,6 +123,7 @@ footer {
 .layout {
   display: flex;
   flex-direction: row;
+  background-color: #E3EDF9;
 }
 
 app-navbar {
@@ -133,7 +134,7 @@ app-navbar {
 
 .content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 20px 40px;
   overflow-y: auto;
   background-color: $bg-creme;
 }

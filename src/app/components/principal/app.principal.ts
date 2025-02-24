@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from "../navbar/navbar.component";
 import { DashboardCard } from './dashboardCards/dashboardCard';
 
 @Component({
@@ -12,9 +10,10 @@ import { DashboardCard } from './dashboardCards/dashboardCard';
 })
 export class AppPrincipal {
   cardItems = [
-    { icone: 'fa-solid fa-address-card', numero: '30', texto:'Pacientes', rota: '/pacientes', cor: 'hypnosColor--azul' },
-    { icone: 'fa-solid fa-suitcase-medical', numero: '20', texto:'Medicamentos', rota: '/medicamentos', cor: 'hypnosColor--verde1' },
-    { icone: 'fa-solid fa-address-card', numero: '7', texto:'Prontuários', rota: '/pacientes', cor: 'hypnosColor--cinza' },
-    { icone: 'fa-solid fa-address-card', numero: '10', texto:'Relatórios', rota: '/pacientes', cor: 'hypnosColor--bg-amarelo' },
+    { icone: 'fa-solid fa-address-card', numero: '30', texto:'Pacientes', rota: '/pacientes', cor: 'hdk-bg-azul' },
+    { icone: 'fa-solid fa-suitcase-medical', numero: '20', texto:'Medicamentos', rota: '/medicamentos', cor: 'hdk-bg-verde' },
+    { icone: 'fa-solid fa-book-open', numero: '7', texto:'Prontuários', rota: '/pacientes', cor: 'hdk-bg-preto' },
+    { icone: 'fa-solid fa-chart-column', numero: '10', texto:'Relatórios', rota: '/pacientes', cor: 'hdk-bg-amarelo' },
+    { icone: 'fa-solid fa-user-group', numero: '10', texto:'Tutores', rota: '/pacientes', cor: 'hdk-bg-azul' }
   ];
 }

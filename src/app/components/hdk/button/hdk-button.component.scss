@@ -1,0 +1,12 @@
+@import '../cores.scss';
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6vw;
+  height: 4vh;
+  i{
+    color: $creme;
+  }
+}
