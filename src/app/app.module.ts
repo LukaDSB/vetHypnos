@@ -10,6 +10,7 @@ import { AutenticacaoModalComponent } from "./components/modal/autenticacao-moda
 import { AppComponent } from './app.component';
 import { HdkButtonComponent } from './components/hdk/button/hdk-button.component';
 import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
+import { TabelaComponent } from './components/hdk/tabela/hdk-tabela.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
     NavbarComponent,
     FormsModule,
     AutenticacaoModalComponent,
-    PacientesComponent
+    PacientesComponent,
+    TabelaComponent
 ],
   providers: [],
   bootstrap: [AppComponent]
