@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'hdk-divisor',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./hdk-divisor.component.scss']
 })
 export class HdkDivisor {
-
+  showDivisor?: boolean;
+  
+  @Input() hideDivisor: boolean = false;
+  @Input() icon: string = 'fa-solid fa-magnifying-glass';
 }

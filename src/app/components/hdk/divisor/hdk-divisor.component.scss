@@ -4,4 +4,10 @@
   background-color: #ccc;
   margin: 1vw 0;
   padding: 0;
+  transition: height 0.3s ease-in-out;
+}
+
+.divider-hidden {
+  height: 0 !important;
+  opacity: 0;
 }

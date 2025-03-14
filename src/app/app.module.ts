@@ -11,10 +11,15 @@ import { AppComponent } from './app.component';
 import { HdkButtonComponent } from './components/hdk/button/hdk-button.component';
 import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
 import { TabelaComponent } from './components/hdk/tabela/hdk-tabela.component';
+import { HdkModalComponent } from './components/hdk/modal/hdk-modal.component';
+import { TutoresComponent } from './components/tutores/tutores.component';
+import { RelatoriosComponent } from './components/relatorios/relatorios.component';
+import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,MedicamentosComponent, HdkButtonComponent, HdkDivisor
+    AppComponent,MedicamentosComponent, HdkButtonComponent, HdkDivisor, HdkModalComponent, ProntuariosComponent, RelatoriosComponent, TutoresComponent
   ],
   imports: [
     BrowserModule,

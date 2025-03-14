@@ -6,16 +6,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TabelaService } from 'src/app/services/tabela.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'hdk-tabela',
   styleUrls: ['hdk-tabela.component.scss'],
   templateUrl: 'hdk-tabela.component.html',
   standalone: true,
-  imports: [HttpClientModule, MatTableModule, MatPaginatorModule],
+  imports: [HttpClientModule, MatTableModule, MatPaginatorModule, RouterModule],
 })
 export class TabelaComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'nome', 'email', 'especialidade'];
+  displayedColumns: string[] = ['id', 'nome', 'email', 'especialidade', 'acoes'];
   dataSource = new MatTableDataSource<Usuario>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

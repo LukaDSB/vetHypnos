@@ -16,8 +16,8 @@ export class AppComponent {
   menuItems = [
     { text: 'Pacientes', icon: 'fa-solid fa-address-card', route: '/pacientes' },
     { text: 'Medicamentos', icon: 'fa-solid fa-briefcase-medical', route: '/medicamentos' },
-    { text: 'Prontuários', icon: 'fa-solid fa-book-open', route: '/medicamentos' },
-    { text: 'Relatórios', icon: 'fa-solid fa-chart-column', route: '/medicamentos' },
-    { text: 'Tutores', icon: 'fa-solid fa-user-group', route: '/medicamentos' },
+    { text: 'Prontuários', icon: 'fa-solid fa-book-open', route: '/prontuarios' },
+    { text: 'Relatórios', icon: 'fa-solid fa-chart-column', route: '/relatorios' },
+    { text: 'Tutores', icon: 'fa-solid fa-user-group', route: '/tutores' },
   ];
 }

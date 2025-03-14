@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'hdk-button',
   templateUrl: './hdk-button.component.html',
-  styleUrls: ['./hdk-button.component.scss']
+  styleUrls: ['./hdk-button.component.scss'],
 })
 export class HdkButtonComponent {
-  @Input() icon: string = 'fa-solid fa-magnifying-glass';
+  @Input() icon?: string;
   @Input() text: string = 'Buscar';
   @Input() fonte: string = 'hypnosText--TituloGrande';
   @Input() color: string = 'btn-success';
