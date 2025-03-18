@@ -9,7 +9,7 @@ import { Usuario } from 'src/app/models/usuario.model';
   templateUrl: './pacientes.component.html',
 })
 export class PacientesComponent implements OnInit {
-  dataSource: MatTableDataSource<Usuario> | undefined;
+  dataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>([]);
   displayedColumns: string[] = ['id', 'nome', 'email', 'especialidade', 'acoes'];
 
   constructor(private usuarioService: UsuarioService, private location: Location) {}

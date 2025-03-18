@@ -14,7 +14,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 })
 export class TabelaComponent implements AfterViewInit {
   @Input() dataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>([]);
-  @Input() pageSizeOptions: number[] = [12, 20];
+  @Input() pageSizeOptions: number[] = [10, 20];
   @Input() displayedColumns?: string[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
