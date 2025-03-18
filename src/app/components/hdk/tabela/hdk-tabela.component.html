@@ -1,11 +1,6 @@
-<div class="tableContainer">
+ <div class="tableContainer">
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" class="mat-table">
-      
-      <!-- <ng-container *ngFor="let item of items" matColumnDef={{item.title}}>
-        <th mat-header-cell *matHeaderCellDef> {{item.title}} </th>
-        <td mat-cell *matCellDef="let element"> {{ item.content }} </td>
-      </ng-container> -->
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -39,4 +34,3 @@
   </div>
   <mat-paginator class="matPaginator" [pageSizeOptions]="[12, 20]" showFirstLastButtons hidePageSize></mat-paginator>
 </div>
-  

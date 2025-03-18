@@ -1,35 +1,27 @@
-import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Usuario } from '../../../models/usuario.model';
-import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { TabelaService } from 'src/app/services/tabela.service';
 import { RouterModule } from '@angular/router';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
-  selector: 'hdk-tabela',
-  styleUrls: ['hdk-tabela.component.scss'],
+  imports:[MatTableModule, RouterModule, MatPaginatorModule],
   templateUrl: 'hdk-tabela.component.html',
-  standalone: true,
-  imports: [HttpClientModule, MatTableModule, MatPaginatorModule, RouterModule],
+  styleUrls: ['hdk-tabela.component.scss'],
+  selector: 'hdk-tabela',
+  standalone: true
 })
-export class TabelaComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'nome', 'email', 'especialidade', 'acoes'];
-  dataSource = new MatTableDataSource<Usuario>([]);
+export class TabelaComponent implements AfterViewInit {
+  @Input() dataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>([]);
+  @Input() pageSizeOptions: number[] = [12, 20];
+  @Input() displayedColumns?: string[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private tabelaService: TabelaService) {}
-
-  ngOnInit() {
-    this.tabelaService.getUsuarios().subscribe((data) => {
-      this.dataSource.data = data;
-    });
-  }
-
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+    }
   }
 }

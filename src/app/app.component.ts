@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { AutenticacaoModalComponent } from './components/modal/autenticacao-modal.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',

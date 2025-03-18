@@ -1,1 +1,22 @@
-<h1>Sla kk</h1>
+<h2 class="hypnosText--TituloGrande mb-2">Buscar fármaco</h2>
+<div class="d-flex flex-row justify-content-between container-fluid">
+  <div class="form-group row">
+    <label for="nome">Nome</label>
+    <input type="search" class="bg-azul col-2 form-control" id="nome">
+  </div>
+  <hdk-button
+    icon="fa-solid fa-search"
+    text="Buscar"
+    color="hdk-bg-verde"
+    route="/pesquisa">
+  </hdk-button>
+</div>
+<hdk-divisor></hdk-divisor>
+<hdk-button
+  text="Voltar"
+  color="hdk-bg-verde"
+  (click)="voltar()">
+</hdk-button>
+<hdk-divisor [hideDivisor]="true"></hdk-divisor>
+
+<hdk-tabela></hdk-tabela>

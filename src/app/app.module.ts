@@ -15,11 +15,14 @@ import { HdkModalComponent } from './components/hdk/modal/hdk-modal.component';
 import { TutoresComponent } from './components/tutores/tutores.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
-    AppComponent,MedicamentosComponent, HdkButtonComponent, HdkDivisor, HdkModalComponent, ProntuariosComponent, RelatoriosComponent, TutoresComponent
+    AppComponent, MedicamentosComponent, PacientesComponent, HdkButtonComponent, HdkDivisor, HdkModalComponent, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,8 +30,10 @@ import { ProntuariosComponent } from './components/prontuarios/prontuarios.compo
     NavbarComponent,
     FormsModule,
     AutenticacaoModalComponent,
-    PacientesComponent,
-    TabelaComponent
+    MatTableModule,
+    MatPaginatorModule,
+    TabelaComponent,
+    HttpClientModule
 ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,17 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 @Injectable({
   providedIn: 'root',
 })
-export class TabelaService {
+export class UsuarioService {
   private apiUrl = 'http://localhost/minhaapi';
 
   constructor(private http: HttpClient) {}
