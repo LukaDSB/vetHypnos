@@ -1,23 +1,31 @@
-<h2 class="hypnosText--TituloGrande mb-2">Buscar fármaco</h2>
+<h2 class="hypnosText--TituloGrande mb-2">Buscar medicamento</h2>
 <div class="d-flex flex-row justify-content-between container-fluid">
   <div class="form-group row">
     <label for="nome">Nome</label>
     <input type="search" class="bg-azul col-2 form-control" id="nome">
   </div>
   <hdk-button
-  icon="fa-solid fa-search"
-  text="Buscar"
-  color="hdk-bg-verde"
-  route="/pesquisa">
+    icon="fa-solid fa-search"
+    text="Buscar"
+    color="hdk-bg-verde"
+    route="/pesquisa">
   </hdk-button>
 </div>
 <hdk-divisor></hdk-divisor>
-<hdk-button
+<div class="underDivisor">
+  <hdk-button
   text="Voltar"
   color="hdk-bg-verde"
-  onclick="history.back()">
-</hdk-button>
+  (click)="voltar()">
+  </hdk-button>
+  <hdk-button
+  text="Cadastrar novo paciente"
+  color="hdk-bg-verde"
+  (click)="voltar()">
+  </hdk-button>
+</div>
 <hdk-divisor [hideDivisor]="true"></hdk-divisor>
+
 <hdk-tabela
 [displayedColumns]="displayedColumns"
 [dataSource]="dataSource"></hdk-tabela>

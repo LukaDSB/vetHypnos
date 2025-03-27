@@ -1,3 +1,4 @@
+
 import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,10 +13,11 @@ import { Usuario } from 'src/app/models/usuario.model';
   selector: 'hdk-tabela',
   standalone: true
 })
-export class TabelaComponent implements AfterViewInit {
-  @Input() dataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>([]);
+export class TabelaComponent<T> implements AfterViewInit {
+  @Input() dataSource: MatTableDataSource<T> = new MatTableDataSource<T>([]);
   @Input() pageSizeOptions: number[] = [10, 20];
   @Input() displayedColumns?: string[];
+  @Input() customTemplates: {[key: string]: (element: T) => string} = {};
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

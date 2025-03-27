@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 @Component({
   selector: 'app-pacientes',
   templateUrl: './pacientes.component.html',
+  styleUrls: ['./pacientes.component.scss'],
 })
 export class PacientesComponent implements OnInit {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>([]);

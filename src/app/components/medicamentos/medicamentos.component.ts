@@ -3,17 +3,20 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Medicamento } from 'src/app/models/medicamento.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { MedicamentoService } from 'src/app/services/medicamento.service';
+import { Location } from '@angular/common';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-medicamentos',
   templateUrl: './medicamentos.component.html',
   styleUrls: ['./medicamentos.component.scss']
 })
-export class MedicamentosComponent implements OnInit {
-  dataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>([]);
-  displayedColumns: string[] = ['id', 'nome', 'Concentracao','Fabricante','Lote','Validade','Quantidade', 'acoes'];
 
-  constructor(private medicamentoService: MedicamentoService) {}
+export class MedicamentosComponent implements OnInit {
+  dataSource: MatTableDataSource<Medicamento> = new MatTableDataSource<Medicamento>([]);
+  displayedColumns: string[] = ['id', 'nome', 'concentracao', 'fabricante', 'lote'];
+
+  constructor(private location: Location, private medicamentoService: MedicamentoService) {}
 
   ngOnInit() {
     this.carregarDados();
@@ -25,7 +28,7 @@ export class MedicamentosComponent implements OnInit {
     });
   }
 
-  deleteItem(item: Usuario) {
-    console.log('Deletar item:', item);
+  voltar(){
+    this.location.back();
   }
 }

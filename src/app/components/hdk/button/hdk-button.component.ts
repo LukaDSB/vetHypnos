@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./hdk-button.component.scss'],
 })
 export class HdkButtonComponent {
-  @Input() icon?: string;
-  @Input() text: string = 'Buscar';
   @Input() fonte: string = 'hypnosText--TituloGrande';
-  @Input() color: string = 'btn-success';
-  @Input() route: string = '';
   @Input() textColor: string = 'hdk-creme';
+  @Input() color: string = 'btn-success';
+  @Input() text: string = 'Buscar';
+  @Input() route: string = '';
+  @Input() icon?: string;
 
   constructor(private router: Router) {}
 
