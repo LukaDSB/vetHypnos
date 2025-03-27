@@ -2,10 +2,10 @@ export interface Medicamento {
     id: number;
     nome: string;
     concentracao: number;
-    categoriaId: number;
+    categoria_id: number;
     fabricante: string;
     lote: number;
-    validade: number;
+    validade: string;
     quantidade: number;
   }
   

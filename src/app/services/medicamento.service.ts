@@ -12,6 +12,6 @@ export class MedicamentoService {
   constructor(private http: HttpClient) {}
 
   getMedicamentos(): Observable<Medicamento[]> {
-    return this.http.get<Medicamento[]>(`${this.apiUrl}/medicamentos`);
+    return this.http.get<Medicamento[]>(`${this.apiUrl}/medicamento`);
   }
 }
