@@ -4,10 +4,11 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { Usuario } from 'src/app/models/usuario.model';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { HdkModalComponent } from '../modal/hdk-modal.component';
 
 @Component({
-  imports:[MatTableModule, RouterModule, MatPaginatorModule],
+  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule],
   templateUrl: 'hdk-tabela.component.html',
   styleUrls: ['hdk-tabela.component.scss'],
   selector: 'hdk-tabela',
@@ -20,6 +21,23 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Input() customTemplates: {[key: string]: (element: T) => string} = {};
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(public dialog: MatDialog) {}
+
+abrirModal(): void {
+  console.log('Modal abriu');
+  const dialogRef = this.dialog.open(HdkModalComponent, {
+    width: '400px',
+    data: {}
+  });
+
+  dialogRef.afterClosed().subscribe(() => {
+    console.log('The dialog was closed');
+  });
+}
+
+fecharModal(): void{
+}
 
   ngAfterViewInit() {
     if (this.dataSource) {

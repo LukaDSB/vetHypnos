@@ -2,30 +2,20 @@
 <div class="d-flex flex-row justify-content-between container-fluid">
   <div class="form-group row">
     <label for="nome">Nome</label>
-    <input type="search" class="bg-azul col-2 form-control" id="nome">
+    <input type="search" class="bg-azul col-2 form-control" id="nome" />
   </div>
-  <hdk-button
-    icon="fa-solid fa-search"
-    text="Buscar"
-    color="hdk-bg-verde"
-    route="/pesquisa">
-  </hdk-button>
+  <hdk-button icon="fa-solid fa-search" text="Buscar" color="hdk-bg-verde" route="/pesquisa" />
 </div>
-<hdk-divisor></hdk-divisor>
-<div class="underDivisor">
-  <hdk-button
-  text="Voltar"
-  color="hdk-bg-verde"
-  (click)="voltar()">
-  </hdk-button>
-  <hdk-button
-  text="Cadastrar novo paciente"
-  color="hdk-bg-verde"
-  (click)="voltar()">
-  </hdk-button>
-</div>
-<hdk-divisor [hideDivisor]="true"></hdk-divisor>
 
-<hdk-tabela
-[displayedColumns]="displayedColumns"
-[dataSource]="dataSource"></hdk-tabela>
+<hdk-divisor/>
+
+<div class="underDivisor">
+  <div class="d-flex flex-row justify-content-between container-fluid">
+    <hdk-button text="Voltar" color="hdk-bg-verde" (click)="voltar()" />
+    <hdk-button text="Cadastrar" color="hdk-bg-verde" (click)="voltar()" />
+  </div>
+</div>
+
+<hdk-divisor [hideDivisor]="true" />
+
+<hdk-tabela [displayedColumns]="displayedColumns" [dataSource]="dataSource" />

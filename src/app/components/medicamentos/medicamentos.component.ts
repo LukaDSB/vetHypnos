@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Medicamento } from 'src/app/models/medicamento.model';
-import { Usuario } from 'src/app/models/usuario.model';
 import { MedicamentoService } from 'src/app/services/medicamento.service';
 import { Location } from '@angular/common';
-import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-medicamentos',
@@ -14,7 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 
 export class MedicamentosComponent implements OnInit {
   dataSource: MatTableDataSource<Medicamento> = new MatTableDataSource<Medicamento>([]);
-  displayedColumns: string[] = ['id', 'nome', 'concentracao', 'fabricante', 'lote'];
+  displayedColumns: string[] = ['id', 'nome', 'concentracao', 'fabricante', 'lote', 'acoes'];
 
   constructor(private location: Location, private medicamentoService: MedicamentoService) {}
 

@@ -1,3 +1,3 @@
-<button type="button" class="p-2 btn" [ngClass]="[color, textColor, fonte]" (click)="navigate()">
+<button type="button" class="p-2 hover-none" [ngClass]="[color, textColor, fonte]" (click)="navigate()">
   <i *ngIf="icon" class="{{ icon }} me-2"></i>{{ text }}
 </button>

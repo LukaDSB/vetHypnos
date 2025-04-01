@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent, MedicamentosComponent, PacientesComponent, HdkButtonComponent, HdkDivisor, HdkModalComponent, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
+    AppComponent, MedicamentosComponent, PacientesComponent, HdkDivisor, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatPaginatorModule,
     TabelaComponent,
-    HttpClientModule
+    HttpClientModule,
+    HdkModalComponent,
+    HdkButtonComponent
 ],
   providers: [],
   bootstrap: [AppComponent]
