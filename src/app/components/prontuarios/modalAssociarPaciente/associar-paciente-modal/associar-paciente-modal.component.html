@@ -1,0 +1,18 @@
+<div *ngIf="modalAssociar" class="modal">
+  <div class="modal-content">
+      <h1 class="hypnosText--fonte1">Associar paciente</h1>
+
+      <div class="innerContent">
+        <hdk-button color="hdk-bg-verde" text="Paciente existente" (click)="isModalNovoPaciente()" />
+        <hdk-button color="hdk-bg-vermelho" text="Novo paciente"/>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="modalNovoPaciente" class="modal">
+    <div class="modal-content">
+  
+      <h1>Modal novo paciente</h1>
+  
+    </div>
+  </div>

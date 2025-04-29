@@ -4,10 +4,12 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 6vw;
+  width: auto;
   height: 4vh;
   border: none;
   border-radius: 8px;
+  flex-wrap: nowrap;
+  text-wrap: nowrap;
   i{
     color: $creme;
   }

@@ -16,6 +16,7 @@ export class HdkButtonComponent {
   @Input() text: string = 'Buscar';
   @Input() route: string = '';
   @Input() icon?: string;
+  @Input() size?: number;
 
   constructor(private router: Router) {}
 

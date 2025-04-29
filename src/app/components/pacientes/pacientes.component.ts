@@ -14,7 +14,7 @@ export class PacientesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'email', 'especialidade', 'acoes'];
 
   constructor(private usuarioService: UsuarioService, private location: Location) {}
-
+  
   ngOnInit() {
     this.carregarDados();
   }

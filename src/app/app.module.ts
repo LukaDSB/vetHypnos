@@ -35,7 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     TabelaComponent,
     HttpClientModule,
     HdkModalComponent,
-    HdkButtonComponent
+    HdkButtonComponent,
 ],
   providers: [],
   bootstrap: [AppComponent]
