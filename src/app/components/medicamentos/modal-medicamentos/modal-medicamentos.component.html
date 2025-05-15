@@ -1,0 +1,46 @@
+<div *ngIf="isCadastroModalOpen" class="modal">
+  <div class="modal-content">
+
+    <form>
+      <h1 class="hipnosText--TituloGrande">Cadastrar novo medicamento</h1>
+      <div class="form-group">
+        <label for="nome">Nome do medicamento *</label>
+        <input type="search" class="bg-azul col-2 form-control" id="nome" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Concentração *</label>
+        <input type="search" class="bg-azul col-2 form-control" id="concentracao" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Dosagem máxima *</label>
+        <input type="search" class="bg-azul col-2 form-control" id="dosagemMax" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Dosagem mínima *</label>
+        <input type="search" class="bg-azul col-2 form-control" id="dosagemMin" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Tipo de remédio</label>
+        <input type="search" class="bg-azul col-2 form-control" id="tipoRemedio" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Fabricante</label>
+        <input type="search" class="bg-azul col-2 form-control" id="fabricante" />
+      </div>
+       <div class="form-group">
+        <label for="nome">Lote</label>
+        <input type="search" class="bg-azul col-2 form-control" id="lote" />
+      </div>
+       <div class="form-group">
+        <label for="nome">Data de validade</label>
+        <input type="search" class="bg-azul col-2 form-control" id="dataValidade" />
+      </div>
+
+      <footer>
+        <hdk-button text="Cadastrar" color="hdk-bg-verde" route="/pesquisa" />
+        <hdk-button text="Cancelar" color="hdk-bg-vermelho" route="/pesquisa" (click)="closeCadastro()"/>
+      </footer>
+    </form>
+  </div>
+  </div>
+  
