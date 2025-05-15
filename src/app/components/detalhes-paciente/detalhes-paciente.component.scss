@@ -1,0 +1,133 @@
+.detalhes-container h2 {
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+  
+  .dados-paciente {
+    display: flex;
+    gap: 55px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  
+  .campo label {
+    display: block;
+    font-weight: 600;
+    font-size: 21px;
+    width: 10em;
+    margin-bottom: 5px;
+  }
+  
+  .valor {
+    background-color: #e5f0ff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    min-width: 80px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  hr {
+    margin: 30px 0;
+    border: none;
+    height: 3px;
+    background-color: #a9a9a9;
+  }
+  
+  .botoes-acao {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 17px;
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .btn-solo{
+
+  }
+
+  .btn-duplo{
+    display: flex;
+    gap: 30px;
+  }
+  
+  .btn-voltar {
+    background-color: #239b3a;
+  }
+  
+  .btn-acao {
+    background-color: #239b3a;
+  }
+  
+  button:hover {
+    filter: brightness(0.9);
+  }
+
+  // SECTION 2
+
+  .historico-container {
+    background-color: #f9f4ed;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .historico-container h2 {
+    font-size: 30px;
+    margin: 20px 0px;
+  }
+
+  .container-cards{
+    margin: 4em 8em;
+    overflow-y: auto;
+    height: 400px;
+    scroll-behavior: smooth;
+    border-radius: 8px;
+  }
+  
+  .card-historico {
+    background-color: white;
+    border-radius: 32px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: 30px 50px 10px 50px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.425);
+  }
+  
+  .cabecalho {
+    background-color: #239b3a;
+    color: white;
+    border-radius: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin: 10px 50px 10px 50px;
+  }
+  
+  .cabecalho div {
+    flex: 1;
+    text-align: center;
+    margin: 5px 25px 5px 25px;
+  }
+  
+  .medico {
+    font-weight: 500;
+    color: #333;
+    font-size: 20px;
+  }
+  
