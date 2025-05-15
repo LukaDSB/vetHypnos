@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent, MedicamentosComponent, PacientesComponent, HdkDivisor, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
+    AppComponent, PacientesComponent, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
   ],
   imports: [
     BrowserModule,
