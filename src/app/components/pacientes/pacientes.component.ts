@@ -13,7 +13,7 @@ import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
   templateUrl: './pacientes.component.html',
   styleUrls: ['./pacientes.component.scss'],
   standalone: true,
-   imports: [ModalPacientesComponent, HdkButtonComponent, HdkDivisor, TabelaComponent],
+  imports: [ModalPacientesComponent, HdkButtonComponent, HdkDivisor, TabelaComponent],
 })
 export class PacientesComponent implements OnInit {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>([]);

@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'hdk-divisor',
   templateUrl: './hdk-divisor.component.html',
   styleUrls: ['./hdk-divisor.component.scss'],
-  standalone: true
+  standalone: true,
 })
 export class HdkDivisor {
   showDivisor?: boolean;
