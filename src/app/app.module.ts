@@ -37,6 +37,7 @@ import { ModalPacientesComponent } from './components/pacientes/modal-pacientes/
     HttpClientModule,
     HdkModalComponent,
     HdkButtonComponent,
+    HdkDivisor,
 ],
   providers: [],
   bootstrap: [AppComponent]
