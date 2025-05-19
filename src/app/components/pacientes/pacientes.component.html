@@ -1,3 +1,5 @@
+<app-modal-pacientes #modalPacientes></app-modal-pacientes>
+
 <h2 class="hypnosText--TituloGrande mb-2">Buscar paciente</h2>
 <div class="d-flex flex-row justify-content-between container-fluid">
   <div class="form-group row">
@@ -21,7 +23,7 @@
   <hdk-button
   text="Cadastrar"
   color="hdk-bg-verde"
-  (click)="voltar()">
+  (click)="abrirModalCadastro()">
   </hdk-button>
 </div>
 <hdk-divisor [hideDivisor]="true"></hdk-divisor>

@@ -15,11 +15,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
-
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
-    AppComponent, RelatoriosComponent, TutoresComponent,
+    AppComponent, MedicamentosComponent, PacientesComponent, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +33,8 @@ import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
     HttpClientModule,
     HdkModalComponent,
     HdkButtonComponent,
-    HdkDivisor
+    HdkDivisor,
+    UsuariosComponent,
 ],
   providers: [],
   bootstrap: [AppComponent]
