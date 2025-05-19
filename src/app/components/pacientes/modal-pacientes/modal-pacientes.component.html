@@ -1,0 +1,38 @@
+<div *ngIf="isCadastroModalOpen" class="modal">
+  <div class="modal-content">
+
+    <form>
+      <h1 class="hipnosText--TituloGrande">Cadastrar novo paciente</h1>
+      <div class="form-group">
+        <label for="nome">Nome do paciente *</label>
+        <input type="search" class="bg-azul col-2 form-control" id="nomePaciente" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Espécie</label>
+        <input type="search" class="bg-azul col-2 form-control" id="especiePaciente" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Idade</label>
+        <input type="search" class="bg-azul col-2 form-control" id="IdadePaciente" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Sexo</label>
+        <input type="search" class="bg-azul col-2 form-control" id="SexoPaciente" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Peso *</label>
+        <input type="search" class="bg-azul col-2 form-control" id="PesoPaciente" />
+      </div>
+      <div class="form-group">
+        <label for="nome">Tutor</label>
+        <input type="search" class="bg-azul col-2 form-control" id="TutorPaciente" />
+      </div>
+
+      <footer>
+        <hdk-button text="Cadastrar" color="hdk-bg-verde" route="/pesquisa" />
+        <hdk-button text="Cancelar" color="hdk-bg-vermelho" (click)="closeCadastro()"/>
+      </footer>
+    </form>
+  </div>
+  </div>
+  

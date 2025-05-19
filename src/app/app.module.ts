@@ -20,7 +20,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
-
 @NgModule({
   declarations: [
     AppComponent, MedicamentosComponent, PacientesComponent, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
