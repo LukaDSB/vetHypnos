@@ -16,10 +16,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { MedicamentosComponent } from './components/medicamentos/medicamentos.component';
+import { PacientesComponent } from './components/pacientes/pacientes.component';
+import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
 
 @NgModule({
   declarations: [
-    AppComponent, MedicamentosComponent, PacientesComponent, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
+    AppComponent, 
+    RelatoriosComponent, TutoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,9 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     AutenticacaoModalComponent,
     MatTableModule,
     MatPaginatorModule,
+    MedicamentosComponent, 
+    PacientesComponent, 
+    ProntuariosComponent, 
     TabelaComponent,
     HttpClientModule,
     HdkModalComponent,
