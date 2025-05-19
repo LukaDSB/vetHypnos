@@ -18,11 +18,12 @@ import { ProntuariosComponent } from './components/prontuarios/prontuarios.compo
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
+import { PageProntuarioComponent } from './components/page-prontuario/page-prontuario.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, MedicamentosComponent, PacientesComponent, HdkDivisor, ProntuariosComponent, RelatoriosComponent, TutoresComponent,
+    AppComponent, MedicamentosComponent, PacientesComponent, HdkDivisor, ProntuariosComponent, RelatoriosComponent, TutoresComponent, PageProntuarioComponent,
   ],
   imports: [
     BrowserModule,

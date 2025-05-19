@@ -6,6 +6,10 @@ import { AppPrincipal } from './components/principal/app.principal';
 import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { TutoresComponent } from './components/tutores/tutores.component';
+import { PageProntuarioComponent } from './components/page-prontuario/page-prontuario.component';
+
+
+
 
 
 
@@ -14,6 +18,7 @@ const routes: Routes = [
   { path: 'medicamentos', component: MedicamentosComponent },
   { path: 'principal', component: AppPrincipal },
   { path: 'prontuarios', component: ProntuariosComponent },
+  { path: 'pageProntuario', component: PageProntuarioComponent },
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'tutores', component: TutoresComponent },
   { path: '', redirectTo: '/principal', pathMatch: 'full' }
