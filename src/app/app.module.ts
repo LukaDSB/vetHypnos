@@ -14,6 +14,7 @@ import { RelatoriosComponent } from './components/relatorios/relatorios.componen
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
+import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     HdkModalComponent,
     HdkButtonComponent,
+    HdkDivisor
 ],
   providers: [],
   bootstrap: [AppComponent]
