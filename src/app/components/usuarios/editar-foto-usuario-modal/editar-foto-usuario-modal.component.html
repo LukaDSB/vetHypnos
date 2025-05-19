@@ -1,0 +1,15 @@
+<div class="modal">
+  <div class="modal-content d-flex flex-column align-items-center py-5">
+    <i class="fa-solid fa-xmark fa-3x" (click) = "onCloseModal()"></i>
+    <h2 class="hypnosText--fonte1 mb-3"> Foto de Perfil</h2>
+        <div class="user-avatar --editando d-flex justify-content-center align-items-center mt-5">
+            <img src="../../../../assets/images/userImg.png" alt="Foto Usuário">
+        </div>
+        <div class="d-flex flex-row align-items-center py-5">
+            <div class="iconsBtns d-flex flex-column justify-content-center align-items-center mx-5" (click)="onBtnClick(info.type)" *ngFor="let info of infoBtnsModal">
+                <i [class]="info.class"></i>
+                <p class="hypnosText--fonte1 btn-modal-text">{{info.text}}</p>
+            </div>
+        </div>
+   </div>
+</div>
