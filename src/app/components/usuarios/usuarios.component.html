@@ -1,0 +1,89 @@
+<app-editar-foto-usuario-modal 
+  *ngIf="isEditUserProfilePictureModalOpen"
+  (fecharModal)="onCloseModal()">
+</app-editar-foto-usuario-modal>
+
+<div class="wrapper">
+    
+<!-- <h2 class="hypnosText--TituloGrande mb-2"  *ngFor="let usuario of dataSource"> {{usuario.nome}} • NomeClinica</h2> -->
+<h2 class="hypnosText--TituloGrande mb-2"> NomeUsuario • NomeClinica</h2>
+
+
+<div class="usuario-info d-flex flex-row align-items-center flex-wrap my-4">
+   <div class="user-avatar d-flex justify-content-center align-items-center">
+        <img src="../../../assets/images/userImg.png" alt="Foto Usuário">
+        <i class="fa-solid fa-user-pen fa-2x" (click)="openModalEditarImagemUsuario()"></i>
+    </div>
+
+    <div class="group-form d-flex flex-row mx-5">
+        <div class="d-flex flex-column me-5" *ngFor="let campo of camposInfo">
+            <label [for]="campo.id">{{ campo.label }}</label>
+            <input
+            type="search"
+            class="bg-azul form-control"
+            [id]="campo.id"
+            [disabled]="!editable"
+            />
+        </div>
+    </div>
+
+</div>
+
+<hdk-divisor></hdk-divisor>
+
+<div class="usuario-endereco flex-wrap">
+    <h5 class="hypnosText--fonte2">Endereço</h5>
+
+    <div class="group-form d-flex flex-row">
+        <div class="d-flex flex-column me-5 my-3" *ngFor="let campo of camposEndereco">
+            <label [for]="campo.id">{{ campo.label }}</label>
+            <input
+            type="search"
+            class="bg-azul form-control"
+            [id]="campo.id"
+            [disabled]="!editable"
+            />
+        </div>
+    </div>
+
+    <div class="group-form d-flex flex-row">
+        <div class="d-flex flex-column me-5 my-3" *ngFor="let campo of camposLogradouro">
+            <label [for]="campo.id">{{ campo.label }}</label>
+            <input
+            type="search"
+            class="bg-azul form-control"
+            [id]="campo.id"
+            [disabled]="!editable"
+            />
+        </div>
+    </div>
+</div>
+
+<hdk-divisor></hdk-divisor>
+
+<div class="usuario-contatos d-flex row flex-wrap">
+<h5 class="hypnosText--fonte2">Redes sociais / contatos</h5>
+    <div class="group-form d-flex flex-row">
+        <div class="d-flex flex-column me-5 my-4" *ngFor="let campo of camposContatos">
+            <label [for]="campo.id">{{ campo.label }}</label>
+            <input
+            type="search"
+            class="bg-azul form-control"
+            [id]="campo.id"
+            [disabled]="!editable"
+            />
+        </div>
+    </div>
+</div>
+
+<hdk-divisor></hdk-divisor>
+
+<div class="usuario-btns d-flex flex-row justify-content-between flex-wrap">
+
+    <hdk-button text="Voltar" color="hdk-bg-verde" (click)="voltar()" />
+
+    <hdk-button [text]="botaoTexto" color="hdk-bg-verde" (click)="editarDadosUsuario()" />
+
+</div>
+
+</div>
