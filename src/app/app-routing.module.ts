@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'tutores', component: TutoresComponent },
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
-  { path: 'usuarios', component: UsuariosComponent }
+  { path: 'usuario', component: UsuariosComponent }
 ];
 
 @NgModule({
