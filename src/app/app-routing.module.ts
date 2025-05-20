@@ -6,6 +6,7 @@ import { AppPrincipal } from './components/principal/app.principal';
 import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { TutoresComponent } from './components/tutores/tutores.component';
+import { DetalhesPacienteComponent } from './components/detalhes-paciente/detalhes-paciente.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { PageProntuarioComponent } from './components/page-prontuario/page-prontuario.component';
 
@@ -16,6 +17,7 @@ import { PageProntuarioComponent } from './components/page-prontuario/page-pront
 
 const routes: Routes = [
   { path: 'pacientes', component: PacientesComponent },
+  { path: 'pacientes/detalhesPaciente', component: DetalhesPacienteComponent},
   { path: 'medicamentos', component: MedicamentosComponent },
   { path: 'principal', component: AppPrincipal },
   { path: 'prontuarios', component: ProntuariosComponent },
