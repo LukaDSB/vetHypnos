@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+:host {
+    display: block;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .container-prontuario {
+    background-color: white;
+    border-radius: 15px;
+    max-width: 1500px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-height: 95vh;      
+    overflow-y: auto;      
+    overflow-x: auto;  
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .logo-instituto {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .logo-instituto img {
+    width: 377.82568359375px;
+    height: 130px;
+    margin-top: 30px;
+    margin-left: 24.99px;
+  }
+
+  .icons-img{
+    height: 41px;
+    width: 22px;
+    transform: scale(2);  
+    transform-origin: center; 
+  }
+  
+  .infos-contato {
+    text-align: left;
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 1em;
+    margin-top: 4em;
+    gap: 4em;
+    align-items: center;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .titulo {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    font-size: 48px;
+  }
+  
+  .num-prontuario {
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: -1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 24px;
+  }
+  
+  .section-titulo {
+    background-color: #359830A1;
+    color: black;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 4px 4px 0 0;
+    font-size: 24px;
+  }
+  
+  .section-content {
+    background-color: white;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 4rem;
+    border-radius: 0 0 8px 8px;
+    font-size: 24px;
+    margin: 0.5em 0em 2em;
+  }
+
+  .section-content-2{
+    background-color: white;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 4rem;
+    border-radius: 0 0 8px 8px;
+    font-size: 24px;
+    margin: 0.5em 0em 2em;
+  }
+  
+  .label {
+    font-weight: bold;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .label-2{
+    font-weight: bold;
+    display: inline-block;
+    width: 267.87640380859375px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .value {
+    background-color: #e3efff;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin-top: 4px;
+    text-align: center;
+    font-weight: bold;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .value-2 {
+    background-color: #e3efff;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin-top: 4px;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block;
+    width: 267.87640380859375px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .obs{
+    font-size: 24px;
+    padding: 10px;
+  }
+  
+  .obs-area {
+    background-color: #dceafb;
+    border-radius: 8px;
+    padding: 1rem;
+    grid-column: 1 / -1;
+    min-height: 200px;
+    margin: 1rem;
+  }
+  
