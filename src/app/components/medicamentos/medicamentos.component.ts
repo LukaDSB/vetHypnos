@@ -8,7 +8,6 @@ import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
 import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
 
-
 @Component({
   selector: 'app-medicamentos',
   templateUrl: './medicamentos.component.html',
@@ -24,6 +23,31 @@ export class MedicamentosComponent implements OnInit {
 
   constructor(private location: Location, private medicamentoService: MedicamentoService) {}
 
+  cadastrarMedicamento(medicamento: Medicamento) {
+    this.medicamentoService.cadastrarMedicamento(medicamento).subscribe({
+      next: () => {
+        this.carregarDados();
+      },
+      error: (err) => {
+        console.error('Erro ao cadastrar medicamento:', err);
+      }
+    });
+  }
+
+  deletarMedicamento(medicamento: Medicamento) {
+    if (confirm(`Deseja realmente excluir "${medicamento.nome}"?`)) {
+      this.medicamentoService.deletarMedicamento(medicamento.id).subscribe({
+        next: () => {
+          console.log(`Medicamento com ID ${medicamento.id} excluído.`);
+          this.carregarDados();
+        },
+        error: (err) => {
+          console.error('Erro ao excluir medicamento:', err);
+        }
+      });
+    }
+  }
+  
   ngOnInit() {
     this.carregarDados();
   }

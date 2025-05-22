@@ -39,7 +39,9 @@
       
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef> Acoes </th>
-        <td mat-cell *matCellDef="let element" ><i class="me-2 fa-solid fa-pencil" (click)="abrirModal()"></i><i class="fa-solid fa-trash" onclick="deleteMedicamento()"></i></td>
+        <td mat-cell *matCellDef="let element" >
+          <i class="me-2 fa-solid fa-pencil" (click)="abrirModal()"></i>
+          <i class="fa-solid fa-trash" (click)="onExcluir(element)"></i>
       </ng-container>
       
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

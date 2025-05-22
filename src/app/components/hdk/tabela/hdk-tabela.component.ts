@@ -1,5 +1,5 @@
 
-import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
@@ -22,22 +22,29 @@ export class TabelaComponent<T> implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+
+  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
+
+  onExcluir(element: T) {
+    this.excluir.emit(element);
+  }
+
   constructor(public dialog: MatDialog) {}
 
-abrirModal(): void {
-  console.log('Modal abriu');
-  const dialogRef = this.dialog.open(HdkModalComponent, {
-    width: '400px',
-    data: {}
-  });
+  abrirModal(): void {
+    console.log('Modal abriu');
+    const dialogRef = this.dialog.open(HdkModalComponent, {
+      width: '400px',
+      data: {}
+    });
 
-  dialogRef.afterClosed().subscribe(() => {
-    console.log('The dialog was closed');
-  });
-}
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
+  }
 
-fecharModal(): void{
-}
+  fecharModal(): void{
+  }
 
   ngAfterViewInit() {
     if (this.dataSource) {

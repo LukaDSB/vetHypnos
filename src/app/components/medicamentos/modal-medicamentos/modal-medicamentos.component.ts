@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { Location } from '@angular/common';
+import { Medicamento } from 'src/app/models/medicamento.model';
 
 @Component({
   selector: 'app-modal-medicamentos',
@@ -13,36 +14,49 @@ import { Location } from '@angular/common';
   imports:[FormsModule, CommonModule, HdkButtonComponent]
 })
 export class ModalMedicamentosComponent {
- isLoginModalOpen = true;
   isCadastroModalOpen = false;
-  email = '';
-  senha = '';
-  nome = '';
+  nome?: string;
+  concentracao = 0;
+  categoriaRemedio = 1;
+  fabricante?: string;
+  lote = 0;
+  validade?: string;
+  quantidade = 0;
+  @Output() cadastrar = new EventEmitter<Medicamento>();
 
   constructor(private authService: AuthService, private location: Location ) {}
 
-  login() {
-    console.log('Tentativa de login com:', this.email, this.senha);
-    this.isLoginModalOpen = false;
+  cadastrarMedicamento() {
+    const novoMedicamento: Medicamento = {
+      id: 0,
+      nome: this.nome || '',
+      concentracao: this.concentracao,
+      categoria_id: this.categoriaRemedio,
+      fabricante: this.fabricante || '',
+      lote: this.lote,
+      validade: this.validade || '',
+      quantidade: this.quantidade
+    };
+  
+    this.cadastrar.emit(novoMedicamento);
+    this.closeCadastro();
   }
+  
 
   voltar(){
     this.location.back();
   }
 
   openCadastro() {
-    this.isLoginModalOpen = false;
     this.isCadastroModalOpen = true;
   }
 
   closeCadastro() {
     this.isCadastroModalOpen = false;
-    this.isLoginModalOpen = true;
   }
 
   loginMock() {
     this.authService.loginMock();
-    this.isLoginModalOpen = false;
   }
 }
 
