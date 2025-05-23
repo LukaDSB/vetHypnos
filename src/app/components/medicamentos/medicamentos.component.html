@@ -1,4 +1,8 @@
-<app-modal-medicamentos #modalMedicamentos (cadastrar)="cadastrarMedicamento($event)"></app-modal-medicamentos>
+<app-modal-medicamentos 
+  #modalMedicamentos 
+  (cadastrar)="cadastrarMedicamento($event)"
+  (atualizar)="enviarAtualizacao($event)">
+</app-modal-medicamentos>
 
 <h2 class="hypnosText--TituloGrande mb-2">Buscar medicamento</h2>
 <div class="d-flex flex-row justify-content-between container-fluid">
@@ -6,7 +10,7 @@
     <label for="nome">Nome</label>
     <input type="search" class="bg-azul col-2 form-control" id="nome" />
   </div>
-  <hdk-button icon="fa-solid fa-search" text="Buscar" color="hdk-bg-verde" />
+  <hdk-button icon="fa-solid fa-search" text="Buscar" color="hdk-bg-verde" (click)="carregarDados()" />
 </div>
 
 <hdk-divisor/>
@@ -20,4 +24,4 @@
 
 <hdk-divisor [hideDivisor]="true" />
 
-<hdk-tabela [displayedColumns]="displayedColumns" [dataSource]="dataSource" (excluir)="deletarMedicamento($event)" />
+<hdk-tabela [displayedColumns]="displayedColumns" [dataSource]="dataSource" (excluir)="deletarMedicamento($event)" (atualizar)="atualizarMedicamento($event)"/>

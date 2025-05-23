@@ -18,15 +18,18 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Input() dataSource: MatTableDataSource<T> = new MatTableDataSource<T>([]);
   @Input() pageSizeOptions: number[] = [10, 20];
   @Input() displayedColumns?: string[];
-  @Input() customTemplates: {[key: string]: (element: T) => string} = {};
+
+  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
+  @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-
-  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
-
   onExcluir(element: T) {
     this.excluir.emit(element);
+  }
+
+  onAtualizar(element: T){
+    this.atualizar.emit(element);
   }
 
   constructor(public dialog: MatDialog) {}

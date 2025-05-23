@@ -15,6 +15,10 @@ export class MedicamentoService {
     return this.http.get<Medicamento[]>(`${this.apiUrl}/medicamento`);
   }
 
+  atualizarMedicamento(medicamento: Medicamento): Observable<Medicamento>{
+    return this.http.put<Medicamento>(`${this.apiUrl}/medicamento/${medicamento.id}`, medicamento);
+  }
+
   cadastrarMedicamento(medicamento: Medicamento): Observable<Medicamento> {
     return this.http.post<Medicamento>(`${this.apiUrl}/medicamento`, medicamento);
   }
@@ -22,6 +26,4 @@ export class MedicamentoService {
   deletarMedicamento(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/medicamento/${id}`);
   }
-  
-  
 }

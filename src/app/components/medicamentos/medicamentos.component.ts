@@ -23,6 +23,10 @@ export class MedicamentosComponent implements OnInit {
 
   constructor(private location: Location, private medicamentoService: MedicamentoService) {}
 
+  ngOnInit() {
+    this.carregarDados();
+  }
+
   cadastrarMedicamento(medicamento: Medicamento) {
     this.medicamentoService.cadastrarMedicamento(medicamento).subscribe({
       next: () => {
@@ -47,9 +51,21 @@ export class MedicamentosComponent implements OnInit {
       });
     }
   }
+
+  enviarAtualizacao(medicamento: Medicamento) {
+    this.medicamentoService.atualizarMedicamento(medicamento).subscribe({
+      next: () => {
+        console.log('Medicamento atualizado com sucesso!');
+        this.carregarDados();
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar medicamento:', err);
+      }
+    });
+  }
   
-  ngOnInit() {
-    this.carregarDados();
+  atualizarMedicamento(medicamento: Medicamento) {
+    this.modalMedicamentosComponent.openAtualizar(medicamento);
   }
 
   carregarDados() {
