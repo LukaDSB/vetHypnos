@@ -39,7 +39,32 @@
       
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef> Acoes </th>
-        <td mat-cell *matCellDef="let element" ><i class="me-2 fa-solid fa-pencil" (click)="abrirModal()"></i><i class="fa-solid fa-trash" onclick="deleteMedicamento()"></i></td>
+        <td mat-cell *matCellDef="let element" ><i class="me-2 fa-solid fa-pencil" (click)="abrirModal()"></i><i class="fa-solid fa-trash"  (click)="onExcluir(element)"></i></td>
+      </ng-container>
+
+      <ng-container matColumnDef="data_nascimento">
+        <th mat-header-cell *matHeaderCellDef> Nascimento </th>
+        <td mat-cell *matCellDef="let element"> {{ element.data_nascimento | dateMask }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sexo">
+        <th mat-header-cell *matHeaderCellDef> Sexo </th>
+        <td mat-cell *matCellDef="let element"> {{ element.sexo || 'Não informado' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="peso">
+        <th mat-header-cell *matHeaderCellDef> Peso </th>
+        <td mat-cell *matCellDef="let element"> {{ element.peso }} kg</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tutor_id">
+        <th mat-header-cell *matHeaderCellDef> Tutor </th>
+        <td mat-cell *matCellDef="let element"> {{ element.tutor_id || 'Não informado'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="especie_id">
+        <th mat-header-cell *matHeaderCellDef> Espécie </th>
+        <td mat-cell *matCellDef="let element"> {{ element.especie?.especie}} </td>
       </ng-container>
       
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
