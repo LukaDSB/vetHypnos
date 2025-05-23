@@ -1,14 +1,15 @@
 
-import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HdkModalComponent } from '../modal/hdk-modal.component';
+import { DateMaskPipe } from './pipe';
 
 @Component({
-  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule],
+  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, DateMaskPipe],
   templateUrl: 'hdk-tabela.component.html',
   styleUrls: ['hdk-tabela.component.scss'],
   selector: 'hdk-tabela',
@@ -21,6 +22,11 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Input() customTemplates: {[key: string]: (element: T) => string} = {};
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
+
+  onExcluir(element: T){
+    this.excluir.emit(element);
+}
 
   constructor(public dialog: MatDialog) {}
 
