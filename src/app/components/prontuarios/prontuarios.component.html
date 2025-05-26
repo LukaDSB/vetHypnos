@@ -1,4 +1,4 @@
-<h2 class="hypnosText--TituloGrande mb-2">Buscar paciente</h2>
+<h2 class="hypnosText--TituloGrande mb-2">Buscar Prontuário</h2>
 <div class="d-flex flex-row justify-content-between container-fluid">
   <div class="form-group row">
     <label for="nome">Nome</label>
@@ -25,3 +25,5 @@
   </hdk-button>
 </div>
 <hdk-divisor [hideDivisor]="true"></hdk-divisor>
+
+<hdk-tabela [displayedColumns]="displayedColumns" [dataSource]="dataSource" (excluir)="deletarProntuario($event)"/>
