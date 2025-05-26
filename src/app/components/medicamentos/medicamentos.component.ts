@@ -8,7 +8,6 @@ import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
 import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
 
-
 @Component({
   selector: 'app-medicamentos',
   templateUrl: './medicamentos.component.html',
@@ -26,6 +25,47 @@ export class MedicamentosComponent implements OnInit {
 
   ngOnInit() {
     this.carregarDados();
+  }
+
+  cadastrarMedicamento(medicamento: Medicamento) {
+    this.medicamentoService.cadastrarMedicamento(medicamento).subscribe({
+      next: () => {
+        this.carregarDados();
+      },
+      error: (err) => {
+        console.error('Erro ao cadastrar medicamento:', err);
+      }
+    });
+  }
+
+  deletarMedicamento(medicamento: Medicamento) {
+    if (confirm(`Deseja realmente excluir "${medicamento.nome}"?`)) {
+      this.medicamentoService.deletarMedicamento(medicamento.id).subscribe({
+        next: () => {
+          console.log(`Medicamento com ID ${medicamento.id} excluído.`);
+          this.carregarDados();
+        },
+        error: (err) => {
+          console.error('Erro ao excluir medicamento:', err);
+        }
+      });
+    }
+  }
+
+  enviarAtualizacao(medicamento: Medicamento) {
+    this.medicamentoService.atualizarMedicamento(medicamento).subscribe({
+      next: () => {
+        console.log('Medicamento atualizado com sucesso!');
+        this.carregarDados();
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar medicamento:', err);
+      }
+    });
+  }
+  
+  atualizarMedicamento(medicamento: Medicamento) {
+    this.modalMedicamentosComponent.openAtualizar(medicamento);
   }
 
   carregarDados() {
