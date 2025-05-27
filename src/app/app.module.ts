@@ -19,11 +19,14 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { MedicamentosComponent } from './components/medicamentos/medicamentos.component';
 import { PacientesComponent } from './components/pacientes/pacientes.component';
 import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
+import { ExpansionPanelComponent } from './components/hdk/expansion-panel/expansion-panel.component';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { PageTesteComponent } from './components/page-teste/page-teste.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    RelatoriosComponent, TutoresComponent,
+    RelatoriosComponent, TutoresComponent, PageTesteComponent, 
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,8 @@ import { ProntuariosComponent } from './components/prontuarios/prontuarios.compo
     HdkButtonComponent,
     HdkDivisor,
     UsuariosComponent,
+    ExpansionPanelComponent,
+    CdkAccordionModule,
 ],
   providers: [],
   bootstrap: [AppComponent]
