@@ -9,6 +9,8 @@ import { TutoresComponent } from './components/tutores/tutores.component';
 import { DetalhesPacienteComponent } from './components/detalhes-paciente/detalhes-paciente.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { PageProntuarioComponent } from './components/page-prontuario/page-prontuario.component';
+import { PageTesteComponent } from './components/page-teste/page-teste.component';
+
 
 
 
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'principal', component: AppPrincipal },
   { path: 'prontuarios', component: ProntuariosComponent },
   { path: 'pageProntuario', component: PageProntuarioComponent },
+  { path: 'pageTeste', component: PageTesteComponent },
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'tutores', component: TutoresComponent },
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
