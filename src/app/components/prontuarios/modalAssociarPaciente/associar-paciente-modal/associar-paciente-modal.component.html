@@ -3,8 +3,8 @@
       <h1 class="hypnosText--fonte1">Associar paciente</h1>
 
       <div class="innerContent">
-        <hdk-button color="hdk-bg-verde" text="Paciente existente" (click)="isModalNovoPaciente()" />
-        <hdk-button color="hdk-bg-vermelho" text="Novo paciente"/>
+        <hdk-button color="hdk-bg-verde" text="Paciente existente" (click)="abrirModalAssociarPacienteExistente()" />
+        <hdk-button color="hdk-bg-vermelho" text="Novo paciente" (click)="abrirModalCadastro()"/>
       </div>
     </div>
   </div>
@@ -16,3 +16,7 @@
   
     </div>
   </div>
+
+<app-modal-pacientes #modalPacientes></app-modal-pacientes>
+<app-modal-associar-animal-existente #modalAssociarAnimalExistente></app-modal-associar-animal-existente>
+
