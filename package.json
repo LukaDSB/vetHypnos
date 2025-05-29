@@ -27,6 +27,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "font-awesome": "^4.7.0",
+    "ngx-mask": "^16.4.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "vet-hypnos": "file:",
