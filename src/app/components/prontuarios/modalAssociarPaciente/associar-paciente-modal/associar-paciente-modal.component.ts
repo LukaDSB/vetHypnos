@@ -40,6 +40,10 @@ export class AssociarPacienteModalComponent {
   this.modalPacientesComponent.openCadastro();
 }
 
+fecharModalCadastro(){
+  this.modalAssociar = false;
+}
+
 abrirModalAssociarPacienteExistente() {
   this.modalAssociarAnimalExistenteComponent.openModal();
 }

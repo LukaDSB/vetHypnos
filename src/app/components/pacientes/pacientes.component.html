@@ -1,4 +1,4 @@
-<app-modal-pacientes #modalPacientes (cadastrar)="cadastrarAnimal($event)"></app-modal-pacientes>
+<app-modal-pacientes #modalPacientes (cadastrar)="cadastrarAnimal($event)" (atualizar)="enviarAtualizacao($event)"></app-modal-pacientes>
 
 <h2 class="hypnosText--TituloGrande mb-2">Buscar paciente</h2>
 <div class="d-flex flex-row justify-content-between container-fluid">
@@ -31,4 +31,5 @@
 <hdk-tabela
 [displayedColumns]="displayedColumns"
 [dataSource]="dataSource"
-(excluir)="deletarAnimal($event)"></hdk-tabela>
+(excluir)="deletarAnimal($event)"
+(atualizar)="atualizarAnimal($event)"></hdk-tabela>

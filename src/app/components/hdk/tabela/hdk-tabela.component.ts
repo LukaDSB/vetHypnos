@@ -7,9 +7,10 @@ import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HdkModalComponent } from '../modal/hdk-modal.component';
 import { DateMaskPipe } from './pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
-  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, DateMaskPipe],
+  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, DateMaskPipe, MatCheckboxModule],
   templateUrl: 'hdk-tabela.component.html',
   styleUrls: ['hdk-tabela.component.scss'],
   selector: 'hdk-tabela',
@@ -25,20 +26,15 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
-
-  onExcluir(element: T){
-    this.excluir.emit(element);
-}
 
   constructor(public dialog: MatDialog) {}
-   
-onExcluir(element: T) {
-    this.excluir.emit(element);
-}
 
 onAtualizar(element: T){
     this.atualizar.emit(element);
+}
+
+onExcluir(element: T){
+    this.excluir.emit(element);
 }
 
  abrirModal(): void {
