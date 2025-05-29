@@ -1,14 +1,16 @@
 
-import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HdkModalComponent } from '../modal/hdk-modal.component';
+import { DateMaskPipe } from './pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
-  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule],
+  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, DateMaskPipe, MatCheckboxModule],
   templateUrl: 'hdk-tabela.component.html',
   styleUrls: ['hdk-tabela.component.scss'],
   selector: 'hdk-tabela',
@@ -20,24 +22,35 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Input() displayedColumns?: string[];
   @Input() customTemplates: {[key: string]: (element: T) => string} = {};
 
+  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
+  @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public dialog: MatDialog) {}
 
-abrirModal(): void {
-  console.log('Modal abriu');
-  const dialogRef = this.dialog.open(HdkModalComponent, {
-    width: '400px',
-    data: {}
-  });
+onAtualizar(element: T){
+    this.atualizar.emit(element);
+}
+
+onExcluir(element: T){
+    this.excluir.emit(element);
+}
+
+ abrirModal(): void {
+    console.log('Modal abriu');
+    const dialogRef = this.dialog.open(HdkModalComponent, {
+      width: '400px',
+      data: {}
+    });
 
   dialogRef.afterClosed().subscribe(() => {
-    console.log('The dialog was closed');
-  });
-}
+      console.log('The dialog was closed');
+    });
+  }
 
-fecharModal(): void{
-}
+  fecharModal(): void{
+  }
 
   ngAfterViewInit() {
     if (this.dataSource) {

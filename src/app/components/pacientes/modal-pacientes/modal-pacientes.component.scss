@@ -77,3 +77,9 @@ footer{
     align-items: start;
   }
 }
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

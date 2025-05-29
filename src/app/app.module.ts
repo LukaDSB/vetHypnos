@@ -19,6 +19,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { MedicamentosComponent } from './components/medicamentos/medicamentos.component';
 import { PacientesComponent } from './components/pacientes/pacientes.component';
 import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,9 @@ import { ProntuariosComponent } from './components/prontuarios/prontuarios.compo
     HdkButtonComponent,
     HdkDivisor,
     UsuariosComponent,
+    NgxMaskDirective,
 ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

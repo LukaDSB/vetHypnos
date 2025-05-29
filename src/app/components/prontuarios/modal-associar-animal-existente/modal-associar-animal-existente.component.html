@@ -1,0 +1,14 @@
+<div *ngIf="isAssociarPacienteExistenteModalOpen" class="modal">
+  <div class="modal-content">
+        <h2 class="hypnosText--TituloGrande mb-2">Selecione o paciente</h2>
+       
+        <div class="tabela-wrapper">
+          <hdk-tabela [displayedColumns]="displayedColumns" [dataSource]="dataSource" />
+        </div>
+
+        <div class="btns d-flex flex-row justify-content-center align-items-center">
+        <hdk-button color="hdk-bg-verde" text="Salvar" />
+        <hdk-button color="hdk-bg-vermelho" text="Cancelar" (click)="closeModal()"/>
+        </div>
+    </div>
+</div>
