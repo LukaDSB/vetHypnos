@@ -24,11 +24,6 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
-
-  onExcluir(element: T){
-    this.excluir.emit(element);
-}
 
   onExcluir(element: T) {
     this.excluir.emit(element);
