@@ -47,14 +47,14 @@
         <td mat-cell *matCellDef="let element"> {{ element.data_prontuario || 'Não informado' }} </td>
       </ng-container>
       
-      <ng-container matColumnDef="nome_usuario">
+      <ng-container matColumnDef="usuario_nome">
         <th mat-header-cell *matHeaderCellDef> Médico </th>
-        <td mat-cell *matCellDef="let element"> {{ element.nome_usuario }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.usuario_nome }} </td>
       </ng-container>
 
-      <ng-container matColumnDef="nome_animal">
+      <ng-container matColumnDef="animal_nome">
         <th mat-header-cell *matHeaderCellDef> Animal </th>
-        <td mat-cell *matCellDef="let element"> {{ element.nome_animal }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.animal_nome }} </td>
       </ng-container>
 
       <ng-container matColumnDef="status">
@@ -64,7 +64,7 @@
 
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef> Acoes </th>
-        <td mat-cell *matCellDef="let element" ><i class="me-2 fa-solid fa-pencil" (click)="abrirModal()"></i><i class="fa-solid fa-trash"  (click)="onExcluir(element)"></i></td>
+        <td mat-cell *matCellDef="let element" ><i class="me-2 fa-solid fa-pencil" (click)="onAtualizar(element)"></i><i class="fa-solid fa-trash"  (click)="onExcluir(element)"></i></td>
       </ng-container>
 
       <ng-container matColumnDef="data_nascimento">
@@ -90,17 +90,14 @@
       <ng-container matColumnDef="especie_id">
         <th mat-header-cell *matHeaderCellDef> Espécie </th>
         <td mat-cell *matCellDef="let element"> {{ element.especie?.especie}} </td>
-        <td mat-cell *matCellDef="let element" >
-          <i class="me-2 fa-solid fa-pencil" (click)="onAtualizar(element)"></i>
-          <i class="fa-solid fa-trash" (click)="onExcluir(element)"></i>
       </ng-container>
 
-        <ng-container matColumnDef="selecionar">
-          <th mat-header-cell *matHeaderCellDef> Selecionar </th>
-          <td mat-cell *matCellDef="let element">
-            <mat-checkbox>{{element.selecionado}}</mat-checkbox>
-          </td>
-        </ng-container>
+      <ng-container matColumnDef="selecionar">
+        <th mat-header-cell *matHeaderCellDef> Selecionar </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox>{{element.selecionado}}</mat-checkbox>
+        </td>
+      </ng-container>
       
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

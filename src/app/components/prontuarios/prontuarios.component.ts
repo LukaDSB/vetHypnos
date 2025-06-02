@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Prontuario } from 'src/app/models/prontuario';
@@ -18,7 +18,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ProntuariosComponent implements OnInit {
   dataSource:MatTableDataSource<Prontuario> = new MatTableDataSource<Prontuario>([]);
-  displayedColumns: string[] = ['id', 'nome_usuario','nome_animal', 'data_prontuario', 'procedimento', 'status', 'acoes'];
+  displayedColumns: string[] = ['id', 'usuario_nome','animal_nome', 'data_prontuario', 'procedimento', 'status', 'acoes'];
 
   constructor(public dialog: MatDialog, private prontuarioService: ProntuarioService){}
 

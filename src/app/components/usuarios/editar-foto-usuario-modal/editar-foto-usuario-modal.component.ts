@@ -17,33 +17,29 @@ export class EditarFotoUsuarioModalComponent {
 
   @Output() fecharModal = new EventEmitter<void>();
 
-onCloseModal() {
-  this.fecharModal.emit();
-}
-
-onBtnClick(type: string) {
-  switch (type) {
-    case 'editar':
-      this.editarFotoPerfil();
-      break;
-    case 'adicionar':
-      this.adicionarFotoPerfil();
-      break;
-    case 'excluir':
-      this.excluirFotoPerfil();
-      break;
+  onCloseModal() {
+    this.fecharModal.emit();
   }
-}
+
+  onBtnClick(type: string) {
+    switch (type) {
+      case 'editar':
+        this.editarFotoPerfil();
+        break;
+      case 'adicionar':
+        this.adicionarFotoPerfil();
+        break;
+      case 'excluir':
+        this.excluirFotoPerfil();
+        break;
+    }
+  }
 
 
-editarFotoPerfil(){
- // teste alert("editar");
-}
-adicionarFotoPerfil(){
-  // teste alert("adicionar");
-}
-excluirFotoPerfil(){
-   // teste alert("excluir");
-}
-
+  editarFotoPerfil(){
+  }
+  adicionarFotoPerfil(){
+  }
+  excluirFotoPerfil(){
+  }
 }

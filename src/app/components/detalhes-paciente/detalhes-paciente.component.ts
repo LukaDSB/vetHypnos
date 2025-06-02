@@ -18,15 +18,12 @@ export class DetalhesPacienteComponent {
   };
 
   voltar() {
-    // lógica para voltar à página anterior
   }
 
   novaPrescricao() {
-    // lógica para criar uma nova prescrição
   }
 
   editarPaciente() {
-    // lógica para ir para a edição do paciente
   }
 
   historico = [
