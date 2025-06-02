@@ -23,9 +23,6 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
   @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
 
-  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
-  @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   onExcluir(element: T) {
@@ -37,10 +34,6 @@ export class TabelaComponent<T> implements AfterViewInit {
   }
 
   constructor(public dialog: MatDialog) {}
-
-onAtualizar(element: T){
-    this.atualizar.emit(element);
-}
 
   abrirModal(): void {
     console.log('Modal abriu');
