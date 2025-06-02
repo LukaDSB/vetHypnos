@@ -22,7 +22,7 @@ export class AnimalService {
   deletarAnimal(id:number): Observable<void>{
     return this.http.delete<void>(`${this.apiUrl}/animal/${id}`);
   }
-
+  
   atualizarAnimal(animal: Animal): Observable<Animal>{
     return this.http.put<Animal>(`${this.apiUrl}/animal/${animal.id}`, animal);
   }

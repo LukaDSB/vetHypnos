@@ -133,4 +133,3 @@ export class ModalPacientesComponent implements OnInit{
     this.authService.loginMock();
   }
 }
-
