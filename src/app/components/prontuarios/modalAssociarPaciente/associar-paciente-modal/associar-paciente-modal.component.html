@@ -1,6 +1,10 @@
 <div *ngIf="modalAssociar" class="modal">
   <div class="modal-content">
+      
+    <div class="header d-flex flex-row align-items-center">
       <h1 class="hypnosText--fonte1">Associar paciente</h1>
+       <i class="fa-solid fa-xmark fa-2x" (click) = "fecharModalCadastro()"></i>
+    </div>
 
       <div class="innerContent">
         <hdk-button color="hdk-bg-verde" text="Paciente existente" (click)="abrirModalAssociarPacienteExistente()" />

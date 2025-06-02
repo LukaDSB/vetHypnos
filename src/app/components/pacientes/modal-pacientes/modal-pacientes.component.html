@@ -1,35 +1,85 @@
 <div *ngIf="isCadastroModalOpen" class="modal">
-  <div class="modal-content">
+  <div *ngIf="isCadastrarModal" class="modal-content">
 
     <form>
-      <h1 class="hipnosText--TituloGrande">Cadastrar novo paciente</h1>
+      <h1 class="hipnosText--TituloGrande">Cadastrar novo Animal</h1>
       <div class="form-group">
-        <label for="nome">Nome do paciente *</label>
-        <input type="search" class="bg-azul col-2 form-control" id="nomePaciente" />
+        <label for="nomeAnimal">Nome do paciente *</label>
+        <input type="search" class="bg-azul col-2 form-control" [(ngModel)]="nomeAnimal" name="nomeAnimal" />
+      </div>
+
+     <div class="form-group">
+      <label for="especieAnimal">Espécie</label>
+      <select
+        class="bg-azul col-2 form-control"
+        [(ngModel)]="especieAnimal"
+        name="especieAnimal"
+      >
+        <option [ngValue]="null" disabled>Selecione uma espécie</option>
+        <option *ngFor="let especie of especies" [ngValue]="especie.id">
+          {{ especie.especie }}
+        </option>
+      </select>
+    </div>
+
+      <div class="form-group">
+        <label for="DataNascAnimal">Data de Nascimento</label>
+        <input
+          type="text"
+          mask="00/00/0000"
+          maxlength="10"
+          [(ngModel)]="DataNascAnimal"
+          name="DataNascAnimal"
+          placeholder="dd/mm/aaaa"
+          inputmode="numeric"
+          class="bg-azul col-2 form-control"
+        />
       </div>
       <div class="form-group">
-        <label for="nome">Espécie</label>
-        <input type="search" class="bg-azul col-2 form-control" id="especiePaciente" />
+        <label for="SexoAnimal">Sexo</label>
+        <select
+          class="bg-azul col-2 form-control"
+          [(ngModel)]="SexoAnimal"
+          name="SexoAnimal"
+        >
+          <option [ngValue]="null" disabled selected>Selecione o sexo</option>
+          <option value="M">M</option>
+          <option value="F">F</option>
+          <option value="Outro">Outro</option>
+        </select>
       </div>
+      
       <div class="form-group">
-        <label for="nome">Idade</label>
-        <input type="search" class="bg-azul col-2 form-control" id="IdadePaciente" />
-      </div>
+          <label for="PesoAnimal">Peso (kg)*</label>
+          <input 
+            type="text"
+            mask="separator.2" 
+            thousandSeparator="."
+            decimalMarker=","
+            [dropSpecialCharacters]="false"
+            placeholder="0,00"
+            class="no-spinners bg-azul col-2 form-control"
+            [(ngModel)]="PesoAnimal"
+            name="PesoAnimal"
+          />
+        </div>
+
       <div class="form-group">
-        <label for="nome">Sexo</label>
-        <input type="search" class="bg-azul col-2 form-control" id="SexoPaciente" />
-      </div>
-      <div class="form-group">
-        <label for="nome">Peso *</label>
-        <input type="search" class="bg-azul col-2 form-control" id="PesoPaciente" />
-      </div>
-      <div class="form-group">
-        <label for="nome">Tutor</label>
-        <input type="search" class="bg-azul col-2 form-control" id="TutorPaciente" />
+        <label for="TutorAnimal">Tutor</label>
+        <input type="search" class="bg-azul col-2 form-control" [(ngModel)]="TutorAnimal" name="TutorAnimal" />
       </div>
 
       <footer>
-        <hdk-button text="Cadastrar" color="hdk-bg-verde" />
+          <hdk-button
+            *ngIf="!isAtualizarModal"
+            text="Cadastrar"
+            color="hdk-bg-verde"
+            (click)="cadastrarAnimal()" />
+          <hdk-button
+            *ngIf="isAtualizarModal"
+            text="Atualizar"
+            color="hdk-bg-verde"
+            (click)="atualizarAnimal()" />
         <hdk-button text="Cancelar" color="hdk-bg-vermelho" (click)="closeCadastro()"/>
       </footer>
     </form>

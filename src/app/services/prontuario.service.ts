@@ -22,4 +22,8 @@ export class ProntuarioService {
   deletarProntuario(id: number):Observable<Prontuario>{
     return this.http.delete<Prontuario>(`${this.apiUrl}/prontuario/${id}`);
   }
+
+  atualizarProntuario(prontuario: Prontuario): Observable<Prontuario>{
+    return this.http.put<Prontuario>(`${this.apiUrl}/prontuario/${prontuario.id}`, prontuario);
+  }
 }
