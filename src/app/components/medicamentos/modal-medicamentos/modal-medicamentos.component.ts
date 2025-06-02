@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { Location } from '@angular/common';
+import { Medicamento } from 'src/app/models/medicamento.model';
 
 @Component({
   selector: 'app-modal-medicamentos',
@@ -13,36 +14,103 @@ import { Location } from '@angular/common';
   imports:[FormsModule, CommonModule, HdkButtonComponent]
 })
 export class ModalMedicamentosComponent {
- isLoginModalOpen = true;
   isCadastroModalOpen = false;
-  email = '';
-  senha = '';
-  nome = '';
+  isModalCadastro = true;
+  isModalAtualizar = false;
+  medicamento: Medicamento | undefined;
+  nome?: string;
+  concentracao = 0;
+  categoriaRemedio = 1;
+  fabricante?: string;
+  lote = 0;
+  validade?: string;
+  quantidade = 0;
+  @Output() cadastrar = new EventEmitter<Medicamento>();
+  @Output() atualizar = new EventEmitter<Medicamento>();
 
   constructor(private authService: AuthService, private location: Location ) {}
 
-  login() {
-    console.log('Tentativa de login com:', this.email, this.senha);
-    this.isLoginModalOpen = false;
+  cadastrarMedicamento() {
+    const medicamento: Medicamento = {
+      id: this.medicamento?.id ?? 0,
+      nome: this.nome || '',
+      concentracao: this.concentracao,
+      categoria_id: this.categoriaRemedio,
+      fabricante: this.fabricante || '',
+      lote: this.lote,
+      validade: this.validade || '',
+      quantidade: this.quantidade
+    };
+  
+    if (this.isModalAtualizar) {
+      this.atualizar.emit(medicamento);
+    } else {
+      this.cadastrar.emit(medicamento);
+    }
+  
+    this.closeCadastro();
+  }
+
+  openAtualizar(med: Medicamento) {
+    this.medicamento = med;
+    this.nome = med.nome;
+    this.concentracao = med.concentracao;
+    this.categoriaRemedio = med.categoria_id;
+    this.fabricante = med.fabricante;
+    this.lote = med.lote;
+    this.validade = med.validade;
+    this.quantidade = med.quantidade;
+  
+    this.isModalCadastro = false;
+    this.isModalAtualizar = true;
+    this.isCadastroModalOpen = true;
   }
 
   voltar(){
     this.location.back();
   }
 
+  atualizarMedicamento() {
+    if (!this.medicamento) return;
+  
+    const medicamentoAtualizado: Medicamento = {
+      ...this.medicamento,
+      nome: this.nome || '',
+      concentracao: this.concentracao,
+      categoria_id: this.categoriaRemedio,
+      fabricante: this.fabricante || '',
+      lote: this.lote,
+      validade: this.validade || '',
+      quantidade: this.quantidade
+    };
+  
+    this.atualizar.emit(medicamentoAtualizado);
+    this.closeCadastro();
+  }
+
   openCadastro() {
-    this.isLoginModalOpen = false;
+    this.isModalCadastro = true;
+    this.isModalAtualizar = false;
+    this.resetCampos();
     this.isCadastroModalOpen = true;
+  }
+  
+  resetCampos() {
+    this.nome = '';
+    this.concentracao = 0;
+    this.categoriaRemedio = 1;
+    this.fabricante = '';
+    this.lote = 0;
+    this.validade = '';
+    this.quantidade = 0;
   }
 
   closeCadastro() {
     this.isCadastroModalOpen = false;
-    this.isLoginModalOpen = true;
   }
 
   loginMock() {
     this.authService.loginMock();
-    this.isLoginModalOpen = false;
   }
 }
 
