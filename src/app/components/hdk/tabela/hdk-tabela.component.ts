@@ -1,4 +1,3 @@
-
 import { Component, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -20,12 +19,22 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Input() dataSource: MatTableDataSource<T> = new MatTableDataSource<T>([]);
   @Input() pageSizeOptions: number[] = [10, 20];
   @Input() displayedColumns?: string[];
-  @Input() customTemplates: {[key: string]: (element: T) => string} = {};
+
+  @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
+  @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
 
   @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
   @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  onExcluir(element: T) {
+    this.excluir.emit(element);
+  }
+
+  onAtualizar(element: T){
+    this.atualizar.emit(element);
+  }
 
   constructor(public dialog: MatDialog) {}
 
@@ -33,18 +42,14 @@ onAtualizar(element: T){
     this.atualizar.emit(element);
 }
 
-onExcluir(element: T){
-    this.excluir.emit(element);
-}
-
- abrirModal(): void {
+  abrirModal(): void {
     console.log('Modal abriu');
     const dialogRef = this.dialog.open(HdkModalComponent, {
       width: '400px',
       data: {}
     });
 
-  dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }

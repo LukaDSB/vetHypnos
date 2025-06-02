@@ -20,11 +20,14 @@ import { MedicamentosComponent } from './components/medicamentos/medicamentos.co
 import { PacientesComponent } from './components/pacientes/pacientes.component';
 import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ExpansionPanelComponent } from './components/hdk/expansion-panel/expansion-panel.component';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { PageTesteComponent } from './components/page-teste/page-teste.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    RelatoriosComponent, TutoresComponent,
+    RelatoriosComponent, TutoresComponent, PageTesteComponent, 
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     HdkDivisor,
     UsuariosComponent,
     NgxMaskDirective,
+    ExpansionPanelComponent,
+    CdkAccordionModule,
 ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]
