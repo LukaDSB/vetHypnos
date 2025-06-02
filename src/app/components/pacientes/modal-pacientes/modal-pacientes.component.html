@@ -1,5 +1,5 @@
 <div *ngIf="isCadastroModalOpen" class="modal">
-  <div class="modal-content">
+  <div *ngIf="isCadastrarModal" class="modal-content">
 
     <form>
       <h1 class="hipnosText--TituloGrande">Cadastrar novo Animal</h1>
@@ -70,7 +70,16 @@
       </div>
 
       <footer>
-        <hdk-button text="Cadastrar" color="hdk-bg-verde" (click)="cadastrarAnimal()" />
+          <hdk-button
+            *ngIf="!isAtualizarModal"
+            text="Cadastrar"
+            color="hdk-bg-verde"
+            (click)="cadastrarAnimal()" />
+          <hdk-button
+            *ngIf="isAtualizarModal"
+            text="Atualizar"
+            color="hdk-bg-verde"
+            (click)="atualizarAnimal()" />
         <hdk-button text="Cancelar" color="hdk-bg-vermelho" (click)="closeCadastro()"/>
       </footer>
     </form>

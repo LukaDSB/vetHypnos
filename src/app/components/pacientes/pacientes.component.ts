@@ -53,6 +53,22 @@ export class PacientesComponent implements OnInit {
     }
   }
 
+  atualizarAnimal(animal: Animal){
+    this.modalPacientesComponent.openAtualizar(animal);
+  }
+
+  enviarAtualizacao(animal: Animal){
+    this.animalService.atualizarAnimal(animal).subscribe({
+      next: () => {
+        console.log('Animal atualizado com sucesso.');
+        this.carregarDados();
+      },
+      error: (err) => {
+        console.log('Erro ao atualizar animal: ', err);
+      }
+    })
+  }
+
   carregarDados() {
      this.animalService.getAnimais().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);

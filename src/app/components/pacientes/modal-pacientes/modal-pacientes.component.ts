@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { Location } from '@angular/common';
-import { Animal } from 'src/app/models/animal.model';
+import {Animal} from 'src/app/models/animal.model';
+import { AnimalService } from 'src/app/services/animal.service';
 import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
@@ -12,51 +13,116 @@ import { NgxMaskDirective } from 'ngx-mask';
   templateUrl: './modal-pacientes.component.html',
   styleUrls: ['./modal-pacientes.component.scss'],
   standalone: true,
-  imports: [FormsModule, CommonModule, HdkButtonComponent, NgxMaskDirective]
+  imports:[FormsModule, CommonModule, HdkButtonComponent, NgxMaskDirective]
 })
-export class ModalPacientesComponent implements OnInit {
-  isCadastroModalOpen = false;
-  nomeAnimal = '';
-  DataNascAnimal = 0;
-  SexoAnimal = '';
-  PesoAnimal = 0;
-  TutorAnimal = 0;
-  especieAnimal = 1;
-  especies: any[] = [];
+export class ModalPacientesComponent implements OnInit{
+  animal: Animal | undefined;
+ isCadastroModalOpen = false;
+ isAtualizarModal = false;
+ isCadastrarModal = true;
+    nomeAnimal = "";
+    DataNascAnimal = 0;
+    SexoAnimal = "";
+    PesoAnimal = 0;
+    TutorAnimal = 0;
+    especieAnimal = 0;
+    especies: any[] = [];
+    @Output() cadastrar = new EventEmitter<Animal>();
+    @Output() atualizar = new EventEmitter<Animal>();
 
-  @Output() cadastrar = new EventEmitter<Animal>();
 
-  constructor(
-    private authService: AuthService,
-    private location: Location
-  ) {}
-
+  constructor(private authService: AuthService, private location: Location, private animalService: AnimalService) {}
+  
   ngOnInit(): void {
-
+      this.animalService.getAnimais().subscribe((animais: any[]) => {
+        this.especies = this.getEspeciesUnicas(animais);
+    });
   }
 
-  cadastrarAnimal() {
+  cadastrarAnimal(){
     const novoAnimal: Animal = {
-      id: 0,
+      id:0,
       nome: this.nomeAnimal,
       data_nascimento: this.DataNascAnimal,
       sexo: this.SexoAnimal,
       peso: this.PesoAnimal,
       obito: 0,
-      tutor_id: this.TutorAnimal,
+      tutor_id:this.TutorAnimal,
       especie_id: this.especieAnimal,
     };
 
+    if (this.isAtualizarModal){
+    this.atualizar.emit(novoAnimal);
+    } else {
     this.cadastrar.emit(novoAnimal);
+    }
     this.closeCadastro();
   }
 
-  voltar() {
+  openAtualizar(anml: Animal){
+      this.animal = anml; 
+      this.nomeAnimal = anml.nome;
+      this.DataNascAnimal = anml.data_nascimento;
+      this.SexoAnimal = anml.sexo;
+      this.PesoAnimal = anml.peso;
+      this.TutorAnimal = anml.tutor_id;
+      this.especieAnimal = anml.especie_id;
+
+      this.isCadastroModalOpen = false;
+      this.isAtualizarModal = true;
+      this.isCadastroModalOpen = true;
+  }
+
+  atualizarAnimal(){
+    if (!this.animal) return;
+
+    const animalAtualizado: Animal = {
+      ...this.animal,
+      nome: this.nomeAnimal || '',
+      data_nascimento: this.DataNascAnimal,
+      sexo: this.SexoAnimal,
+      peso: this.PesoAnimal,
+      tutor_id: this.TutorAnimal,
+      especie_id: this.especieAnimal,
+
+    };
+      console.log('teste');
+
+    this.atualizar.emit(animalAtualizado);
+    this.closeCadastro();
+  }
+
+
+  getEspeciesUnicas(animais: any[]): any[] {
+    const especiesMap = new Map<number, any>();
+    for (const animal of animais) {
+      const especie = animal.especie;
+      if (especie && !especiesMap.has(especie.id)) {
+        especiesMap.set(especie.id, especie);
+      }
+    }
+    return Array.from(especiesMap.values());
+  }
+
+  resetCampos(){
+      this.nomeAnimal = '';
+      this.DataNascAnimal = 0;
+      this.SexoAnimal =  '';
+      this.PesoAnimal = 0;
+      this.TutorAnimal = 0;
+      this.especieAnimal = 0;
+  }
+
+
+  voltar(){
     this.location.back();
   }
 
   openCadastro() {
     this.isCadastroModalOpen = true;
+    this.isAtualizarModal = false;
+    this.resetCampos();
+    this.isCadastrarModal= true;
   }
 
   closeCadastro() {
