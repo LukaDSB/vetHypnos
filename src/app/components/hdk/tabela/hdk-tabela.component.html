@@ -92,6 +92,26 @@
         <td mat-cell *matCellDef="let element"> {{ element.especie?.especie}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="tutor_nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{ element.tutor_nome || 'Não informado'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tutor_cpf">
+        <th mat-header-cell *matHeaderCellDef> CPF </th>
+        <td mat-cell *matCellDef="let element"> {{ element.tutor_cpf || 'Não informado'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="endereco">
+        <th mat-header-cell *matHeaderCellDef> Endereço </th>
+        <td mat-cell *matCellDef="let element"> {{ element.endereco?.endereco || 'Não informado'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contato">
+        <th mat-header-cell *matHeaderCellDef> Contato </th>
+        <td mat-cell *matCellDef="let element"> {{ element.contato?.contato || 'Não informado'}} </td>
+      </ng-container>
+
       <ng-container matColumnDef="selecionar">
         <th mat-header-cell *matHeaderCellDef> Selecionar </th>
         <td mat-cell *matCellDef="let element">
