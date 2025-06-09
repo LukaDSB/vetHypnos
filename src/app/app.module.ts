@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { HdkButtonComponent } from './components/hdk/button/hdk-button.component';
 import { TabelaComponent } from './components/hdk/tabela/hdk-tabela.component';
 import { HdkModalComponent } from './components/hdk/modal/hdk-modal.component';
-import { TutoresComponent } from './components/tutores/tutores.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -27,7 +26,7 @@ import { PageTesteComponent } from './components/page-teste/page-teste.component
 @NgModule({
   declarations: [
     AppComponent, 
-    RelatoriosComponent, TutoresComponent, PageTesteComponent, 
+    RelatoriosComponent, PageTesteComponent,
   ],
   imports: [
     BrowserModule,
