@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from "./components/navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +12,7 @@ export class AppComponent {
   isLoginModalOpen = true;
 
   menuItems = [
-    { text: 'Pacientes', icon: 'fa-solid fa-address-card', route: '/pacientes' },
+    { text: 'Animais', icon: 'fa-solid fa-address-card', route: '/animais' },
     { text: 'Medicamentos', icon: 'fa-solid fa-briefcase-medical', route: '/medicamentos' },
     { text: 'Prontuários', icon: 'fa-solid fa-book-open', route: '/prontuarios' },
     { text: 'Relatórios', icon: 'fa-solid fa-chart-column', route: '/relatorios' },

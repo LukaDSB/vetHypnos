@@ -2,24 +2,24 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AnimalService } from 'src/app/services/animal.service';
 import { Location } from '@angular/common';
-import {Animal} from 'src/app/models/animal.model';
-import { ModalPacientesComponent } from './modal-pacientes/modal-pacientes.component';
+import { Animal } from 'src/app/models/animal.model';
 import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
 import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
+import { ModalAnimalComponent } from './modal-animal/modal-animal.component';
 
 @Component({
-  selector: 'app-pacientes',
-  templateUrl: './pacientes.component.html',
-  styleUrls: ['./pacientes.component.scss'],
+  selector: 'app-animais',
+  templateUrl: './animais.component.html',
+  styleUrls: ['./animais.component.scss'],
   standalone: true,
-  imports: [ModalPacientesComponent, HdkButtonComponent, HdkDivisor, TabelaComponent],
+  imports: [ModalAnimalComponent, HdkButtonComponent, HdkDivisor, TabelaComponent],
 })
-export class PacientesComponent implements OnInit {
+export class AnimaisComponent implements OnInit {
+  
   dataSource: MatTableDataSource<Animal> = new MatTableDataSource<Animal>([]);
   displayedColumns: string[] = ['id', 'nome', 'especie_id', 'data_nascimento', 'tutor_id', 'peso', 'sexo', 'acoes'];
-  @ViewChild('modalPacientes') modalPacientesComponent!: ModalPacientesComponent;
-
+  @ViewChild('modalAnimal') modalAnimalComponent!: ModalAnimalComponent;
 
   constructor(private animalService: AnimalService, private location: Location) {}
   
@@ -54,7 +54,7 @@ export class PacientesComponent implements OnInit {
   }
 
   atualizarAnimal(animal: Animal){
-    this.modalPacientesComponent.openAtualizar(animal);
+    this.modalAnimalComponent.openAtualizar(animal);
   }
 
   enviarAtualizacao(animal: Animal){
@@ -80,6 +80,6 @@ export class PacientesComponent implements OnInit {
   }
 
   abrirModalCadastro() {
-  this.modalPacientesComponent.openCadastro();
+  this.modalAnimalComponent.openCadastro();
 }
 }

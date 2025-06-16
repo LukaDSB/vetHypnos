@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-detalhes-paciente',
+  selector: 'app-detalhes-animal',
   standalone: true,
   imports: [],
-  templateUrl: './detalhes-paciente.component.html',
-  styleUrls: ['./detalhes-paciente.component.scss'],
+  templateUrl: './detalhes-animal.component.html',
+  styleUrls: ['./detalhes-animal.component.scss'],
 })
-export class DetalhesPacienteComponent {
-  paciente = {
+export class DetalhesAnimalComponent {
+  animal = {
     id: 5,
     nome: 'Placidusax',
     especie: 'Dragão',
@@ -23,7 +23,7 @@ export class DetalhesPacienteComponent {
   novaPrescricao() {
   }
 
-  editarPaciente() {
+  editarAnimal() {
   }
 
   historico = [

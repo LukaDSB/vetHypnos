@@ -2,25 +2,25 @@
   <div class="modal-content">
       
     <div class="header d-flex flex-row align-items-center">
-      <h1 class="hypnosText--fonte1">Associar paciente</h1>
+      <h1 class="hypnosText--fonte1">Associar animal</h1>
        <i class="fa-solid fa-xmark fa-2x" (click) = "fecharModalCadastro()"></i>
     </div>
 
       <div class="innerContent">
-        <hdk-button color="hdk-bg-verde" text="Paciente existente" (click)="abrirModalAssociarPacienteExistente()" />
-        <hdk-button color="hdk-bg-vermelho" text="Novo paciente" (click)="abrirModalCadastro()"/>
+        <hdk-button color="hdk-bg-verde" text="Animal existente" (click)="abrirModalAssociarAnimalExistente()" />
+        <hdk-button color="hdk-bg-vermelho" text="Novo animal" (click)="abrirModalCadastro()"/>
       </div>
     </div>
   </div>
   
-  <div *ngIf="modalNovoPaciente" class="modal">
+  <div *ngIf="modalNovoAnimal" class="modal">
     <div class="modal-content">
   
-      <h1>Modal novo paciente</h1>
+      <h1>Modal novo animal</h1>
   
     </div>
   </div>
 
-<app-modal-pacientes #modalPacientes></app-modal-pacientes>
+<app-modal-animal #modalAnimal (cadastrar)="cadastrarAnimal($event)"></app-modal-animal>
 <app-modal-associar-animal-existente #modalAssociarAnimalExistente></app-modal-associar-animal-existente>
 
