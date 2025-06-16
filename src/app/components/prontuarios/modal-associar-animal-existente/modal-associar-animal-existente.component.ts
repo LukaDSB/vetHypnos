@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
@@ -18,7 +18,7 @@ import { AnimalService } from 'src/app/services/animal.service';
   imports: [HdkButtonComponent, TabelaComponent, CommonModule],
 })
 export class ModalAssociarAnimalExistenteComponent {
-  isAssociarPacienteExistenteModalOpen = false;
+  isAssociarAnimalExistenteModalOpen = false;
   dataSource: MatTableDataSource<Animal> = new MatTableDataSource<Animal>([]);
    displayedColumns: string[] = ['id', 'nome', 'especie_id', 'data_nascimento', 'tutor_id', 'peso', 'sexo', 'selecionar'];
 
@@ -35,11 +35,10 @@ export class ModalAssociarAnimalExistenteComponent {
   }
 
    openModal() {
-    console.log('teste aaaaaaa');
-    this.isAssociarPacienteExistenteModalOpen = true;
+    this.isAssociarAnimalExistenteModalOpen = true;
   }
 
   closeModal(){
-    this.isAssociarPacienteExistenteModalOpen = false;
+    this.isAssociarAnimalExistenteModalOpen = false;
   }
 }

@@ -17,17 +17,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { MedicamentosComponent } from './components/medicamentos/medicamentos.component';
-import { PacientesComponent } from './components/pacientes/pacientes.component';
 import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ExpansionPanelComponent } from './components/hdk/expansion-panel/expansion-panel.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
-import { PageTesteComponent } from './components/page-teste/page-teste.component';
+import { AnimaisComponent } from './components/animais/animais.component';
+import { ProntuarioProvisorioComponent } from './components/prontuario-provisorio/prontuario-provisorio.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    RelatoriosComponent, TutoresComponent, PageTesteComponent, 
+    RelatoriosComponent, TutoresComponent, ProntuarioProvisorioComponent, 
   ],
   imports: [
     BrowserModule,
@@ -38,7 +38,6 @@ import { PageTesteComponent } from './components/page-teste/page-teste.component
     MatTableModule,
     MatPaginatorModule,
     MedicamentosComponent, 
-    PacientesComponent, 
     ProntuariosComponent, 
     TabelaComponent,
     HttpClientModule,
@@ -49,6 +48,7 @@ import { PageTesteComponent } from './components/page-teste/page-teste.component
     NgxMaskDirective,
     ExpansionPanelComponent,
     CdkAccordionModule,
+    AnimaisComponent
 ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]
