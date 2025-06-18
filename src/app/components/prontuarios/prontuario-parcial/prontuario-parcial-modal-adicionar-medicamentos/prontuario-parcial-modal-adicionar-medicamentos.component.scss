@@ -1,0 +1,104 @@
+@import '../../../../../styles.scss';
+@import '../../../hdk/fontes.scss';
+@import '../../../hdk/cores.scss';
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 8px;
+  width: 50vw;
+  padding: 15px;
+  gap: 10px;
+  background-color: white;
+}
+
+.innerContent{
+  justify-self: center;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+}
+.form{
+  width: 15vw;
+}
+
+.hypnosButtom{
+  background-color: $verde;
+}
+
+.header{
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.header i{
+  cursor: pointer;
+}
+
+.medicamentos{
+    padding: 1em;
+}
+
+.medicamentos-header label{
+    font-weight: bold;
+    font-size: 24px
+}
+
+.slide-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.medicamento-info{
+    margin: 0 1em 0 1em;
+}
+
+.medicamento-input {
+  border: 1px solid #c4c4c4;
+  border-radius: 8px;
+  padding: 4px 12px;
+  width: 10vw;
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.medicamento-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+  background-color: transparent;
+}
+
+.medicamento-input input::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+.medicamento-input input:focus {
+  outline: none;
+}

@@ -10,11 +10,7 @@ import { DetalhesPacienteComponent } from './components/detalhes-paciente/detalh
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { PageProntuarioComponent } from './components/page-prontuario/page-prontuario.component';
 import { PageTesteComponent } from './components/page-teste/page-teste.component';
-
-
-
-
-
+import { ProntuarioParcialComponent } from './components/prontuarios/prontuario-parcial/prontuario-parcial.component';
 
 
 const routes: Routes = [
@@ -28,7 +24,8 @@ const routes: Routes = [
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'tutores', component: TutoresComponent },
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
-  { path: 'usuario', component: UsuariosComponent }
+  { path: 'usuario', component: UsuariosComponent },
+  { path: 'prontuarios/prontuarioParcial', component: ProntuarioParcialComponent}
 ];
 
 @NgModule({

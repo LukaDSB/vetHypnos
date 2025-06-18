@@ -27,7 +27,7 @@ import { PageTesteComponent } from './components/page-teste/page-teste.component
 @NgModule({
   declarations: [
     AppComponent, 
-    RelatoriosComponent, TutoresComponent, PageTesteComponent, 
+    RelatoriosComponent, TutoresComponent, PageTesteComponent,
   ],
   imports: [
     BrowserModule,
