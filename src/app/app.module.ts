@@ -27,7 +27,10 @@ import { ProntuarioProvisorioComponent } from './components/prontuario-provisori
 @NgModule({
   declarations: [
     AppComponent, 
-    RelatoriosComponent, TutoresComponent, ProntuarioProvisorioComponent, 
+    PageTesteComponent,
+    RelatoriosComponent, 
+    TutoresComponent, 
+    ProntuarioProvisorioComponent, 
   ],
   imports: [
     BrowserModule,

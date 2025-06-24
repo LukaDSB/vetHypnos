@@ -8,6 +8,8 @@ import { TutoresComponent } from './components/tutores/tutores.component';
 import { DetalhesAnimalComponent } from './components/detalhes-animal/detalhes-animal.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { PageProntuarioComponent } from './components/page-prontuario/page-prontuario.component';
+import { PageTesteComponent } from './components/page-teste/page-teste.component';
+import { ProntuarioParcialComponent } from './components/prontuarios/prontuario-parcial/prontuario-parcial.component';
 import { AnimaisComponent } from './components/animais/animais.component';
 import { ProntuarioProvisorioComponent } from './components/prontuario-provisorio/prontuario-provisorio.component';
 
@@ -23,7 +25,8 @@ const routes: Routes = [
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'tutores', component: TutoresComponent },
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
-  { path: 'usuario', component: UsuariosComponent }
+  { path: 'usuario', component: UsuariosComponent },
+  { path: 'prontuarios/prontuarioParcial', component: ProntuarioParcialComponent}
 ];
 
 @NgModule({

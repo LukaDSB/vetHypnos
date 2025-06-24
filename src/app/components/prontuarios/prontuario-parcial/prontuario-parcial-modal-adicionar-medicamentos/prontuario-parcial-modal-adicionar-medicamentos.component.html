@@ -1,0 +1,33 @@
+<div *ngIf="isCadastroModalOpen" class="modal">
+    <div class="modal-content">
+
+        <h1 class="hypnosText--h1 header">Selecione a dosagem utilizada</h1>
+
+        <div class="medicamentos">
+            <div class="medicamentos-header d-flex justify-content-between align-items-center m-2">
+                <label>Medicamento</label>
+                <label>Volume Mínimo</label>
+                <label>Volume Máximo</label>
+                <label>Volume Personalizado</label>
+            </div>
+            <div class="medicamento-info d-flex justify-content-between align-items-center">
+                <div class="label-2">Acepromazina</div>
+                <div class="label-2">75,01(ml)</div>
+                <div class="slide-box">
+                    <mat-slide-toggle [(ngModel)]="isChecked"></mat-slide-toggle>
+                </div>
+                <div class="label-2">150,02(ml)</div>
+                <div class="medicamento-input">
+                    <input type="text" placeholder="Digite o volume...">
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="innerContent">
+            <hdk-button color="hdk-bg-verde" text="Salvar" (click)="salvarDosagem()" />
+            <hdk-button color="hdk-bg-vermelho" text="Cancelar" (click)="closeCadastro()" />
+        </div>
+    </div>
+</div>

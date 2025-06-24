@@ -1,0 +1,159 @@
+<app-prontuario-parcial-modal-adicionar-medicamentos #modalAdicionarMedicamentos></app-prontuario-parcial-modal-adicionar-medicamentos>
+
+<div class="container-prontuario poppins-bold">
+  <div class="header">
+    <div class="logo-instituto">
+      <img src="../../../assets/images/LogoIfes.png" alt="Logo IFES" />
+    </div>
+    <div class="infos-contato">
+      <div class="info-item">
+        <div class="icons-img">
+          <img src="../../../assets/images/telefone.png" alt="">
+        </div>
+        <div>
+          <p>3564–1800</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="icons-img">
+          <img src="../../../assets/images/email.png" alt="">
+        </div>
+        <div>
+          <p>gabinete.ale&#64;ifes.edu.br</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="icons-img">
+          <img src="../../../assets/images/local.png" alt="">
+        </div>
+        <div>
+          <p>Rodovia ES-482<br />(Cachoeiro–Alegre, Km 72 –<br> Rive, Alegre – ES, 29500–000)</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="titulo">Prontuário Parcial</div>
+  <div class="num-prontuario">Número: 202401</div>
+
+  <div class="section-titulo ">Informações do paciente</div>
+  <div class="section-content">
+    <div>
+      <div class="label">Id</div>
+      <div class="value">5</div>
+    </div>
+    <div>
+      <div class="label">Nome</div>
+      <div class="value">Placidusax</div>
+    </div>
+    <div>
+      <div class="label">Espécie</div>
+      <div class="value">Dragão</div>
+    </div>
+    <div>
+      <div class="label">Idade</div>
+      <div class="value">100</div>
+    </div>
+    <div>
+      <div class="label">Peso</div>
+      <div class="value">3000.37</div>
+    </div>
+    <div>
+      <div class="label">Sexo</div>
+      <div class="value">?</div>
+    </div>
+  </div>
+
+  <div class="section-titulo">Detalhes do procedimento</div>
+  <div class="section-content-2">
+    <div>
+      <div class="label-2">Médico</div>
+      <div class="value-2">Paulo</div>
+    </div>
+    <div>
+      <div class="label-2">Tipo de Procedimento</div>
+      <div class="value-2">Castração</div>
+    </div>
+    <div>
+      <div class="label-2">Data do Procedimento</div>
+      <div class="value-2">12/11/2024</div>
+    </div>
+    <div>
+      <div class="label-2">Duração</div>
+      <div class="value-2">4 horas</div>
+    </div>
+  </div>
+
+  <div class="section-titulo">Parâmetros Clínicos</div>
+  <div class="section-content-2">
+
+
+    <div class="tabela-clinica-wrapper">
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cell">
+            <ng-container *ngIf="column === 'parametro'; else emptyHeader">
+              Parâmetro
+            </ng-container>
+            <ng-template #emptyHeader>
+            </ng-template>
+          </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell">
+            <ng-container *ngIf="column === 'parametro'; else inputField" class="table-input-teste">
+              {{ element[column] }}
+            </ng-container>
+            <ng-template #inputField class="input-field">
+              <input type="text" [(ngModel)]="element[column]" class="table-input" />
+            </ng-template>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="medicamentos-section" (click)="abrirModalCadastro()">
+    <div class="section-titulo">Medicamentos</div>
+  <div class="section-subTitulo hypnosText--fonte1">Medicação pré-anestésica</div>
+  <div class="section-content-2 text-align-center">
+    <div class="justify-content-between d-flex  text-center">
+      <div class="label-2">Nome</div>
+      <div class="label-2">Volume mínimo</div>
+      <div class="label-2">Volume máximo</div>
+    </div>
+  </div>
+  <div class="section-content-3">
+    <div class="justify-content-between d-flex">
+      <div class="label-2">Acepromazina 1%</div>
+      <div class="label-2">75,01(ml)</div>
+      <div class="label-2">150,02(ml)</div>
+    </div>
+  </div>
+  </div>
+
+  <hdk-divisor></hdk-divisor>
+
+  <div>
+    <h2 class="poppins-bold obs">Observações</h2>
+  </div>
+  <div class="obs-area form-group">
+    <textarea class="obs-area-input bg-azul form-control"></textarea>
+  </div>
+
+  <hdk-button
+    icon="fa-solid fa-search"
+    text="Finalizar prontuário"
+    color="hdk-bg-verde"
+    class="d-flex m-4 button"
+    >
+  </hdk-button>
+
+</div>
