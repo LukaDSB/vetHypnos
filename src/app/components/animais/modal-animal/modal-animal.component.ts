@@ -9,13 +9,13 @@ import { AnimalService } from 'src/app/services/animal.service';
 import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
-  selector: 'app-modal-pacientes',
-  templateUrl: './modal-pacientes.component.html',
-  styleUrls: ['./modal-pacientes.component.scss'],
+  selector: 'app-modal-animal',
+  templateUrl: './modal-animal.component.html',
+  styleUrls: ['./modal-animal.component.scss'],
   standalone: true,
   imports:[FormsModule, CommonModule, HdkButtonComponent, NgxMaskDirective]
 })
-export class ModalPacientesComponent implements OnInit{
+export class ModalAnimalComponent implements OnInit{
   animal: Animal | undefined;
  isCadastroModalOpen = false;
  isAtualizarModal = false;

@@ -13,4 +13,8 @@ button {
   i{
     color: $creme;
   }
+  :hover{
+    cursor: pointer;
+    color: black;
+  }
 }

@@ -1,30 +1,30 @@
 <section class="detalhes-container">
-  <h2>Detalhes do paciente</h2>
+  <h2>Detalhes do animal</h2>
 
-  <div class="dados-paciente">
+  <div class="dados-animal">
     <div class="campo">
       <label>Id</label>
-      <div class="valor">{{ paciente.id }}</div>
+      <div class="valor">{{ animal.id }}</div>
     </div>
     <div class="campo">
       <label>Nome</label>
-      <div class="valor">{{ paciente.nome }}</div>
+      <div class="valor">{{ animal.nome }}</div>
     </div>
     <div class="campo">
       <label>Espécie</label>
-      <div class="valor">{{ paciente.especie }}</div>
+      <div class="valor">{{ animal.especie }}</div>
     </div>
     <div class="campo">
       <label>Idade</label>
-      <div class="valor">{{ paciente.idade }}</div>
+      <div class="valor">{{ animal.idade }}</div>
     </div>
     <div class="campo">
       <label>Peso</label>
-      <div class="valor">{{ paciente.peso }}</div>
+      <div class="valor">{{ animal.peso }}</div>
     </div>
     <div class="campo">
       <label>Sexo</label>
-      <div class="valor">{{ paciente.sexo }}</div>
+      <div class="valor">{{ animal.sexo }}</div>
     </div>
   </div>
 
@@ -38,7 +38,7 @@
 
   <div class="btn-duplo">
     <button class="btn-acao" (click)="novaPrescricao()">Gerar nova prescrição</button>
-    <button class="btn-acao" (click)="editarPaciente()">Editar paciente</button>
+    <button class="btn-acao" (click)="editarAnimal()">Editar animal</button>
   </div>  
   </div>
 </section>

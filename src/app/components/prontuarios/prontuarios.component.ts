@@ -6,8 +6,8 @@ import { ProntuarioService } from 'src/app/services/prontuario.service';
 import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
 import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
-import { AssociarPacienteModalComponent } from './modalAssociarPaciente/associar-paciente-modal/associar-paciente-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { AssociarAnimalModalComponent } from './modalAssociarAnimal/associar-animal-modal/associar-animal-modal.component';
 
 @Component({
   selector: 'app-prontuarios',
@@ -59,7 +59,7 @@ carregarDados(){
 
   abrirModal(): void {
     console.log('Modal abriu');
-    const dialogRef = this.dialog.open(AssociarPacienteModalComponent, {
+    const dialogRef = this.dialog.open(AssociarAnimalModalComponent, {
       width: '400px',
       data: {}
     });
