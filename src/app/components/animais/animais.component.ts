@@ -7,6 +7,7 @@ import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
 import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
 import { ModalAnimalComponent } from './modal-animal/modal-animal.component';
+import { DetalhesAnimalComponent } from '../detalhes-animal/detalhes-animal.component';
 
 @Component({
   selector: 'app-animais',
@@ -80,6 +81,10 @@ export class AnimaisComponent implements OnInit {
   }
 
   abrirModalCadastro() {
-  this.modalAnimalComponent.openCadastro();
-}
+    this.modalAnimalComponent.openCadastro();
+  }
+
+  exibirDetalhes(animal: Animal){
+    
+  }
 }

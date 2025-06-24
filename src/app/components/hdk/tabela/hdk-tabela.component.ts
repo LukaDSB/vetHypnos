@@ -20,10 +20,19 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Input() pageSizeOptions: number[] = [10, 20];
   @Input() displayedColumns?: string[];
 
+  @Output() exibirDetalhes: EventEmitter<T> = new EventEmitter<T>();
   @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
   @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  eye = true;
+  edit = true;
+  trash = true;
+  route = "/animais/detalhesAnimal"
+
+  onExibirDetalhes(element: T) {
+    this.exibirDetalhes.emit(element);
+  }
 
   onExcluir(element: T) {
     this.excluir.emit(element);
@@ -33,7 +42,7 @@ export class TabelaComponent<T> implements AfterViewInit {
     this.atualizar.emit(element);
   }
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
   abrirModal(): void {
     console.log('Modal abriu');
