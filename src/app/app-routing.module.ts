@@ -8,7 +8,6 @@ import { TutoresComponent } from './components/tutores/tutores.component';
 import { DetalhesAnimalComponent } from './components/detalhes-animal/detalhes-animal.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { PageProntuarioComponent } from './components/page-prontuario/page-prontuario.component';
-import { PageTesteComponent } from './components/page-teste/page-teste.component';
 import { ProntuarioParcialComponent } from './components/prontuarios/prontuario-parcial/prontuario-parcial.component';
 import { AnimaisComponent } from './components/animais/animais.component';
 import { ProntuarioProvisorioComponent } from './components/prontuario-provisorio/prontuario-provisorio.component';

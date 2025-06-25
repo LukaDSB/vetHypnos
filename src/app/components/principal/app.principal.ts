@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { DashboardCard } from './dashboardCards/dashboardCard';
+import { ProntuarioParcialComponent } from "../prontuarios/prontuario-parcial/prontuario-parcial.component";
 
 @Component({
   selector: 'app-principal',
   templateUrl: './app.principal.html',
   styleUrls: ['./app.principal.scss'],
-  imports: [DashboardCard],
+  imports: [DashboardCard, ProntuarioParcialComponent],
   standalone: true
 })
 export class AppPrincipal {
