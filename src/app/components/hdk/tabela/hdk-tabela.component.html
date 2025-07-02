@@ -104,12 +104,12 @@
 
       <ng-container matColumnDef="endereco">
         <th mat-header-cell *matHeaderCellDef> Endereço </th>
-        <td mat-cell *matCellDef="let element"> {{ element.endereco?.endereco || 'Não informado'}} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.endereco?.cidade?.cidade_nome || 'Não informado'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="contato">
         <th mat-header-cell *matHeaderCellDef> Contato </th>
-        <td mat-cell *matCellDef="let element"> {{ element.contato?.contato || 'Não informado'}} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.contato?.descricao || 'Não informado'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="selecionar">

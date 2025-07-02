@@ -5,9 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { Location } from '@angular/common';
 import { Tutor } from 'src/app/models/tutor.model';
-import { TutorService } from 'src/app/services/tutor.service';
 import { NgxMaskDirective } from 'ngx-mask';
-
+import { ViaCepService } from 'src/app/services/viacep.service';
 
 @Component({
   selector: 'app-tutores-modal',
@@ -23,22 +22,27 @@ export class TutoresModalComponent{
    isCadastrarModal = true;
       nomeTutor = "";
       cpfTutor = 0;
-      enderecoId = 0;
-      contatoId = 0;
+      contatoId?: number;
+      cepId = "";
+      rua = "";
+      bairro = "";
+      numero = "";
+      cidade = "";
+      estado = "";
+      enderecoId?: number;
       id = 0;
       @Output() cadastrar = new EventEmitter<Tutor>();
       @Output() atualizar = new EventEmitter<Tutor>();
 
-  constructor(private authService: AuthService, private location: Location, private tutorService: TutorService) {}
+  constructor(private authService: AuthService, private location: Location, private viaCepService: ViaCepService) {}
 
   
     cadastrarTutor(){
       const novoTutor: Tutor = {
-        id:0,
+        id: this.id,
         tutor_nome: this.nomeTutor,
         tutor_cpf: this.cpfTutor,
-        endereco_id: this.enderecoId,
-        contato_id: this.contatoId
+         ...(this.contatoId != null && { contato_id: this.contatoId }),
       };
   
       if (this.isAtualizarModal){
@@ -68,10 +72,9 @@ export class TutoresModalComponent{
         ...this.tutor,
         tutor_nome: this.nomeTutor || "",
         tutor_cpf: this.cpfTutor || 0,
-        endereco_id: this.enderecoId || 0,
-        contato_id: this.contatoId || 0,
+        endereco_id: this.enderecoId,
+        contato_id: this.contatoId,
       };
-        console.log('teste');
   
       this.atualizar.emit(tutorAtualizado);
       this.closeCadastro();
@@ -100,7 +103,16 @@ export class TutoresModalComponent{
       this.isCadastroModalOpen = false;
     }
   
-    loginMock() {
-      this.authService.loginMock();
+    carregarEnderecoViaCep(cep: string) {
+       this.viaCepService.getEnderecosViaCEP(cep).subscribe({
+        next: (data) => {
+        this.rua = data.logradouro;
+        this.cidade = data.cidade;
+        this.estado = data.estado;
+    },
+    error: (err) => {
+      console.error('Erro ao carregar endereço:', err);
     }
+  });
+}
 }

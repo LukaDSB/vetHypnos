@@ -16,8 +16,9 @@ import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
   imports: [TabelaComponent, TutoresModalComponent, HdkButtonComponent, HdkDivisor],
 })
 export class TutoresComponent implements OnInit {
+    dataEnderecos: any[] = []
     dataSource: MatTableDataSource<Tutor> = new MatTableDataSource<Tutor>([]);
-    displayedColumns: string[] = ['id', 'tutor_nome', 'tutor_cpf', 'endereco', 'acoes'];
+    displayedColumns: string[] = ['id', 'tutor_nome', 'tutor_cpf', 'contato', 'endereco', 'acoes'];
       @ViewChild('modalTutores') modalTutores!: TutoresModalComponent;
     
 
@@ -31,7 +32,6 @@ export class TutoresComponent implements OnInit {
       console.log(tutor);
       this.tutorService.cadastrarTutor(tutor).subscribe({
         next: () => {
-          this.carregarDados();
         },
         error: (err) => {
           console.error('Erro ao cadastrar tutor:', err);
@@ -76,7 +76,7 @@ export class TutoresComponent implements OnInit {
       });
     }
 
-    voltar(){
+  voltar(){
     this.location.back();
   }
 
