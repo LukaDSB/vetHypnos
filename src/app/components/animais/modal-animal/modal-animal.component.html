@@ -1,8 +1,11 @@
 <div *ngIf="isCadastroModalOpen" class="modal">
-  <div *ngIf="isCadastrarModal" class="modal-content">
+  <div class="modal-content">
 
     <form>
-      <h1 class="hipnosText--TituloGrande">Cadastrar novo Animal</h1>
+      <h1 class="hipnosText--TituloGrande">
+        {{ isCadastrarModal ? 'Cadastrar novo Animal' : 'Atualizar Animal' }}
+      </h1>
+
       <div class="form-group">
         <label for="nomeAnimal">Nome do animal *</label>
         <input type="search" class="bg-azul col-2 form-control" [(ngModel)]="nomeAnimal" name="nomeAnimal" />
@@ -50,19 +53,18 @@
       </div>
       
       <div class="form-group">
-          <label for="PesoAnimal">Peso (kg)*</label>
-          <input 
-            type="text"
-            mask="separator.2" 
-            thousandSeparator="."
-            decimalMarker=","
-            [dropSpecialCharacters]="false"
-            placeholder="0,00"
-            class="no-spinners bg-azul col-2 form-control"
-            [(ngModel)]="PesoAnimal"
-            name="PesoAnimal"
-          />
-        </div>
+        <label for="PesoAnimal">Peso (kg)*</label>
+        <input 
+          type="text"
+          mask="separator.2" 
+          thousandSeparator="."
+          decimalMarker=","
+          [dropSpecialCharacters]="false"
+          placeholder="0,00"
+          class="no-spinners bg-azul col-2 form-control"
+          [(ngModel)]="PesoAnimal"
+          name="PesoAnimal"/>
+      </div>
 
       <div class="form-group">
         <label for="TutorAnimal">Tutor</label>
@@ -84,5 +86,5 @@
       </footer>
     </form>
   </div>
-  </div>
+</div>
   

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Animal } from 'src/app/models/animal.model';
 
 @Component({
   selector: 'app-detalhes-animal',
@@ -8,14 +9,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./detalhes-animal.component.scss'],
 })
 export class DetalhesAnimalComponent {
-  animal = {
-    id: 5,
-    nome: 'Placidusax',
-    especie: 'Dragão',
-    idade: 100,
-    peso: 3000.37,
-    sexo: '?',
-  };
+  isCadastroModalOpen = false;
+  isAtualizarModal = false;
+  isCadastrarModal = true;
+  nomeAnimal = "";
+  DataNascAnimal = 0;
+  SexoAnimal = "";
+  PesoAnimal = 0;
+  TutorAnimal = 0;
+  especie = 0;
+  animal: Animal | undefined;
 
   voltar() {
   }
@@ -25,6 +28,18 @@ export class DetalhesAnimalComponent {
 
   editarAnimal() {
   }
+
+  openAtualizar(animal: Animal){
+        this.animal = animal; 
+        this.nomeAnimal = animal.nome;
+        this.DataNascAnimal = animal.data_nascimento;
+        this.SexoAnimal = animal.sexo;
+        this.PesoAnimal = animal.peso;
+        this.TutorAnimal = animal.tutor_id;
+  
+        this.isCadastroModalOpen = true;
+        this.isCadastrarModal = false;
+    }
 
   historico = [
     {

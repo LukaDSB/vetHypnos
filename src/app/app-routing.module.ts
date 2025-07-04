@@ -5,7 +5,7 @@ import { AppPrincipal } from './components/principal/app.principal';
 import { ProntuariosComponent } from './components/prontuarios/prontuarios.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { TutoresComponent } from './components/tutores/tutores.component';
-import { DetalhesAnimalComponent } from './components/detalhes-animal/detalhes-animal.component';
+import { DetalhesAnimalComponent } from './components/animais/detalhes-animal/detalhes-animal.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { PageProntuarioComponent } from './components/page-prontuario/page-prontuario.component';
 import { ProntuarioParcialComponent } from './components/prontuarios/prontuario-parcial/prontuario-parcial.component';
@@ -15,7 +15,7 @@ import { ProntuarioProvisorioComponent } from './components/prontuario-provisori
 
 const routes: Routes = [
   { path: 'animais', component: AnimaisComponent },
-  { path: 'animais/detalhesAnimal', component: DetalhesAnimalComponent},
+  { path: 'animais/detalhes', component: DetalhesAnimalComponent},
   { path: 'medicamentos', component: MedicamentosComponent },
   { path: 'principal', component: AppPrincipal },
   { path: 'prontuarios', component: ProntuariosComponent },

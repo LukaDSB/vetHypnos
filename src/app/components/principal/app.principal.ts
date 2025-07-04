@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { DashboardCard } from './dashboardCards/dashboardCard';
 import { ProntuarioParcialComponent } from "../prontuarios/prontuario-parcial/prontuario-parcial.component";
+import { DetalhesAnimalComponent } from "../animais/detalhes-animal/detalhes-animal.component";
+import { AutenticacaoModalComponent } from "../modal/autenticacao-modal.component";
 
 @Component({
   selector: 'app-principal',
   templateUrl: './app.principal.html',
   styleUrls: ['./app.principal.scss'],
-  imports: [DashboardCard, ProntuarioParcialComponent],
+  imports: [DashboardCard, ProntuarioParcialComponent, DetalhesAnimalComponent, AutenticacaoModalComponent],
   standalone: true
 })
 export class AppPrincipal {

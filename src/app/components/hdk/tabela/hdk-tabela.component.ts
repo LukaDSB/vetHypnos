@@ -36,7 +36,6 @@ export class TabelaComponent<T> implements AfterViewInit {
   constructor(public dialog: MatDialog) {}
 
   abrirModal(): void {
-    console.log('Modal abriu');
     const dialogRef = this.dialog.open(HdkModalComponent, {
       width: '400px',
       data: {}

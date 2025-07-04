@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import {Animal} from 'src/app/models/animal.model';
 import { AnimalService } from 'src/app/services/animal.service';
 import { NgxMaskDirective } from 'ngx-mask';
+import { DetalhesAnimalComponent } from '../detalhes-animal/detalhes-animal.component';
 
 @Component({
   selector: 'app-modal-animal',
@@ -16,10 +17,10 @@ import { NgxMaskDirective } from 'ngx-mask';
   imports:[FormsModule, CommonModule, HdkButtonComponent, NgxMaskDirective]
 })
 export class ModalAnimalComponent implements OnInit{
-  animal: Animal | undefined;
- isCadastroModalOpen = false;
- isAtualizarModal = false;
- isCadastrarModal = true;
+    animal: Animal | undefined;
+    isCadastroModalOpen = false;
+    isAtualizarModal = false;
+    isCadastrarModal = true;
     nomeAnimal = "";
     DataNascAnimal = 0;
     SexoAnimal = "";
@@ -29,6 +30,7 @@ export class ModalAnimalComponent implements OnInit{
     especies: any[] = [];
     @Output() cadastrar = new EventEmitter<Animal>();
     @Output() atualizar = new EventEmitter<Animal>();
+    @ViewChild('detalhesAnimal') detalhesAnimal!: DetalhesAnimalComponent;
 
 
   constructor(private authService: AuthService, private location: Location, private animalService: AnimalService) {}
@@ -51,11 +53,12 @@ export class ModalAnimalComponent implements OnInit{
       especie_id: this.especieAnimal,
     };
 
-    if (this.isAtualizarModal){
-    this.atualizar.emit(novoAnimal);
-    } else {
-    this.cadastrar.emit(novoAnimal);
+    if (!this.isAtualizarModal){
+      this.cadastrar.emit(novoAnimal);
     }
+
+    this.atualizar.emit(novoAnimal);
+    
     this.closeCadastro();
   }
 
@@ -68,9 +71,8 @@ export class ModalAnimalComponent implements OnInit{
       this.TutorAnimal = anml.tutor_id;
       this.especieAnimal = anml.especie_id;
 
-      this.isCadastroModalOpen = false;
-      this.isAtualizarModal = true;
       this.isCadastroModalOpen = true;
+      this.isCadastrarModal = false;
   }
 
   atualizarAnimal(){
@@ -90,6 +92,10 @@ export class ModalAnimalComponent implements OnInit{
 
     this.atualizar.emit(animalAtualizado);
     this.closeCadastro();
+  }
+
+  abrirDetalhes(animal: Animal){
+    this.detalhesAnimal.openAtualizar(animal);
   }
 
 
@@ -120,7 +126,6 @@ export class ModalAnimalComponent implements OnInit{
 
   openCadastro() {
     this.isCadastroModalOpen = true;
-    this.isAtualizarModal = false;
     this.resetCampos();
     this.isCadastrarModal= true;
   }

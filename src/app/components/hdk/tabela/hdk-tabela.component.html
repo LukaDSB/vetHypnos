@@ -64,7 +64,11 @@
 
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef> Acoes </th>
-        <td mat-cell *matCellDef="let element" ><i class="me-2 fa-solid fa-pencil" (click)="onAtualizar(element)"></i><i class="fa-solid fa-trash"  (click)="onExcluir(element)"></i></td>
+        <td mat-cell *matCellDef="let element" >
+          <!-- <i class="me-2 fa-solid fa-eye" [routerLink]="'/animais/detalhes'"></i> -->
+          <i class="me-2 fa-solid fa-pencil" (click)="onAtualizar(element)"></i>
+          <i class="fa-solid fa-trash"  (click)="onExcluir(element)"></i>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="data_nascimento">
