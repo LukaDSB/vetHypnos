@@ -25,6 +25,8 @@ export class ModalMedicamentosComponent {
   lote = 0;
   validade?: string;
   quantidade = 0;
+  categoria_medicamento_id: number = 0;
+
   @Output() cadastrar = new EventEmitter<Medicamento>();
   @Output() atualizar = new EventEmitter<Medicamento>();
 
@@ -39,7 +41,9 @@ export class ModalMedicamentosComponent {
       fabricante: this.fabricante || '',
       lote: this.lote,
       validade: this.validade || '',
-      quantidade: this.quantidade
+      quantidade: this.quantidade,
+      categoria_medicamento_id: this.categoria_medicamento_id,
+      categoria_medicamento: null
     };
   
     if (this.isModalAtualizar) {

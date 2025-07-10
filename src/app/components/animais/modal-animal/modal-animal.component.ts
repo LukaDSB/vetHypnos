@@ -94,9 +94,6 @@ export class ModalAnimalComponent implements OnInit{
     this.closeCadastro();
   }
 
-  abrirDetalhes(animal: Animal){
-    this.detalhesAnimal.openAtualizar(animal);
-  }
 
 
   getEspeciesUnicas(animais: any[]): any[] {

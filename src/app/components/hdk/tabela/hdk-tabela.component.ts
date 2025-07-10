@@ -7,6 +7,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HdkModalComponent } from '../modal/hdk-modal.component';
 import { DateMaskPipe } from './pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { Animal } from 'src/app/models/animal.model';
 
 @Component({
   imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, DateMaskPipe, MatCheckboxModule],
@@ -22,9 +23,26 @@ export class TabelaComponent<T> implements AfterViewInit {
 
   @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
   @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
+  @Output() selecionadosChange = new EventEmitter<Animal[]>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  selecionados: any[] = [];
+  
+  constructor(public dialog: MatDialog) {}
+  
+  onCheckboxChange(element: any, checked: boolean) {
+    element.selecionado = checked;
+
+    if (checked) {
+      this.selecionados.push(element);
+    } else {
+      this.selecionados = this.selecionados.filter(e => e !== element);
+    }
+
+    this.selecionadosChange.emit(this.selecionados);
+  }
+  
   onExcluir(element: T) {
     this.excluir.emit(element);
   }
@@ -33,7 +51,6 @@ export class TabelaComponent<T> implements AfterViewInit {
     this.atualizar.emit(element);
   }
 
-  constructor(public dialog: MatDialog) {}
 
   abrirModal(): void {
     const dialogRef = this.dialog.open(HdkModalComponent, {

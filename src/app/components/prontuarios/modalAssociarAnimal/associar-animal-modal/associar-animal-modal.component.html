@@ -3,11 +3,11 @@
       
     <div class="header d-flex flex-row align-items-center">
       <h1 class="hypnosText--fonte1">Associar animal</h1>
-       <i class="fa-solid fa-xmark fa-2x" (click) = "fecharModalCadastro()"></i>
+       <i class="fa-solid fa-xmark fa-2x" (click)="fecharModalPrincipal()"></i>
     </div>
 
       <div class="innerContent">
-        <hdk-button color="hdk-bg-verde" text="Animal existente" (click)="abrirModalAssociarAnimalExistente()" />
+        <hdk-button color="hdk-bg-verde" text="Animal existente" (click)="isModalSelecionarAnimal()" />
         <hdk-button color="hdk-bg-vermelho" text="Novo animal" (click)="abrirModalCadastro()"/>
       </div>
     </div>
@@ -22,5 +22,9 @@
   </div>
 
 <app-modal-animal #modalAnimal (cadastrar)="cadastrarAnimal($event)"></app-modal-animal>
-<app-modal-associar-animal-existente #modalAssociarAnimalExistente></app-modal-associar-animal-existente>
-
+<div *ngIf="modalSelecionarPaciete">
+    <app-modal-associar-animal-existente 
+        #modalAssociarAnimalExistente
+        (onNavigateAndClose)="fecharModalPrincipal()">
+    </app-modal-associar-animal-existente>
+</div>

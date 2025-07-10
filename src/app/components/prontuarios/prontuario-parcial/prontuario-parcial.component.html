@@ -41,27 +41,27 @@
   <div class="section-content">
     <div>
       <div class="label">Id</div>
-      <div class="value">5</div>
+      <div class="value">{{dadosRecebidos?.id}}</div>
     </div>
     <div>
       <div class="label">Nome</div>
-      <div class="value">Placidusax</div>
+      <div class="value">{{dadosRecebidos?.nome}}</div>
     </div>
     <div>
       <div class="label">Espécie</div>
-      <div class="value">Dragão</div>
+      <div class="value">{{dadosRecebidos?.especie_id}}</div>
     </div>
     <div>
       <div class="label">Idade</div>
-      <div class="value">100</div>
+      <div class="value">{{dadosRecebidos?.data_nascimento}}</div>
     </div>
     <div>
       <div class="label">Peso</div>
-      <div class="value">3000.37</div>
+      <div class="value">{{dadosRecebidos?.peso}}</div>
     </div>
     <div>
       <div class="label">Sexo</div>
-      <div class="value">?</div>
+      <div class="value">{{dadosRecebidos?.sexo}}</div>
     </div>
   </div>
 
@@ -120,7 +120,7 @@
 
   </div>
 
-  <div class="medicamentos-section" (click)="abrirModalCadastro()">
+  <!-- <div class="medicamentos-section" (click)="abrirModalCadastro()">
     <div class="section-titulo">Medicamentos</div>
   <div class="section-subTitulo hypnosText--fonte1">Medicação pré-anestésica</div>
   <div class="section-content-2 text-align-center">
@@ -135,6 +135,36 @@
       <div class="label-2">Acepromazina 1%</div>
       <div class="label-2">75,01(ml)</div>
       <div class="label-2">150,02(ml)</div>
+    </div>
+  </div>
+  <div class="section-content-3">
+    <div class="justify-content-between d-flex">
+      <div class="label-2">Acepromazina 1%</div>
+      <div class="label-2">75,01(ml)</div>
+      <div class="label-2">150,02(ml)</div>
+    </div>
+  </div>
+  </div> -->
+
+  <div class="medicamentos-section" (click)="abrirModalCadastro()">
+  <div class="section-titulo">Medicamentos</div>
+  <div class="section-subTitulo hypnosText--fonte1">Medicação pré-anestésica</div>
+  
+  <div class="section-content-2 text-align-center">
+    <div class="justify-content-between d-flex text-center">
+      <div class="label-2">Nome</div>
+      <div class="label-2">Volume mínimo</div>
+      <div class="label-2">Volume máximo</div>
+    </div>
+  </div>
+
+  <div *ngFor="let med of medicamentosRecebidos" class="section-content-3">
+    <div class="justify-content-between d-flex">
+      <div class="label-2">{{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}</div>
+      
+      <div class="label-2">null(ml)</div>
+
+      <div class="label-2">null(ml)</div>
     </div>
   </div>
   </div>

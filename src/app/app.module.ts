@@ -23,6 +23,7 @@ import { ExpansionPanelComponent } from './components/hdk/expansion-panel/expans
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { AnimaisComponent } from './components/animais/animais.component';
 import { ProntuarioProvisorioComponent } from './components/prontuario-provisorio/prontuario-provisorio.component';
+import { SelecionarMedicamentosComponent } from './components/prontuarios/selecionar-medicamentos/selecionar-medicamentos.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ProntuarioProvisorioComponent } from './components/prontuario-provisori
     NgxMaskDirective,
     ExpansionPanelComponent,
     CdkAccordionModule,
-    AnimaisComponent
+    AnimaisComponent,
+    SelecionarMedicamentosComponent
 ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]

@@ -16,7 +16,7 @@ import { ViewEncapsulation } from '@angular/core';
   templateUrl: 'expansion-panel.component.html',
   styleUrls: ['expansion-panel.component.scss'],
   standalone: true,
-  imports: [CdkAccordionModule, NgFor,     MatExpansionModule,
+  imports: [CdkAccordionModule, NgFor, MatExpansionModule,
     MatCheckboxModule,
     MatCardModule,
     MatDividerModule,

@@ -1,3 +1,5 @@
+// associar-animal-modal.component.ts
+
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +9,7 @@ import { ModalAnimalComponent } from 'src/app/components/animais/modal-animal/mo
 import { Animal } from 'src/app/models/animal.model';
 import { AnimalService } from 'src/app/services/animal.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'associar-animal-modal',
@@ -15,7 +18,6 @@ import { MatTableDataSource } from '@angular/material/table';
   standalone: true,
   imports: [FormsModule, CommonModule, HdkButtonComponent, ModalAnimalComponent, ModalAssociarAnimalExistenteComponent]
 })
-
 export class AssociarAnimalModalComponent {
   modalAssociar = true;
   modalNovoAnimal = false
@@ -24,17 +26,30 @@ export class AssociarAnimalModalComponent {
   senha = '';
   nome = '';
   dataSource: MatTableDataSource<Animal> = new MatTableDataSource<Animal>([]);
-  @ViewChild ('modalAssociarAnimalExistente') modalAssociarAnimalExistenteComponent! : ModalAssociarAnimalExistenteComponent
+  
+  // ALTERAÇÃO: Usar um 'setter' para o ViewChild.
+  // Isso garante que a função `openModal()` da modal filha seja chamada
+  // assim que ela for renderizada pelo *ngIf.
+  @ViewChild('modalAssociarAnimalExistente') set modalAssociarAnimalExistente(comp: ModalAssociarAnimalExistenteComponent) {
+    if (comp) {
+      comp.openModal();
+    }
+  }
+  
   @ViewChild('modalAnimal') modalAnimalComponent!: ModalAnimalComponent;
 
-  constructor(private animalService: AnimalService) {}
+  constructor(
+    private animalService: AnimalService,
+    public dialogRef: MatDialogRef<AssociarAnimalModalComponent>
+  ) {}
 
-  isModalNovoAnimal(){
+  isModalNovoAnimal() {
     this.modalNovoAnimal = true;
     this.modalAssociar = false;
   }
 
-  isModalSelecionarAnimal(){
+  // Esta função agora só precisa mudar a flag. O 'setter' acima cuida de abrir a modal.
+  isModalSelecionarAnimal() {
     this.modalSelecionarPaciete = true;
     this.modalAssociar = false;
   }
@@ -43,12 +58,8 @@ export class AssociarAnimalModalComponent {
     this.modalAnimalComponent.openCadastro();
   }
 
-  fecharModalCadastro(){
-    this.modalAssociar = false;
-  }
-
-  abrirModalAssociarAnimalExistente() {
-    this.modalAssociarAnimalExistenteComponent.openModal();
+  fecharModalPrincipal() {
+    this.dialogRef.close();
   }
 
   cadastrarAnimal(animal: Animal) {
@@ -57,6 +68,6 @@ export class AssociarAnimalModalComponent {
       error: (err) => {
         console.error('Erro ao cadastrar animal:', err);
       }
-    })
+    });
   }
 }

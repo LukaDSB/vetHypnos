@@ -1,0 +1,70 @@
+<section class="detalhes-container">
+  <h2>Detalhes do animal</h2>
+  <div class="dados-animal">
+    <div class="campo">
+      <label>Id</label>
+      <div class="valor">{{ dadosRecebidos?.id || 'null' }}</div>
+    </div>
+    <div class="campo">
+      <label>Nome</label>
+      <div class="valor">{{ dadosRecebidos?.nome || 'null' }}</div>
+    </div>
+    <div class="campo">
+      <label>Especie</label>
+      <div class="valor">{{dadosRecebidos?.especie_id || 'null'}}</div>
+    </div>
+    <div class="campo">
+      <label>Peso</label>
+      <div class="valor">{{dadosRecebidos?.peso || 'null'}}</div>
+    </div>
+    <div class="campo">
+      <label>Sexo</label>
+      <div class="valor">{{dadosRecebidos?.sexo || 'null'}}</div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<cdk-accordion class="example-accordion poppins-bold">
+  <cdk-accordion-item
+    #accordionItem1="cdkAccordionItem"
+    class="example-accordion-item"
+    role="button"
+    tabindex="0"
+    id="accordion-header-0">
+    
+    <div class="example-accordion-item-header" (click)="accordionItem1.toggle()">
+      Medicação pré anestésica
+    </div>
+
+    <div class="example-accordion-item-body inter" role="region"
+      [style.display]="accordionItem1.expanded ? '' : 'none'"
+      id="accordion-body-0" aria-labelledby="accordion-header-0">
+
+      <p class="subtitulo-accordion inter"> Tranquilizantes maiores</p>
+
+      <div *ngFor="let grupo of medicamentosAgrupados | keyvalue" style="padding: 10px;" class="inter">
+        
+        <p class="mini-titulo-accordion inter">{{ grupo.key }}</p>
+
+        <div *ngFor="let med of grupo.value">
+          <mat-checkbox 
+              class="box inter"
+              (change)="onSelectionChange($event, med.id)">
+            
+            {{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}
+          </mat-checkbox>
+          <br>
+        </div>
+        <br>
+      </div>
+      </div>
+  </cdk-accordion-item>
+</cdk-accordion>
+
+<div class="salvar-container" style="text-align: center; padding: 20px;">
+  <button mat-raised-button color="primary" (click)="salvarSelecao()">
+    Salvar Seleção
+  </button>
+</div>

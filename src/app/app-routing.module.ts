@@ -11,6 +11,7 @@ import { PageProntuarioComponent } from './components/page-prontuario/page-pront
 import { ProntuarioParcialComponent } from './components/prontuarios/prontuario-parcial/prontuario-parcial.component';
 import { AnimaisComponent } from './components/animais/animais.component';
 import { ProntuarioProvisorioComponent } from './components/prontuario-provisorio/prontuario-provisorio.component';
+import { SelecionarMedicamentosComponent } from './components/prontuarios/selecionar-medicamentos/selecionar-medicamentos.component';
 
 
 const routes: Routes = [
@@ -19,13 +20,14 @@ const routes: Routes = [
   { path: 'medicamentos', component: MedicamentosComponent },
   { path: 'principal', component: AppPrincipal },
   { path: 'prontuarios', component: ProntuariosComponent },
+  { path: 'prontuarios/prontuarioParcial', component: ProntuarioParcialComponent},
+  { path: 'prontuarios/selecionarMedicamentos', component: SelecionarMedicamentosComponent},
   { path: 'pageProntuario', component: PageProntuarioComponent },
   { path: 'prontuarios/gerarProntuario', component: ProntuarioProvisorioComponent },
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'tutores', component: TutoresComponent },
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
   { path: 'usuario', component: UsuariosComponent },
-  { path: 'prontuarios/prontuarioParcial', component: ProntuarioParcialComponent}
 ];
 
 @NgModule({

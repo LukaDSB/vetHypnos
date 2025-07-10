@@ -99,7 +99,10 @@
       <ng-container matColumnDef="selecionar">
         <th mat-header-cell *matHeaderCellDef> Selecionar </th>
         <td mat-cell *matCellDef="let element">
-          <mat-checkbox>{{element.selecionado}}</mat-checkbox>
+          <mat-checkbox
+            [checked]="element.selecionado"
+            (change)="onCheckboxChange(element, $event.checked)">
+          </mat-checkbox>
         </td>
       </ng-container>
       

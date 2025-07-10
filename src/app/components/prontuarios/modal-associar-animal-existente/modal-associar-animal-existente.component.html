@@ -3,12 +3,12 @@
         <h2 class="hypnosText--TituloGrande mb-2">Selecione o animal</h2>
        
         <div class="tabela-wrapper">
-          <hdk-tabela [displayedColumns]="displayedColumns" [dataSource]="dataSource" />
+          <hdk-tabela [displayedColumns]="displayedColumns" [dataSource]="dataSource" (selecionadosChange)="receberSelecionados($event)"/>
         </div>
 
         <div class="btns d-flex flex-row justify-content-center align-items-center">
-        <hdk-button color="hdk-bg-verde" text="Salvar" />
-        <hdk-button color="hdk-bg-vermelho" text="Cancelar" (click)="closeModal()"/>
+          <hdk-button color="hdk-bg-verde" text="Salvar" (click)="irParaAdicionarMedicamentos()"/>
+          <hdk-button color="hdk-bg-vermelho" text="Cancelar" (click)="closeModal()"/>
         </div>
     </div>
 </div>

@@ -22,40 +22,40 @@ export class ProntuariosComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private prontuarioService: ProntuarioService){}
 
-ngOnInit(): void {
-  this.carregarDados();
-}
+  ngOnInit(): void {
+    this.carregarDados();
+  }
 
-criarProntuario(prontuario: Prontuario){
-  this.prontuarioService.criarProntuario(prontuario).subscribe({
-    next: () => {
-      this.carregarDados();
-    },
-    error: (err) => {
-      console.error('Erro ao criar prontuário: ', err);
-    }
-  })
-}
-
-deletarProntuario(prontuario: Prontuario){
-  if (confirm(`Deseja realmente excluir "${prontuario.id}"?`)){
-    this.prontuarioService.deletarProntuario(prontuario.id).subscribe({
+  criarProntuario(prontuario: Prontuario){
+    this.prontuarioService.criarProntuario(prontuario).subscribe({
       next: () => {
-        console.log(`Prontuario com ID ${prontuario.id} excluído.`);
         this.carregarDados();
       },
       error: (err) => {
-        console.error(`Erro ao excluir prontuario de ID ${prontuario.id}`, err);
+        console.error('Erro ao criar prontuário: ', err);
       }
-    });
+    })
   }
-}
 
-carregarDados(){
-  this.prontuarioService.getProntuarios().subscribe((data) => {
-    this.dataSource = new MatTableDataSource(data);
-  })
-}
+  deletarProntuario(prontuario: Prontuario){
+    if (confirm(`Deseja realmente excluir "${prontuario.id}"?`)){
+      this.prontuarioService.deletarProntuario(prontuario.id).subscribe({
+        next: () => {
+          console.log(`Prontuario com ID ${prontuario.id} excluído.`);
+          this.carregarDados();
+        },
+        error: (err) => {
+          console.error(`Erro ao excluir prontuario de ID ${prontuario.id}`, err);
+        }
+      });
+    }
+  }
+
+  carregarDados(){
+    this.prontuarioService.getProntuarios().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    })
+  }
 
   abrirModal(): void {
     console.log('Modal abriu');
