@@ -8,9 +8,9 @@
     <div class="infos-contato">
       <div class="info-item">
         <div class="icons-img">
-          <img src="../../../assets/images/telefone.png" alt="">
+          <img src="../../../assets/images/telefone.png">
         </div>
-        <div>
+        <div class="hypnosText--fonte2">
           <p>3564–1800</p>
         </div>
       </div>
@@ -18,7 +18,7 @@
         <div class="icons-img">
           <img src="../../../assets/images/email.png" alt="">
         </div>
-        <div>
+        <div class="hypnosText--fonte2">
           <p>gabinete.ale&#64;ifes.edu.br</p>
         </div>
       </div>
@@ -26,7 +26,7 @@
         <div class="icons-img">
           <img src="../../../assets/images/local.png" alt="">
         </div>
-        <div>
+        <div class="hypnosText--fonte2">
           <p>Rodovia ES-482<br />(Cachoeiro–Alegre, Km 72 –<br> Rive, Alegre – ES, 29500–000)</p>
         </div>
       </div>
@@ -34,8 +34,8 @@
     </div>
   </div>
 
-  <div class="titulo">Prontuário Parcial</div>
-  <div class="num-prontuario">Número: 202401</div>
+  <div class="hypnosText--TituloGrande titulo">Prontuário Parcial</div>
+  <div class="hypnosText--fonte1 num-prontuario">Número: 202401</div>
 
   <div class="section-titulo ">Informações do paciente</div>
   <div class="section-content">
@@ -120,51 +120,25 @@
 
   </div>
 
-  <!-- <div class="medicamentos-section" (click)="abrirModalCadastro()">
-    <div class="section-titulo">Medicamentos</div>
-  <div class="section-subTitulo hypnosText--fonte1">Medicação pré-anestésica</div>
-  <div class="section-content-2 text-align-center">
-    <div class="justify-content-between d-flex  text-center">
-      <div class="label-2">Nome</div>
-      <div class="label-2">Volume mínimo</div>
-      <div class="label-2">Volume máximo</div>
-    </div>
-  </div>
-  <div class="section-content-3">
-    <div class="justify-content-between d-flex">
-      <div class="label-2">Acepromazina 1%</div>
-      <div class="label-2">75,01(ml)</div>
-      <div class="label-2">150,02(ml)</div>
-    </div>
-  </div>
-  <div class="section-content-3">
-    <div class="justify-content-between d-flex">
-      <div class="label-2">Acepromazina 1%</div>
-      <div class="label-2">75,01(ml)</div>
-      <div class="label-2">150,02(ml)</div>
-    </div>
-  </div>
-  </div> -->
-
   <div class="medicamentos-section" (click)="abrirModalCadastro()">
   <div class="section-titulo">Medicamentos</div>
   <div class="section-subTitulo hypnosText--fonte1">Medicação pré-anestésica</div>
   
   <div class="section-content-2 text-align-center">
     <div class="justify-content-between d-flex text-center">
-      <div class="label-2">Nome</div>
-      <div class="label-2">Volume mínimo</div>
-      <div class="label-2">Volume máximo</div>
+      <div class="hypnosText--fonte1 label-2">Nome</div>
+      <div class="hypnosText--fonte1 label-2">Volume mínimo</div>
+      <div class="hypnosText--fonte1 label-2">Volume máximo</div>
     </div>
   </div>
 
   <div *ngFor="let med of medicamentosRecebidos" class="section-content-3">
     <div class="justify-content-between d-flex">
-      <div class="label-2">{{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}</div>
+      <div class="hypnosText--fonte1 label-2">{{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}</div>
       
-      <div class="label-2">null(ml)</div>
+      <div class="hypnosText--fonte1 label-2">null(ml)</div>
 
-      <div class="label-2">null(ml)</div>
+      <div class="hypnosText--fonte1 label-2">null(ml)</div>
     </div>
   </div>
   </div>
@@ -172,7 +146,7 @@
   <hdk-divisor></hdk-divisor>
 
   <div>
-    <h2 class="poppins-bold obs">Observações</h2>
+    <h2 class="hypnosText--fonte1 obs">Observações</h2>
   </div>
   <div class="obs-area form-group">
     <textarea class="obs-area-input bg-azul form-control"></textarea>
