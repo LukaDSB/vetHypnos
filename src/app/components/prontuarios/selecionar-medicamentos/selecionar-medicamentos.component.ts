@@ -9,7 +9,7 @@ import {MedicamentoService} from 'src/app/services/medicamento.service';
 import {Medicamento} from 'src/app/models/medicamento.model';
 import { Animal } from 'src/app/models/animal.model';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Importe o CommonModule
+import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -18,7 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./selecionar-medicamentos.component.scss'],
   standalone: true,
   imports: [
-    CommonModule, // Adicione aqui para usar *ngFor, | keyvalue, etc.
+    CommonModule,
     CdkAccordionModule,
     MatExpansionModule,
     MatCheckboxModule,
@@ -33,16 +33,13 @@ export class SelecionarMedicamentosComponent implements OnInit {
   items = [
     'Medicação pré anestésica',
     'Indução anestésica',
-    // ... outros itens
   ];
 
   expandedIndex = 0;
   dadosRecebidos: Animal | undefined;
 
-  // Estrutura para agrupar os medicamentos por categoria
   medicamentosAgrupados = new Map<string, Medicamento[]>();
   
-  // Conjunto para armazenar os IDs dos medicamentos selecionados
   medicamentosSelecionados = new Set<number>();
 
   private todosMedicamentos: Medicamento[] = [];

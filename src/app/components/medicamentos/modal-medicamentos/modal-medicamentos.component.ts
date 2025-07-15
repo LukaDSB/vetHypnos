@@ -24,6 +24,8 @@ export class ModalMedicamentosComponent {
   fabricante?: string;
   lote = 0;
   validade?: string;
+  dose_min?: number;
+  dose_max?: number;
   quantidade = 0;
   categoria_medicamento_id: number = 0;
 
@@ -41,6 +43,8 @@ export class ModalMedicamentosComponent {
       fabricante: this.fabricante || '',
       lote: this.lote,
       validade: this.validade || '',
+      dose_min: this.dose_min || 0,
+      dose_max: this.dose_max || 0,
       quantidade: this.quantidade,
       categoria_medicamento_id: this.categoria_medicamento_id,
       categoria_medicamento: null
