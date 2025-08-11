@@ -3,7 +3,7 @@ export interface CategoriaMedicamento {
   descricao: string;
 }
 
-export interface Medicamento {
+export interface  Medicamento {
   id: number;
   nome: string;
   concentracao: number;

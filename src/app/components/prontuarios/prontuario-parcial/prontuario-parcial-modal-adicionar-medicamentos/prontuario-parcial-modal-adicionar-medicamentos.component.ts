@@ -12,21 +12,18 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   imports: [CommonModule, FormsModule, HdkButtonComponent, MatSlideToggleModule, ReactiveFormsModule]
 })
 export class ProntuarioParcialModalAdicionarMedicamentosComponent {
- isCadastroModalOpen = false;
-   isChecked = true;
+  isCadastroModalOpen = false;
+  isChecked = true;
 
 closeCadastro() {
     this.isCadastroModalOpen = false;
   }
 
-salvarDosagem(){
-}
+  salvarDosagem(){
+  }
 
   openCadastro() {
     this.isCadastroModalOpen = true;
   }
 
 }
-
-
-

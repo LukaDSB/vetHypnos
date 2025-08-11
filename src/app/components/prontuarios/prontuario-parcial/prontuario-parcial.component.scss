@@ -14,31 +14,23 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     max-height: 95vh;      
     overflow-y: auto;      
-    overflow-x: auto;  
+    scrollbar-width: none;
   }
   
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    justify-items: center;
     border-bottom: 2px solid #ddd;
-    padding-bottom: 1rem;
     margin-bottom: 2rem;
     width: 100%;
-    background-color: lightblue;
-  }
-  
-  .logo-instituto {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    padding: 2em;
   }
   
   .logo-instituto img {
-    width: 378px;
-    height: 130px;
-    margin-top: 30px;
-    margin-left: 24.99px;
+    width: 15vw;
+    height: auto;
   }
 
   .icons-img{
@@ -54,16 +46,16 @@
     color: #333;
     display: flex;
     justify-content: space-between;
-    padding: 1em 1em;
-    margin-top: 4em;
     gap: 4em;
-    align-items: center;
+    align-self: center;
   }
 
   .info-item {
     display: flex;
     align-items: center;
+    justify-items: center;
     gap: 1rem;
+    margin-top: 2vh;
   }
   
   .titulo {
@@ -74,6 +66,7 @@
     text-align: right;
     margin-top: -1.5rem;
     margin-bottom: 0.5rem;
+    margin-right: 1rem;
   }
   
   .section-titulo {

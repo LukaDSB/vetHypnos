@@ -26,45 +26,140 @@
 
 <hr>
 
-<cdk-accordion class="example-accordion poppins-bold">
-  <cdk-accordion-item
-    #accordionItem1="cdkAccordionItem"
-    class="example-accordion-item"
-    role="button"
-    tabindex="0"
-    id="accordion-header-0">
-    
-    <div class="example-accordion-item-header" (click)="accordionItem1.toggle()">
-      Medicação pré anestésica
-    </div>
+<div class="scroll">
+  <cdk-accordion class="example-accordion poppins-bold">
+    <cdk-accordion-item
+      #accordionItem1="cdkAccordionItem"  class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      id="accordion-header-1">          <div class="example-accordion-item-header" (click)="accordionItem1.toggle()"> Medicação pré anestésica
+      </div>
 
-    <div class="example-accordion-item-body inter" role="region"
-      [style.display]="accordionItem1.expanded ? '' : 'none'"
-      id="accordion-body-0" aria-labelledby="accordion-header-0">
-
-      <p class="subtitulo-accordion inter"> Tranquilizantes maiores</p>
-
-      <div *ngFor="let grupo of medicamentosAgrupados | keyvalue" style="padding: 10px;" class="inter">
-        
-        <p class="mini-titulo-accordion inter">{{ grupo.key }}</p>
-
-        <div *ngFor="let med of grupo.value">
-          <mat-checkbox 
-              class="box inter"
-              (change)="onSelectionChange($event, med.id)">
-            
-            {{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}
-          </mat-checkbox>
+      <div class="example-accordion-item-body inter" role="region"
+        [style.display]="accordionItem1.expanded ? '' : 'none'" id="accordion-body-1" aria-labelledby="accordion-header-1"> <p class="subtitulo-accordion inter"> Tranquilizantes maiores</p>
+        <div *ngFor="let grupo of medicamentosAgrupados | keyvalue" style="padding: 10px;" class="inter">
+          <p class="mini-titulo-accordion inter">{{ grupo.key }}</p>
+          <div *ngFor="let med of grupo.value">
+            <mat-checkbox 
+                class="box inter"
+                (change)="onSelectionChange($event, med.id)">
+              {{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}
+            </mat-checkbox>
+            <br>
+          </div>
           <br>
         </div>
-        <br>
       </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+
+  <cdk-accordion class="example-accordion poppins-bold">
+    <cdk-accordion-item
+      #accordionItem2="cdkAccordionItem"  class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      id="accordion-header-2">          <div class="example-accordion-item-header" (click)="accordionItem2.toggle()"> Indução anestésica
       </div>
-  </cdk-accordion-item>
-</cdk-accordion>
+
+      <div class="example-accordion-item-body inter" role="region"
+        [style.display]="accordionItem2.expanded ? '' : 'none'" id="accordion-body-2" aria-labelledby="accordion-header-2"> <p class="subtitulo-accordion inter"> Tranquilizantes maiores</p>
+        <div *ngFor="let grupo of medicamentosAgrupados | keyvalue" style="padding: 10px;" class="inter">
+          <p class="mini-titulo-accordion inter">{{ grupo.key }}</p>
+          <div *ngFor="let med of grupo.value">
+            <mat-checkbox 
+                class="box inter"
+                (change)="onSelectionChange($event, med.id)">
+              {{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}
+            </mat-checkbox>
+            <br>
+          </div>
+          <br>
+        </div>
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+</div>
+
+<!-- <div class="scroll">
+  <cdk-accordion class="example-accordion poppins-bold">
+    <cdk-accordion-item
+      #accordionItem1="cdkAccordionItem"
+      class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      id="accordion-header-0">
+      
+      <div class="example-accordion-item-header" (click)="accordionItem1.toggle()">
+        Medicação pré anestésica
+      </div>
+
+      <div class="example-accordion-item-body inter" role="region"
+        [style.display]="accordionItem1.expanded ? '' : 'none'"
+        id="accordion-body-0" aria-labelledby="accordion-header-0">
+
+        <p class="subtitulo-accordion inter"> Tranquilizantes maiores</p>
+
+        <div *ngFor="let grupo of medicamentosAgrupados | keyvalue" style="padding: 10px;" class="inter">
+          
+          <p class="mini-titulo-accordion inter">{{ grupo.key }}</p>
+
+          <div *ngFor="let med of grupo.value">
+            <mat-checkbox 
+                class="box inter"
+                (change)="onSelectionChange($event, med.id)">
+              
+              {{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}
+            </mat-checkbox>
+            <br>
+          </div>
+          <br>
+        </div>
+        </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+
+  <cdk-accordion class="example-accordion poppins-bold">
+    <cdk-accordion-item
+      #accordionItem1="cdkAccordionItem"
+      class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      id="accordion-header-0">
+      
+      <div class="example-accordion-item-header" (click)="accordionItem1.toggle()">
+        Indução anestésica
+      </div>
+
+      <div class="example-accordion-item-body inter" role="region"
+        [style.display]="accordionItem1.expanded ? '' : 'none'"
+        id="accordion-body-0" aria-labelledby="accordion-header-0">
+
+        <p class="subtitulo-accordion inter"> Tranquilizantes maiores</p>
+
+        <div *ngFor="let grupo of medicamentosAgrupados | keyvalue" style="padding: 10px;" class="inter">
+          
+          <p class="mini-titulo-accordion inter">{{ grupo.key }}</p>
+
+          <div *ngFor="let med of grupo.value">
+            <mat-checkbox 
+                class="box inter"
+                (change)="onSelectionChange($event, med.id)">
+              
+              {{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}
+            </mat-checkbox>
+            <br>
+          </div>
+          <br>
+        </div>
+        </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+</div> -->
 
 <div class="salvar-container" style="text-align: center; padding: 20px;">
-  <button mat-raised-button color="primary" (click)="salvarSelecao()">
-    Salvar Seleção
-  </button>
+  <hdk-button
+    text="Gerar prontuário"
+    color="hdk-bg-verde"
+    (click)="salvarSelecao()">
+  </hdk-button>
 </div>

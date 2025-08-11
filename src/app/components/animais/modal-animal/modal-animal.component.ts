@@ -51,6 +51,7 @@ export class ModalAnimalComponent implements OnInit{
       obito: 0,
       tutor_id:this.TutorAnimal,
       especie_id: this.especieAnimal,
+      especie: this.especies.find(especie => especie.id === this.especieAnimal)?.nome || '',
     };
 
     if (!this.isAtualizarModal){

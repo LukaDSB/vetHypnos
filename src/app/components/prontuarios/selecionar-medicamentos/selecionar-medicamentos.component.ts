@@ -11,6 +11,7 @@ import { Animal } from 'src/app/models/animal.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { HdkButtonComponent } from "../../hdk/button/hdk-button.component";
 
 @Component({
   selector: 'app-selecionar-medicamentos',
@@ -25,8 +26,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatDividerModule,
     MatFormFieldModule,
-    MatButtonModule
-  ],
+    MatButtonModule,
+    HdkButtonComponent
+],
   encapsulation: ViewEncapsulation.None
 })
 export class SelecionarMedicamentosComponent implements OnInit {
@@ -57,18 +59,8 @@ export class SelecionarMedicamentosComponent implements OnInit {
     this.carregarDados();
   }
 
-  // carregarDados(): void {
-  //   this.medicamentoService.getMedicamentos().subscribe((data: Medicamento[]) => {
-  //     // Filtra medicamentos que não possuem categoria para evitar erros
-  //     const medicamentosValidos = data.filter(med => med.categoria_medicamento && med.categoria_medicamento.descricao);
-  //     this.agruparMedicamentos(medicamentosValidos);
-  //     console.log('Medicamentos Agrupados:', this.medicamentosAgrupados);
-  //   });
-  // }
-
   carregarDados(): void {
     this.medicamentoService.getMedicamentos().subscribe((data: Medicamento[]) => {
-      // 2. Armazene a lista completa aqui
       this.todosMedicamentos = data; 
       
       const medicamentosValidos = data.filter(med => med.categoria_medicamento?.descricao);
@@ -77,10 +69,9 @@ export class SelecionarMedicamentosComponent implements OnInit {
   }
 
   private agruparMedicamentos(medicamentos: Medicamento[]): void {
-    this.medicamentosAgrupados.clear(); // Limpa o mapa antes de preencher
+    this.medicamentosAgrupados.clear();
 
     for (const med of medicamentos) {
-      // Garante que categoria_medicamento e descricao existem
       const categoria = med.categoria_medicamento!.descricao;
       
       if (!this.medicamentosAgrupados.has(categoria)) {
@@ -91,7 +82,6 @@ export class SelecionarMedicamentosComponent implements OnInit {
     }
   }
   
-  // Função para lidar com a seleção/desseleção de um checkbox
   onSelectionChange(event: MatCheckboxChange, medId: number): void {
     if (event.checked) {
       this.medicamentosSelecionados.add(medId);
@@ -102,8 +92,6 @@ export class SelecionarMedicamentosComponent implements OnInit {
   }
 
   salvarSelecao(): void {
-    // Filtra a lista 'todosMedicamentos' para obter os objetos completos
-    // dos medicamentos cujos IDs estão no Set 'medicamentosSelecionados'.
     const medicamentosParaEnviar = this.todosMedicamentos.filter(med => 
       this.medicamentosSelecionados.has(med.id)
     );
@@ -115,8 +103,6 @@ export class SelecionarMedicamentosComponent implements OnInit {
 
     console.log('Enviando para a próxima tela:', medicamentosParaEnviar);
 
-    // Navega para uma nova rota (ex: '/resumo-anestesia')
-    // e passa os dados selecionados e os dados do animal via 'state'.
     this.router.navigate(['/prontuarios/prontuarioParcial'], {
       state: {
         animal: this.dadosRecebidos,

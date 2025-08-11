@@ -13,18 +13,18 @@
       </ng-container>
 
       <ng-container matColumnDef="concentracao">
-        <th mat-header-cell *matHeaderCellDef> Concentracao </th>
+        <th mat-header-cell *matHeaderCellDef> Concentracao (mg/ml) </th>
         <td mat-cell *matCellDef="let element"> {{ element.concentracao }} </td>
       </ng-container>
 
       <ng-container matColumnDef="fabricante">
-        <th mat-header-cell *matHeaderCellDef> Fabricante </th>
-        <td mat-cell *matCellDef="let element"> {{ element?.fabricante }} </td>
+        <th mat-header-cell *matHeaderCellDef> Dosagem mínima (mg/kg) </th>
+        <td mat-cell *matCellDef="let element"> {{ element?.dose_min }} </td>
       </ng-container>
 
       <ng-container matColumnDef="lote">
-        <th mat-header-cell *matHeaderCellDef> Lote </th>
-        <td mat-cell *matCellDef="let element"> {{ element.lote }} </td>
+        <th mat-header-cell *matHeaderCellDef> Dosagem máxima (mg/kg) </th>
+        <td mat-cell *matCellDef="let element"> {{ element.dose_max }} </td>
       </ng-container>
       
       <ng-container matColumnDef="email">
