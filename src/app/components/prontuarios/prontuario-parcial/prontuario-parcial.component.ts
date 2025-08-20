@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ViewChild } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { NgFor, NgIf } from '@angular/common';
