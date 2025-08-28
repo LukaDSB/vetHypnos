@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
-import { Location } from '@angular/common';
-import {Animal} from 'src/app/models/animal.model';
-import { AnimalService } from 'src/app/services/animal.service';
+import { Animal } from 'src/app/models/animal.model';
 import { NgxMaskDirective } from 'ngx-mask';
-import { DetalhesAnimalComponent } from '../detalhes-animal/detalhes-animal.component';
+import { EspecieService } from 'src/app/services/especie.service';
+import { Especie } from 'src/app/models/especie.model';
 
 @Component({
   selector: 'app-modal-animal',
@@ -18,122 +16,86 @@ import { DetalhesAnimalComponent } from '../detalhes-animal/detalhes-animal.comp
   imports:[FormsModule, CommonModule, HdkButtonComponent, NgxMaskDirective]
 })
 export class ModalAnimalComponent implements OnInit{
-    animal: Animal | undefined;
     isCadastroModalOpen = false;
     isAtualizarModal = false;
-    isCadastrarModal = true;
+
+    animalId = 0;
     nomeAnimal = "";
-    DataNascAnimal = 0;
+    DataNascAnimal = '';
     SexoAnimal = "";
     PesoAnimal: number = 0;
     TutorAnimal = 0;
-    especieAnimal = 0;
-    especies: any[] = [];
+    especieAnimal: number | null = null;
+    
+    especies: Especie[] = [];
+    
     @Output() cadastrar = new EventEmitter<Animal>();
     @Output() atualizar = new EventEmitter<Animal>();
-    @ViewChild('detalhesAnimal') detalhesAnimal!: DetalhesAnimalComponent;
 
-
-  constructor(private authService: AuthService, private location: Location, private animalService: AnimalService) {}
+  constructor(private especieService: EspecieService) {}
   
   ngOnInit(): void {
-      this.animalService.getAnimais().subscribe((animais: any[]) => {
-        this.especies = this.getEspeciesUnicas(animais);
+      this.especieService.getEspecie().subscribe((data: Especie[]) => {
+        this.especies = data;
     });
   }
 
-  cadastrarAnimal(){
-    const novoAnimal: Animal = {
-      id:0,
+  salvarAnimal(){
+    const dataNascimentoInt = this.DataNascAnimal 
+        ? parseInt(this.DataNascAnimal.replace(/\//g, ''), 10) 
+        : 0;
+    const animalData: Animal = {
+      id: this.animalId,
       nome: this.nomeAnimal,
-      data_nascimento: this.DataNascAnimal,
+      data_nascimento: dataNascimentoInt,
       sexo: this.SexoAnimal,
       peso: this.PesoAnimal,
       obito: 0,
-      tutor_id:this.TutorAnimal,
-      especie_id: this.especieAnimal,
-      especie: this.especies.find(especie => especie.id === this.especieAnimal)?.nome || '',
+      tutor_id: this.TutorAnimal,
+      especie_id: this.especieAnimal!,
     };
 
     if (this.isAtualizarModal){
-      this.atualizar.emit(novoAnimal);
+      this.atualizar.emit(animalData);
+    } else {
+      this.cadastrar.emit(animalData);
     }
-    
-    this.cadastrar.emit(novoAnimal);
     
     this.closeCadastro();
   }
 
   openAtualizar(animal: Animal){
-      this.animal = animal; 
+      this.isAtualizarModal = true;
+      
+      this.animalId = animal.id;
       this.nomeAnimal = animal.nome;
-      this.DataNascAnimal = animal.data_nascimento;
+      const dobStr = animal.data_nascimento.toString().padStart(8, '0');
+      this.DataNascAnimal = `${dobStr.substring(0, 2)}/${dobStr.substring(2, 4)}/${dobStr.substring(4, 8)}`;
       this.SexoAnimal = animal.sexo;
       this.PesoAnimal = animal.peso;
       this.TutorAnimal = animal.tutor_id;
       this.especieAnimal = animal.especie_id;
 
       this.isCadastroModalOpen = true;
-      this.isCadastrarModal = false;
-  }
-
-  atualizarAnimal(){
-    if (!this.animal) return;
-
-    const animalAtualizado: Animal = {
-      ...this.animal,
-      nome: this.nomeAnimal || '',
-      data_nascimento: this.DataNascAnimal,
-      sexo: this.SexoAnimal,
-      peso: this.PesoAnimal,
-      tutor_id: this.TutorAnimal,
-      especie_id: this.especieAnimal,
-
-    };
-      console.log('teste');
-
-    this.atualizar.emit(animalAtualizado);
-    this.closeCadastro();
-  }
-
-
-
-  getEspeciesUnicas(animais: any[]): any[] {
-    const especiesMap = new Map<number, any>();
-    for (const animal of animais) {
-      const especie = animal.especie;
-      if (especie && !especiesMap.has(especie.id)) {
-        especiesMap.set(especie.id, especie);
-      }
-    }
-    return Array.from(especiesMap.values());
-  }
-
-  resetCampos(){
-      this.nomeAnimal = '';
-      this.DataNascAnimal = 0;
-      this.SexoAnimal =  '';
-      this.PesoAnimal = 0;
-      this.TutorAnimal = 0;
-      this.especieAnimal = 0;
-  }
-
-
-  voltar(){
-    this.location.back();
   }
 
   openCadastro() {
-    this.isCadastroModalOpen = true;
+    this.isAtualizarModal = false;
     this.resetCampos();
-    this.isCadastrarModal= true;
+    this.isCadastroModalOpen = true;
+  }
+
+  resetCampos(){
+      this.animalId = 0;
+      this.nomeAnimal = '';
+      this.DataNascAnimal = '';
+      this.SexoAnimal =  '';
+      this.PesoAnimal = 0;
+      this.TutorAnimal = 0;
+      this.especieAnimal = null;
   }
 
   closeCadastro() {
     this.isCadastroModalOpen = false;
-  }
-
-  loginMock() {
-    this.authService.loginMock();
   }
 }

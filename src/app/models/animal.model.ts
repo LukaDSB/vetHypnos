@@ -9,5 +9,5 @@ export interface Animal {
   tutor_id: number;
   obito: number;
   especie_id: number;
-  especie: Especie;
+  especie?: Especie;
 }
