@@ -55,11 +55,8 @@
       <div class="form-group">
         <label for="PesoAnimal">Peso (kg)*</label>
         <input 
-          type="text"
-          mask="separator.2" 
-          thousandSeparator="."
-          decimalMarker=","
-          [dropSpecialCharacters]="false"
+          type="number"
+          thousandSeparator=","
           placeholder="0,00"
           class="no-spinners bg-azul col-2 form-control"
           [(ngModel)]="PesoAnimal"

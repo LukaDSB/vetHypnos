@@ -7,7 +7,7 @@ import { Prontuario } from '../models/prontuario';
   providedIn: 'root',
 })
 export class ProntuarioService {
-  private apiUrl = 'http://localhost/minhaapi';
+  private apiUrl = 'http://localhost:8000/minhaapi';
 
   constructor(private http: HttpClient) {}
 
