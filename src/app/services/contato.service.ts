@@ -7,7 +7,7 @@ import { Contato } from '../models/contato.model';
   providedIn: 'root',
 })
 export class ContatoService {
-  private apiUrl = 'http://localhost/minhaapi';
+  private apiUrl = 'http://localhost:8000/minhaapi';
 
   constructor(private http: HttpClient) {}
 

@@ -28,6 +28,7 @@ export class AnimaisComponent implements OnInit {
   }
 
   cadastrarAnimal(animal: Animal) {
+    console.log("cadastrarAnimal kk");
     console.log(animal);
     this.animalService.cadastrarAnimal(animal).subscribe({
       next: () => {

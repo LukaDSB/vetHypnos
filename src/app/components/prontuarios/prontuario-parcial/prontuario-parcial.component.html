@@ -6,7 +6,7 @@
       <img src="../../../../assets/images/LogoIfes2.svg" alt="Logo IFES" />
     </div>
     <div class="infos-contato">
-      <div class="info-item">
+        <div class="info-item">
         <div class="icons-img">
            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
@@ -43,7 +43,7 @@
   </div>
 
   <div class="hypnosText--TituloGrande titulo">Prontuário Parcial</div>
-  <div class="hypnosText--fonte1 num-prontuario">Número: 202401</div>
+  <div class="hypnosText--fonte1 num-prontuario">Número: (a ser gerado)</div>
 
   <div class="section-titulo ">Informações do paciente</div>
   <div class="section-content">
@@ -61,7 +61,7 @@
     </div>
     <div>
       <div class="label">Idade</div>
-      <div class="value">{{dadosRecebidos?.data_nascimento || '0'}}</div>
+      <div class="value">{{ animalIdade || '0'}}</div>
     </div>
     <div>
       <div class="label">Peso</div>
@@ -77,59 +77,51 @@
   <div class="section-content-2">
     <div>
       <div class="label-2">Médico</div>
-      <div class="value-2">Paulo</div>
+      <input type="text" [(ngModel)]="medicoResponsavel" class="value-2-input">
     </div>
     <div>
       <div class="label-2">Tipo de Procedimento</div>
-      <div class="value-2">Castração</div>
+      <select [(ngModel)]="tipo_procedimento_id" class="value-2-input">
+        <option [value]="1">Consulta de Rotina</option>
+        <option [value]="2">Castração</option>
+        <option [value]="3">Emergência</option>
+        <option [value]="4">Vacinação</option>
+      </select>
     </div>
     <div>
       <div class="label-2">Data do Procedimento</div>
-      <div class="value-2">12/11/2024</div>
+      <input type="date" [(ngModel)]="dataProcedimento" class="value-2-input">
     </div>
     <div>
       <div class="label-2">Duração</div>
-      <div class="value-2">4 horas</div>
+      <input type="text" [(ngModel)]="duracaoProcedimento" class="value-2-input">
     </div>
   </div>
 
   <div class="section-titulo">Parâmetros Clínicos</div>
-  <div class="section-content-2">
+  <div class="tabela-clinica-wrapper">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="parametro">
+        <th mat-header-cell *matHeaderCellDef> Horário </th>
+        <td mat-cell *matCellDef="let element"> {{ element.parametro }} </td>
+      </ng-container>
 
+      <ng-container *ngFor="let col of displayedColumns.slice(1); let i = index" [matColumnDef]="col">
+        <th mat-header-cell *matHeaderCellDef>
+          <input type="time" [(ngModel)]="horarios[i]" class="table-input time-input">
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <input type="text" [(ngModel)]="element[col]" class="table-input">
+        </td>
+      </ng-container>
 
-    <div class="tabela-clinica-wrapper">
-
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-        <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-          <th mat-header-cell *matHeaderCellDef class="mat-header-cell">
-            <ng-container *ngIf="column === 'parametro'; else emptyHeader">
-              Parâmetro
-            </ng-container>
-            <ng-template #emptyHeader>
-            </ng-template>
-          </th>
-          <td mat-cell *matCellDef="let element" class="mat-cell">
-            <ng-container *ngIf="column === 'parametro'; else inputField" class="table-input-teste">
-              {{ element[column] }}
-            </ng-container>
-            <ng-template #inputField class="input-field">
-              <input type="text" [(ngModel)]="element[column]" class="table-input" />
-            </ng-template>
-          </td>
-
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-        </tr>
-      </table>
-    </div>
-
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
   </div>
 
   <div class="medicamentos-section" (click)="abrirModalCadastro()">
-  <div class="section-titulo">Medicamentos</div>
+    <div class="section-titulo">Medicamentos</div>
   <div class="section-subTitulo hypnosText--fonte1">Medicação pré-anestésica</div>
   
   <div class="section-content-2 text-align-center">
@@ -148,23 +140,21 @@
     </div>
   </div>
   </div>
-
+  
   <hdk-divisor></hdk-divisor>
 
   <div>
     <h2 class="hypnosText--fonte1 obs">Observações</h2>
   </div>
   <div class="obs-area form-group">
-    <textarea class="obs-area-input bg-azul form-control"></textarea>
+    <textarea class="obs-area-input bg-azul form-control" [(ngModel)]="observacoes"></textarea>
   </div>
 
   <hdk-button
-    icon="fa-solid fa-search"
     text="Finalizar prontuário"
     color="hdk-bg-verde"
     class="d-flex m-4 button"
-    
-    >
+    (click)="finalizarProntuario()">
   </hdk-button>
 
 </div>

@@ -241,3 +241,32 @@
 .button{
   justify-content: end;
 }
+
+// Adicione ou ajuste os seguintes estilos no seu arquivo SCSS
+
+// Estilos para os inputs nos "Detalhes do Procedimento"
+.value-2-input {
+  width: 95%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+}
+
+// Estilos para os inputs dentro da tabela
+.table-input {
+  width: 90%;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  text-align: center;
+  padding: 4px;
+
+  &:focus {
+    outline: 1px solid #3498db;
+  }
+}
+
+.time-input {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}

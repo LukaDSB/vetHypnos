@@ -7,7 +7,7 @@ import {Animal} from '../models/animal.model';
   providedIn: 'root',
 })
 export class AnimalService {
-  private apiUrl = 'http://localhost/minhaapi';
+  private apiUrl = 'http://localhost:8000/minhaapi';
 
   constructor(private http: HttpClient) {}
 

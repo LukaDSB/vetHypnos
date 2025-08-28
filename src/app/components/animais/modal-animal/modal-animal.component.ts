@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +25,7 @@ export class ModalAnimalComponent implements OnInit{
     nomeAnimal = "";
     DataNascAnimal = 0;
     SexoAnimal = "";
-    PesoAnimal = 0;
+    PesoAnimal: number = 0;
     TutorAnimal = 0;
     especieAnimal = 0;
     especies: any[] = [];
@@ -54,23 +55,23 @@ export class ModalAnimalComponent implements OnInit{
       especie: this.especies.find(especie => especie.id === this.especieAnimal)?.nome || '',
     };
 
-    if (!this.isAtualizarModal){
-      this.cadastrar.emit(novoAnimal);
+    if (this.isAtualizarModal){
+      this.atualizar.emit(novoAnimal);
     }
-
-    this.atualizar.emit(novoAnimal);
+    
+    this.cadastrar.emit(novoAnimal);
     
     this.closeCadastro();
   }
 
-  openAtualizar(anml: Animal){
-      this.animal = anml; 
-      this.nomeAnimal = anml.nome;
-      this.DataNascAnimal = anml.data_nascimento;
-      this.SexoAnimal = anml.sexo;
-      this.PesoAnimal = anml.peso;
-      this.TutorAnimal = anml.tutor_id;
-      this.especieAnimal = anml.especie_id;
+  openAtualizar(animal: Animal){
+      this.animal = animal; 
+      this.nomeAnimal = animal.nome;
+      this.DataNascAnimal = animal.data_nascimento;
+      this.SexoAnimal = animal.sexo;
+      this.PesoAnimal = animal.peso;
+      this.TutorAnimal = animal.tutor_id;
+      this.especieAnimal = animal.especie_id;
 
       this.isCadastroModalOpen = true;
       this.isCadastrarModal = false;
