@@ -53,7 +53,6 @@ export class TabelaComponent<T> implements AfterViewInit {
     this.atualizar.emit(element);
   }
 
-
   abrirModal(): void {
     const dialogRef = this.dialog.open(HdkModalComponent, {
       width: '400px',

@@ -7,6 +7,9 @@ import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
 import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
 import { ModalAnimalComponent } from './modal-animal/modal-animal.component';
+import { TutorService } from 'src/app/services/tutor.service';
+import { forkJoin } from 'rxjs';
+import { Tutor } from 'src/app/models/tutor.model';
 
 @Component({
   selector: 'app-animais',
@@ -21,15 +24,17 @@ export class AnimaisComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'especie_id', 'data_nascimento', 'tutor_id', 'peso', 'sexo', 'acoes'];
   @ViewChild('modalAnimal') modalAnimalComponent!: ModalAnimalComponent;
 
-  constructor(private animalService: AnimalService, private location: Location) {}
+  constructor(
+    private animalService: AnimalService,
+    private tutorService: TutorService, 
+    private location: Location
+  ) {}
   
   ngOnInit() {
     this.carregarDados();
   }
 
   cadastrarAnimal(animal: Animal) {
-    console.log("cadastrarAnimal kk");
-    console.log(animal);
     this.animalService.cadastrarAnimal(animal).subscribe({
       next: () => {
         this.carregarDados();
@@ -37,14 +42,13 @@ export class AnimaisComponent implements OnInit {
       error: (err) => {
         console.error('Erro ao cadastrar animal:', err);
       }
-    })
+    });
   }
 
   deletarAnimal(animal: Animal){
     if (confirm(`Deseja realmente excluir "${animal.nome}"?`)){
       this.animalService.deletarAnimal(animal.id).subscribe({
         next: () => {
-          console.log(`Animal com ID ${animal.id} excluído.`);
           this.carregarDados();
         },
         error: (err) => {
@@ -61,18 +65,31 @@ export class AnimaisComponent implements OnInit {
   enviarAtualizacao(animal: Animal){
     this.animalService.atualizarAnimal(animal).subscribe({
       next: () => {
-        console.log('Animal atualizado com sucesso.');
         this.carregarDados();
       },
       error: (err) => {
         console.log('Erro ao atualizar animal: ', err);
       }
-    })
+    });
   }
 
+  
   carregarDados() {
-     this.animalService.getAnimais().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+     forkJoin({
+      animais: this.animalService.getAnimais(),
+      tutores: this.tutorService.getTutores()
+    }).subscribe(({ animais, tutores }) => {
+      
+      
+      const tutoresMap = new Map<number, Tutor>(tutores.map(t => [t.id, t]));
+
+      
+      const animaisComTutor = animais.map(animal => ({
+        ...animal,
+        tutor: tutoresMap.get(animal.tutor_id)
+      }));
+
+      this.dataSource = new MatTableDataSource(animaisComTutor as Animal[]);
     });
   }
 
@@ -81,6 +98,6 @@ export class AnimaisComponent implements OnInit {
   }
 
   abrirModalCadastro() {
-  this.modalAnimalComponent.openCadastro();
-}
+    this.modalAnimalComponent.openCadastro();
+  }
 }

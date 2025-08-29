@@ -11,22 +11,21 @@
         <input type="search" class="bg-azul col-2 form-control" [(ngModel)]="nomeAnimal" name="nomeAnimal" required />
       </div>
 
-     <div class="form-group">
-      <label for="especieAnimal">Espécie *</label>
-      <select
-        class="bg-azul col-2 form-control"
-        [(ngModel)]="especieAnimal"
-        (ngModelChange)="onEspecieChange($event)"
-        name="especieAnimal"
-        required
-      >
-        <option [value]="null" disabled>Selecione uma espécie</option>
-
-        <option *ngFor="let esp of especies" [value]="esp.especie_id">
-          {{ esp.especie }}
-        </option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label for="especieAnimal">Espécie *</label>
+        <select
+          class="bg-azul col-2 form-control"
+          [(ngModel)]="especieAnimal"
+          (ngModelChange)="onEspecieChange($event)"
+          name="especieAnimal"
+          required
+        >
+          <option [value]="null" disabled>Selecione uma espécie</option>
+          <option *ngFor="let esp of especies" [value]="esp.especie_id">
+            {{ esp.especie }}
+          </option>
+        </select>
+      </div>
 
       <div class="form-group">
         <label for="DataNascAnimal">Data de Nascimento</label>
@@ -39,6 +38,7 @@
           class="bg-azul col-2 form-control"
         />
       </div>
+
       <div class="form-group">
         <label for="SexoAnimal">Sexo</label>
         <select
@@ -54,7 +54,7 @@
       
       <div class="form-group">
         <label for="PesoAnimal">Peso (kg)*</label>
-        <input 
+        <input
           type="number"
           step="0.01"
           placeholder="0.00"
@@ -65,10 +65,34 @@
       </div>
 
       <div class="form-group">
-        <label for="TutorAnimal">Tutor ID *</label>
-        <input type="number" class="bg-azul col-2 form-control" [(ngModel)]="TutorAnimal" name="TutorAnimal" required />
+        <label for="TutorAnimal">Tutor *</label>
+        <div class="autocomplete-container">
+          <input
+            type="text"
+            class="bg-azul col-2 form-control"
+            [(ngModel)]="buscaTutor"
+            (ngModelChange)="filtrarTutores()"
+            (focus)="abrirDropdownTutor()"
+            name="TutorAnimalInput"
+            placeholder="Digite para buscar um tutor..."
+            required
+            autocomplete="off"
+          />
+          <ul *ngIf="isDropdownTutorAberto" class="autocomplete-dropdown">
+            <li *ngIf="tutoresFiltrados.length === 0" class="dropdown-item-disabled">
+              Nenhum tutor encontrado
+            </li>
+            <li
+              *ngFor="let tutor of tutoresFiltrados"
+              class="dropdown-item"
+              (click)="selecionarTutor(tutor)"
+            >
+              {{ tutor.tutor_nome }}
+            </li>
+          </ul>
+        </div>
       </div>
-
+      
       <footer>
           <hdk-button
             [text]="isAtualizarModal ? 'Atualizar' : 'Cadastrar'"
