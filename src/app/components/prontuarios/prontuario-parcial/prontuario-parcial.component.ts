@@ -66,9 +66,15 @@ export class ProntuarioParcialComponent implements OnInit {
   if (this.dadosRecebidos) {
     this.animal = this.dadosRecebidos;
 
-    const dataNascimento = this.converterDataIntParaDate(this.animal.data_nascimento);
+    // --- AJUSTE AQUI ---
+    // A string 'YYYY-MM-DD' pode ser passada diretamente para o construtor do Date.
+    // Verificamos se a data existe antes de criar o objeto.
+    const dataNascimento = this.animal.data_nascimento 
+        ? new Date(this.animal.data_nascimento) 
+        : null;
 
     this.animalIdade = this.calcularIdade(dataNascimento);
+    
   } else {
     console.error("Dados do animal não foram recebidos. Considere redirecionar o usuário.");
   }

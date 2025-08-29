@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,9 +9,10 @@ import { HdkModalComponent } from '../modal/hdk-modal.component';
 import { DateMaskPipe } from './pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { Animal } from 'src/app/models/animal.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, DateMaskPipe, MatCheckboxModule],
+  imports:[MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, DateMaskPipe, MatCheckboxModule, DatePipe],
   templateUrl: 'hdk-tabela.component.html',
   styleUrls: ['hdk-tabela.component.scss'],
   selector: 'hdk-tabela',
@@ -69,6 +71,9 @@ export class TabelaComponent<T> implements AfterViewInit {
   ngAfterViewInit() {
     if (this.dataSource) {
       this.dataSource.paginator = this.paginator;
+      
     }
+    console.log('Dados: ' + this.dataSource);
+    
   }
 }

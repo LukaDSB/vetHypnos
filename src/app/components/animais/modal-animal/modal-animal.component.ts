@@ -36,24 +36,42 @@ export class ModalAnimalComponent implements OnInit{
   
   ngOnInit(): void {
       this.especieService.getEspecie().subscribe((data: Especie[]) => {
+        console.log(data);
         this.especies = data;
     });
   }
 
-  salvarAnimal(){
-    const dataNascimentoInt = this.DataNascAnimal 
-        ? parseInt(this.DataNascAnimal.replace(/\//g, ''), 10) 
-        : 0;
-    const animalData: Animal = {
+  onEspecieChange(novoValor: any) {
+  console.log('Novo valor selecionado para espécie:', novoValor);
+}
+
+  salvarAnimal() {
+    // 1. Limpa a string da data, removendo tudo que não for número.
+    const dataLimpa = this.DataNascAnimal.replace(/\D/g, '');
+
+    // 2. Validação: Verifica se a data tem 8 dígitos (DDMMAAAA).
+    if (dataLimpa.length !== 8) {
+      alert('Por favor, insira uma data de nascimento válida no formato DD/MM/AAAA.');
+      return; // Impede o envio do formulário se a data for inválida.
+    }
+
+    // 3. Remonta a data no formato YYYY-MM-DD, que é seguro para o banco.
+    const dia = dataLimpa.substring(0, 2);
+    const mes = dataLimpa.substring(2, 4);
+    const ano = dataLimpa.substring(4, 8);
+    const dataFormatadaApi = `${ano}-${mes}-${dia}`;
+
+    const animalData: any = { // Use 'any' temporariamente se Animal model estiver tipado
       id: this.animalId,
       nome: this.nomeAnimal,
-      data_nascimento: dataNascimentoInt,
+      data_nascimento: dataFormatadaApi, // <-- Usando a data formatada e segura
       sexo: this.SexoAnimal,
       peso: this.PesoAnimal,
       obito: 0,
       tutor_id: this.TutorAnimal,
       especie_id: this.especieAnimal!,
     };
+    console.log('Enviando para a API:', animalData);
 
     if (this.isAtualizarModal){
       this.atualizar.emit(animalData);
@@ -62,22 +80,25 @@ export class ModalAnimalComponent implements OnInit{
     }
     
     this.closeCadastro();
-  }
+}
 
-  openAtualizar(animal: Animal){
-      this.isAtualizarModal = true;
-      
-      this.animalId = animal.id;
-      this.nomeAnimal = animal.nome;
-      const dobStr = animal.data_nascimento.toString().padStart(8, '0');
-      this.DataNascAnimal = `${dobStr.substring(0, 2)}/${dobStr.substring(2, 4)}/${dobStr.substring(4, 8)}`;
-      this.SexoAnimal = animal.sexo;
-      this.PesoAnimal = animal.peso;
-      this.TutorAnimal = animal.tutor_id;
-      this.especieAnimal = animal.especie_id;
+  openAtualizar(animal: Animal) {
+        this.isAtualizarModal = true;
 
-      this.isCadastroModalOpen = true;
-  }
+        this.animalId = animal.id;
+        this.nomeAnimal = animal.nome;
+        
+        // Converte 'yyyy-MM-dd' (vindo da API) para 'dd/MM/yyyy' (para o formulário)
+        const dataParts = animal.data_nascimento.split('-');
+        this.DataNascAnimal = `${dataParts[2]}/${dataParts[1]}/${dataParts[0]}`;
+
+        this.SexoAnimal = animal.sexo;
+        this.PesoAnimal = animal.peso;
+        this.TutorAnimal = animal.tutor_id;
+        this.especieAnimal = animal.especie_id;
+
+        this.isCadastroModalOpen = true;
+    }
 
   openCadastro() {
     this.isAtualizarModal = false;

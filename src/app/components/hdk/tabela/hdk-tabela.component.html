@@ -73,7 +73,7 @@
 
       <ng-container matColumnDef="data_nascimento">
         <th mat-header-cell *matHeaderCellDef> Nascimento </th>
-        <td mat-cell *matCellDef="let element"> {{ element.data_nascimento | dateMask }} </td>
+         <td mat-cell *matCellDef="let element"> {{ element.data_nascimento | date: 'dd/MM/yyyy' }} </td>
       </ng-container>
 
       <ng-container matColumnDef="sexo">

@@ -16,11 +16,13 @@
       <select
         class="bg-azul col-2 form-control"
         [(ngModel)]="especieAnimal"
+        (ngModelChange)="onEspecieChange($event)"
         name="especieAnimal"
         required
       >
-        <option [ngValue]="null" disabled>Selecione uma espécie</option>
-        <option *ngFor="let esp of especies" [ngValue]="esp.id">
+        <option [value]="null" disabled>Selecione uma espécie</option>
+
+        <option *ngFor="let esp of especies" [value]="esp.especie_id">
           {{ esp.especie }}
         </option>
       </select>
