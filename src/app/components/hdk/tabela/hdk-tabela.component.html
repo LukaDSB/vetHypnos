@@ -72,7 +72,7 @@
 
       <ng-container matColumnDef="data_nascimento">
         <th mat-header-cell *matHeaderCellDef> Nascimento </th>
-         <td mat-cell *matCellDef="let element"> {{ element.data_nascimento | date: 'dd/MM/yyyy' }} </td>
+         <td mat-cell *matCellDef="let element"> {{ element.data_nascimento ? (element.data_nascimento | date: 'dd/MM/yyyy') : 'Não informado' }} </td>
       </ng-container>
 
       <ng-container matColumnDef="sexo">
@@ -92,7 +92,7 @@
 
       <ng-container matColumnDef="especie_id">
         <th mat-header-cell *matHeaderCellDef> Espécie </th>
-        <td mat-cell *matCellDef="let element"> {{ element.especie?.especie}} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.especie?.especie || 'Não informado'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="selecionar">

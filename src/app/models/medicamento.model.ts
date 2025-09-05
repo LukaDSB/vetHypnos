@@ -10,8 +10,8 @@ export interface  Medicamento {
   fabricante: string;
   lote: number;
   validade: string;
-  dose_min: number;
-  dose_max: number;
+  dose_min?: number;
+  dose_max?: number;
   quantidade: number;
   categoria_id: number;
   categoria_medicamento_id: number;

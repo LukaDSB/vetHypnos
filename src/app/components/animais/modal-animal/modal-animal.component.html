@@ -1,4 +1,4 @@
-<div *ngIf="isCadastroModalOpen" class="modal">
+<div *ngIf="isCadastroModalOpen" class="modal" (click)="onBackdropClick($event)" id="modal-background">
   <div class="modal-content">
 
     <form #animalForm="ngForm">
@@ -12,19 +12,30 @@
       </div>
 
       <div class="form-group">
-        <label for="especieAnimal">Espécie *</label>
-        <select
-          class="bg-azul col-2 form-control"
-          [(ngModel)]="especieAnimal"
-          (ngModelChange)="onEspecieChange($event)"
-          name="especieAnimal"
-          required
-        >
-          <option [value]="null" disabled>Selecione uma espécie</option>
-          <option *ngFor="let esp of especies" [value]="esp.especie_id">
-            {{ esp.especie }}
-          </option>
-        </select>
+        <label for="especieAnimal">Espécie</label>
+        <div class="autocomplete-container">
+          <input
+            type="text"
+            class="bg-azul col-2 form-control"
+            [(ngModel)]="buscaEspecie"
+            (ngModelChange)="filtrarEspecies()"
+            (focus)="abrirDropdownEspecie()"
+            name="EspecieAnimalInput"
+            placeholder="Digite para buscar uma espécie..."
+            autocomplete="off"
+          />
+          <ul *ngIf="isDropdownEspecieAberto" class="autocomplete-dropdown">
+            <li class="dropdown-item" (click)="deselecionarEspecie()">
+              Nenhuma espécie
+            </li>
+            <li *ngIf="especiesFiltradas.length === 0 && buscaEspecie" class="dropdown-item-disabled">
+              Nenhum a espécie encontrada
+            </li>
+            <li *ngFor="let esp of especiesFiltradas" class="dropdown-item" (click)="selecionarEspecie(esp)">
+              {{ esp.especie }}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="form-group">
@@ -51,7 +62,7 @@
           <option value="F">Fêmea</option>
         </select>
       </div>
-      
+
       <div class="form-group">
         <label for="PesoAnimal">Peso (kg)*</label>
         <input
@@ -65,7 +76,7 @@
       </div>
 
       <div class="form-group">
-        <label for="TutorAnimal">Tutor *</label>
+        <label for="TutorAnimal">Tutor</label>
         <div class="autocomplete-container">
           <input
             type="text"
@@ -75,24 +86,22 @@
             (focus)="abrirDropdownTutor()"
             name="TutorAnimalInput"
             placeholder="Digite para buscar um tutor..."
-            required
             autocomplete="off"
           />
           <ul *ngIf="isDropdownTutorAberto" class="autocomplete-dropdown">
-            <li *ngIf="tutoresFiltrados.length === 0" class="dropdown-item-disabled">
+            <li class="dropdown-item" (click)="deselecionarTutor()">
+              Nenhum tutor
+            </li>
+            <li *ngIf="tutoresFiltrados.length === 0 && buscaTutor" class="dropdown-item-disabled">
               Nenhum tutor encontrado
             </li>
-            <li
-              *ngFor="let tutor of tutoresFiltrados"
-              class="dropdown-item"
-              (click)="selecionarTutor(tutor)"
-            >
+            <li *ngFor="let tutor of tutoresFiltrados" class="dropdown-item" (click)="selecionarTutor(tutor)">
               {{ tutor.tutor_nome }}
             </li>
           </ul>
         </div>
       </div>
-      
+
       <footer>
           <hdk-button
             [text]="isAtualizarModal ? 'Atualizar' : 'Cadastrar'"

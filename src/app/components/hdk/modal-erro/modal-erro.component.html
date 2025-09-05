@@ -1,0 +1,15 @@
+<div *ngIf="isModalOpen" class="modal">
+  <div class="modal-content">
+
+    <div class="conteudo-erro">
+      <h1 class="hipnosText--TituloGrande">Atenção!</h1>
+      
+      <p class="mensagem">{{ mensagemErro }}</p>
+
+      <footer>
+        <hdk-button text="OK" color="hdk-bg-verde" (click)="fechar()" />
+      </footer>
+    </div>
+
+  </div>
+</div>

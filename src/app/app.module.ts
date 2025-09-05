@@ -24,6 +24,8 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { AnimaisComponent } from './components/animais/animais.component';
 import { ProntuarioProvisorioComponent } from './components/prontuario-provisorio/prontuario-provisorio.component';
 import { SelecionarMedicamentosComponent } from './components/prontuarios/selecionar-medicamentos/selecionar-medicamentos.component';
+import { ModalErroComponent } from './components/hdk/modal-erro/modal-erro.component';
+import { CustomCheckboxComponent } from './components/hdk/custom-checkbox/custom-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { SelecionarMedicamentosComponent } from './components/prontuarios/seleci
     ExpansionPanelComponent,
     CdkAccordionModule,
     AnimaisComponent,
-    SelecionarMedicamentosComponent
+    SelecionarMedicamentosComponent,
+    ModalErroComponent,
+    CustomCheckboxComponent
 ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]

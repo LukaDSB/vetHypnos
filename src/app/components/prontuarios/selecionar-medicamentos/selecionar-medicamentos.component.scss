@@ -30,7 +30,7 @@
   width: 100%;
   background: none;
   border: none;
-  padding: 16px;
+  padding: 5px;
   text-align: center;
   background-color: #E3EDF9;
   border: solid 2px #000000;
@@ -59,24 +59,35 @@
   color: #2F007B;
 }
 
-  .box .mini-titulo-accordion{
-    font-size: 16px;
-    font-style: bold;
-  }
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 17vh;
+  gap: 5px;
+  justify-content: space-between;
+}
 
-  .mini-titulo-accordion-2{
-    background-color: #E3EDF9;
-    margin: 0;
-    padding: 16px;
-  }
+.box .mini-titulo-accordion{
+  font-size: 16px;
+  font-style: bold;
+}
 
-  mat-checkbox.box {
-    --mdc-checkbox-size: 5px;
-    --mdc-checkbox-selected-icon-color: #4CAF50;
-    --mdc-checkbox-unselected-icon-color: #ccccccb1;
-    --mdc-checkbox-selected-checkmark-color: white;
-    
+.mini-titulo-accordion-2{
+  background-color: #E3EDF9;
+  margin: 0;
+  padding: 16px;
+}
+
+:host ::ng-deep .box.mat-mdc-checkbox {
+  .mdc-checkbox {
+    --mdc-checkbox-size: 20px; 
   }
+  
+  --mdc-checkbox-selected-icon-color: #4CAF50;
+  --mdc-checkbox-unselected-icon-color: #ccccccb1;
+  --mdc-checkbox-selected-checkmark-color: white;
+}
 
 .example-accordion-item:first-child {
   border-top-left-radius: 4px;

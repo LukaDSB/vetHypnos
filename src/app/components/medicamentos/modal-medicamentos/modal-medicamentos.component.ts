@@ -1,25 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { Location } from '@angular/common';
 import { Medicamento } from 'src/app/models/medicamento.model';
+import { ModalErroComponent } from '../../hdk/modal-erro/modal-erro.component';
 
 @Component({
   selector: 'app-modal-medicamentos',
   templateUrl: './modal-medicamentos.component.html',
   styleUrls: ['./modal-medicamentos.component.scss'],
   standalone: true,
-  imports:[FormsModule, CommonModule, HdkButtonComponent]
+  imports:[FormsModule, CommonModule, HdkButtonComponent, ModalErroComponent]
 })
 export class ModalMedicamentosComponent {
+  @ViewChild(ModalErroComponent) modalErro!: ModalErroComponent;
   isCadastroModalOpen = false;
   isModalCadastro = true;
   isModalAtualizar = false;
   medicamento: Medicamento | undefined;
   nome?: string;
-  concentracao = 0;
+  concentracao?:number;
   categoriaRemedio = 1;
   fabricante?: string;
   lote = 0;
@@ -27,7 +29,7 @@ export class ModalMedicamentosComponent {
   dose_min?: number;
   dose_max?: number;
   quantidade = 0;
-  categoria_medicamento_id: number = 0;
+  categoria_medicamento_id?: number;
 
   @Output() cadastrar = new EventEmitter<Medicamento>();
   @Output() atualizar = new EventEmitter<Medicamento>();
@@ -35,6 +37,10 @@ export class ModalMedicamentosComponent {
   constructor(private authService: AuthService, private location: Location ) {}
 
   cadastrarMedicamento() {
+    if (!this.nome || !this.concentracao || !this.dose_min || !this.dose_max) {
+      this.modalErro.abrir('Por favor, preencha todos os campos obrigatórios (*).');
+      return;
+    }
     const medicamento: Medicamento = {
       id: this.medicamento?.id ?? 0,
       nome: this.nome || '',
@@ -46,9 +52,10 @@ export class ModalMedicamentosComponent {
       dose_min: this.dose_min || 0,
       dose_max: this.dose_max || 0,
       quantidade: this.quantidade,
-      categoria_medicamento_id: this.categoria_medicamento_id,
+      categoria_medicamento_id: this.categoria_medicamento_id || 0,
       categoria_medicamento: null
     };
+    console.log(`Medicamentos a serem enviados: ${medicamento}`)
   
     if (this.isModalAtualizar) {
       this.atualizar.emit(medicamento);
@@ -68,6 +75,10 @@ export class ModalMedicamentosComponent {
     this.lote = med.lote;
     this.validade = med.validade;
     this.quantidade = med.quantidade;
+    this.dose_min = med.dose_min;
+    this.dose_max = med.dose_max;
+  
+    this.isModalAtualizar = true;
   
     this.isModalCadastro = false;
     this.isModalAtualizar = true;
@@ -81,6 +92,11 @@ export class ModalMedicamentosComponent {
   atualizarMedicamento() {
     if (!this.medicamento) return;
   
+    if (!this.nome || !this.concentracao || !this.dose_min || !this.dose_max) {
+      alert('Por favor, preencha todos os campos obrigatórios (*).');
+      return;
+    }
+  
     const medicamentoAtualizado: Medicamento = {
       ...this.medicamento,
       nome: this.nome || '',
@@ -89,7 +105,9 @@ export class ModalMedicamentosComponent {
       fabricante: this.fabricante || '',
       lote: this.lote,
       validade: this.validade || '',
-      quantidade: this.quantidade
+      quantidade: this.quantidade,
+      dose_min: this.dose_min,
+      dose_max: this.dose_max
     };
   
     this.atualizar.emit(medicamentoAtualizado);

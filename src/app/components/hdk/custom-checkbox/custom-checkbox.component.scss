@@ -1,0 +1,39 @@
+/* ARQUIVO: src/app/custom-checkbox/custom-checkbox.component.scss */
+
+:host {
+  display: block;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none; /* Impede que o texto seja selecionado ao clicar */
+  gap: 8px; /* Espaço entre a caixa e o texto */
+}
+
+.checkbox-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccccccb1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.checkbox-box.checked {
+  background-color: #4CAF50; /* Sua cor verde! */
+  border-color: #4CAF50;
+}
+
+.checkbox-box svg {
+  width: 16px;
+  height: 16px;
+  stroke: white; /* Cor do ícone de check */
+}
+
+.checkbox-label {
+  /* O estilo do texto já é herdado da classe .box, então não precisa de muito aqui */
+}

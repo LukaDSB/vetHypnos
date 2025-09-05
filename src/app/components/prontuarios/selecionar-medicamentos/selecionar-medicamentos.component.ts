@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {MatCheckboxChange, MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { HdkButtonComponent } from "../../hdk/button/hdk-button.component";
+import { CustomCheckboxComponent } from '../../hdk/custom-checkbox/custom-checkbox.component';
 
 @Component({
   selector: 'app-selecionar-medicamentos',
@@ -27,16 +28,11 @@ import { HdkButtonComponent } from "../../hdk/button/hdk-button.component";
     MatDividerModule,
     MatFormFieldModule,
     MatButtonModule,
-    HdkButtonComponent
+    HdkButtonComponent, 
+    CustomCheckboxComponent
 ],
-  encapsulation: ViewEncapsulation.None
 })
 export class SelecionarMedicamentosComponent implements OnInit {
-  items = [
-    'Medicação pré anestésica',
-    'Indução anestésica',
-  ];
-
   expandedIndex = 0;
   dadosRecebidos: Animal | undefined;
 
@@ -46,7 +42,7 @@ export class SelecionarMedicamentosComponent implements OnInit {
 
   private todosMedicamentos: Medicamento[] = [];
 
-  constructor(private medicamentoService: MedicamentoService, private router: Router) {
+  constructor(private medicamentoService: MedicamentoService, private router: Router, private cdr: ChangeDetectorRef) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { dadosSelecionados: Animal[] };
     
@@ -57,6 +53,8 @@ export class SelecionarMedicamentosComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarDados();
+    console.log(this.medicamentosAgrupados);
+    console.log(` Dados recebidos: ${this.dadosRecebidos}`);
   }
 
   carregarDados(): void {
@@ -82,14 +80,17 @@ export class SelecionarMedicamentosComponent implements OnInit {
     }
   }
   
-  onSelectionChange(event: MatCheckboxChange, medId: number): void {
+  onSelectionChange(event: { checked: boolean }, medId: number): void {
     if (event.checked) {
       this.medicamentosSelecionados.add(medId);
     } else {
       this.medicamentosSelecionados.delete(medId);
     }
+    // O cdr.detectChanges() pode não ser mais necessário, mas não prejudica.
+    this.cdr.detectChanges(); 
     console.log('IDs Selecionados:', Array.from(this.medicamentosSelecionados));
   }
+
 
   salvarSelecao(): void {
     const medicamentosParaEnviar = this.todosMedicamentos.filter(med => 

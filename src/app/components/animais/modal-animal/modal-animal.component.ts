@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { Animal } from 'src/app/models/animal.model';
@@ -21,6 +21,7 @@ export class ModalAnimalComponent implements OnInit{
     isCadastroModalOpen = false;
     isAtualizarModal = false;
     isDropdownTutorAberto = false;
+    isDropdownEspecieAberto = false;
 
     animalId = 0;
     nomeAnimal = "";
@@ -34,7 +35,9 @@ export class ModalAnimalComponent implements OnInit{
     todosOsTutores: Tutor[] = [];
     tutoresFiltrados: Tutor[] = [];
 
+    buscaEspecie = '';
     especies: Especie[] = [];
+    especiesFiltradas: Especie[] = [];
 
     @Output() cadastrar = new EventEmitter<Animal>();
     @Output() atualizar = new EventEmitter<Animal>();
@@ -42,19 +45,12 @@ export class ModalAnimalComponent implements OnInit{
   constructor(
     private especieService: EspecieService,
     private tutorService: TutorService,
-    private elementRef: ElementRef
   ) {}
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.isDropdownTutorAberto = false;
-    }
-  }
 
   ngOnInit(): void {
     this.especieService.getEspecie().subscribe((data: Especie[]) => {
       this.especies = data;
+      this.especiesFiltradas = data;
     });
 
     this.tutorService.getTutores().subscribe((data: Tutor[]) => {
@@ -63,8 +59,44 @@ export class ModalAnimalComponent implements OnInit{
     });
   }
 
+  onBackdropClick(event: MouseEvent): void {
+    if ((event.target as HTMLElement).id === 'modal-background') {
+      this.isDropdownTutorAberto = false;
+      this.isDropdownEspecieAberto = false;
+    }
+  }
+
+  // Métodos para Espécie
+  filtrarEspecies(): void {
+    if (!this.buscaEspecie) {
+      this.especiesFiltradas = this.especies;
+      this.especieAnimal = null;
+    } else {
+      this.especiesFiltradas = this.especies.filter(esp =>
+        esp.especie.toLowerCase().includes(this.buscaEspecie.toLowerCase())
+      );
+    }
+  }
+
+  abrirDropdownEspecie(): void {
+    this.isDropdownEspecieAberto = true;
+  }
+
+  selecionarEspecie(especie: Especie): void {
+    this.buscaEspecie = especie.especie;
+    this.especieAnimal = especie.especie_id;
+    this.isDropdownEspecieAberto = false;
+  }
+
+  deselecionarEspecie(): void {
+    this.buscaEspecie = '';
+    this.especieAnimal = null;
+    this.isDropdownEspecieAberto = false;
+  }
+
+  // Métodos para Tutor
   filtrarTutores(): void {
-    this.isDropdownTutorAberto = true;
+    // LÓGICA AJUSTADA AQUI
     if (!this.buscaTutor) {
       this.tutoresFiltrados = this.todosOsTutores;
       this.TutorAnimal = null;
@@ -79,20 +111,27 @@ export class ModalAnimalComponent implements OnInit{
     this.isDropdownTutorAberto = true;
   }
 
-  
   selecionarTutor(tutor: Tutor): void {
     this.buscaTutor = tutor.tutor_nome;
     this.TutorAnimal = tutor.id;
     this.isDropdownTutorAberto = false;
   }
 
-  onEspecieChange(novoValor: any) {
-    console.log('Novo valor selecionado para espécie:', novoValor);
+  // NOVO MÉTODO ADICIONADO AQUI
+  deselecionarTutor(): void {
+    this.buscaTutor = '';
+    this.TutorAnimal = null;
+    this.isDropdownTutorAberto = false;
   }
 
+  // Métodos do Modal
   salvarAnimal() {
-    const dataLimpa = this.DataNascAnimal.replace(/\D/g, '');
+    if(!this.nomeAnimal || !this.PesoAnimal) {
+      alert('Por favor, preencha todos os campos obrigatórios antes de salvar.');
+      return;
+    }
 
+    const dataLimpa = this.DataNascAnimal.replace(/\D/g, '');
     if (this.DataNascAnimal && dataLimpa.length !== 8) {
       alert('Por favor, insira uma data de nascimento válida no formato DD/MM/AAAA.');
       return;
@@ -113,29 +152,25 @@ export class ModalAnimalComponent implements OnInit{
       tutor_id: this.TutorAnimal,
       especie_id: this.especieAnimal,
     };
-    console.log('Enviando para a API:', animalData);
 
     if (this.isAtualizarModal){
       this.atualizar.emit(animalData);
     } else {
       this.cadastrar.emit(animalData);
     }
-
     this.closeCadastro();
   }
 
-  
   openAtualizar(animal: Animal) {
     this.isAtualizarModal = true;
     this.animalId = animal.id;
     this.nomeAnimal = animal.nome;
 
     const tutorSelecionado = this.todosOsTutores.find(t => t.id === animal.tutor_id);
-    if (tutorSelecionado) {
-      this.buscaTutor = tutorSelecionado.tutor_nome;
-    } else {
-      this.buscaTutor = '';
-    }
+    this.buscaTutor = tutorSelecionado ? tutorSelecionado.tutor_nome : '';
+
+    const especieSelecionada = this.especies.find(e => e.especie_id === animal.especie_id);
+    this.buscaEspecie = especieSelecionada ? especieSelecionada.especie : '';
 
     if (animal.data_nascimento) {
       const dataParts = animal.data_nascimento.split('-');
@@ -158,7 +193,6 @@ export class ModalAnimalComponent implements OnInit{
     this.isCadastroModalOpen = true;
   }
 
-  
   resetCampos(){
     this.animalId = 0;
     this.nomeAnimal = '';
@@ -170,6 +204,9 @@ export class ModalAnimalComponent implements OnInit{
     this.buscaTutor = '';
     this.isDropdownTutorAberto = false;
     this.tutoresFiltrados = this.todosOsTutores;
+    this.buscaEspecie = '';
+    this.isDropdownEspecieAberto = false;
+    this.especiesFiltradas = this.especies;
   }
 
   closeCadastro() {

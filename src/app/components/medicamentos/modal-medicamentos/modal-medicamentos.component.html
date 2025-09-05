@@ -5,17 +5,27 @@
       
       <div class="form-group">
         <label for="nome">Nome do medicamento *</label>
-        <input type="search" class="bg-azul col-2 form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="alo"/>
+        <input type="search" class="bg-azul col-2 form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="alo" required/>
       </div>
 
       <div class="form-group">
         <label for="concentracao">Concentração (mg/ml)*</label>
-        <input type="number" class="bg-azul col-2 form-control" id="concentracao" [(ngModel)]="concentracao" name="concentracao" placeholder="100"/>
+        <input type="number" class="bg-azul col-2 form-control" id="concentracao" [(ngModel)]="concentracao" name="concentracao" placeholder="100" required/>
       </div>
 
       <div class="form-group">
-        <label for="categoriaRemedio">Categoria do remédio</label>
-        <input type="number" class="bg-azul col-2 form-control" id="categoriaRemedio" [(ngModel)]="categoriaRemedio" name="categoriaRemedio" />
+        <label for="doseMin">Dosagem mínima (mg/kg)*</label>
+        <input type="number" class="bg-azul col-2 form-control" id="doseMin" [(ngModel)]="dose_min" name="doseMin" placeholder="100" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="doseMax">Dosagem máxima (mg/kg)*</label>
+        <input type="number" class="bg-azul col-2 form-control" id="doseMax" [(ngModel)]="dose_max" name="doseMax" placeholder="100" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="categoria_medicamento_id">Categoria do remédio</label>
+        <input type="number" class="bg-azul col-2 form-control" id="categoria_medicamento_id" [(ngModel)]="categoria_medicamento_id" name="categoriaRemedio" />
       </div>
 
       <div class="form-group">
@@ -80,3 +90,5 @@
     </form>
   </div>
 </div>
+
+<app-modal-erro></app-modal-erro>
