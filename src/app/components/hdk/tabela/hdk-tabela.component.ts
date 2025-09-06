@@ -19,9 +19,21 @@ import { DatePipe } from '@angular/common';
   standalone: true
 })
 export class TabelaComponent<T> implements AfterViewInit {
-  @Input() dataSource: MatTableDataSource<T> = new MatTableDataSource<T>([]);
-  @Input() pageSizeOptions: number[] = [10, 20];
+  // --- ALTERAÇÃO 1: Usaremos um setter para o dataSource ---
+  private _dataSource: MatTableDataSource<T> = new MatTableDataSource<T>([]);
+
+  @Input()
+  set dataSource(data: MatTableDataSource<T>) {
+    this._dataSource = data;
+    this.connectPaginator(); // Conecta o paginador sempre que os dados mudam
+  }
+  get dataSource(): MatTableDataSource<T> {
+    return this._dataSource;
+  }
+  // --- FIM DA ALTERAÇÃO 1 ---
+
   @Input() displayedColumns?: string[];
+  @Input() pageSize = 10; // Define o tamanho padrão da página
 
   @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
   @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();
@@ -33,6 +45,18 @@ export class TabelaComponent<T> implements AfterViewInit {
   
   constructor(public dialog: MatDialog) {}
   
+  ngAfterViewInit() {
+    // --- ALTERAÇÃO 2: A lógica foi movida para uma função separada ---
+    this.connectPaginator();
+  }
+
+  // --- ALTERAÇÃO 3: Nova função para conectar o paginador ---
+  private connectPaginator() {
+    if (this._dataSource && this.paginator) {
+      this._dataSource.paginator = this.paginator;
+    }
+  }
+
   onCheckboxChange(element: any, checked: boolean) {
     element.selecionado = checked;
 
@@ -65,14 +89,5 @@ export class TabelaComponent<T> implements AfterViewInit {
   }
 
   fecharModal(): void{
-  }
-
-  ngAfterViewInit() {
-    if (this.dataSource) {
-      this.dataSource.paginator = this.paginator;
-      
-    }
-    console.log('Dados: ' + this.dataSource);
-    
   }
 }

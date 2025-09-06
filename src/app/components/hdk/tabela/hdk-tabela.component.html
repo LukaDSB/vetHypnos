@@ -109,5 +109,10 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
-  <mat-paginator class="matPaginator" [pageSizeOptions]="[12, 20]" showFirstLastButtons hidePageSize></mat-paginator>
+  <mat-paginator
+    class="matPaginator"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[10, 20, 50]"
+    showFirstLastButtons>
+  </mat-paginator>
 </div>
