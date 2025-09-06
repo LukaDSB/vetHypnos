@@ -29,10 +29,12 @@
 <hdk-divisor [hideDivisor]="true"></hdk-divisor>
 
 <hdk-tabela
-[displayedColumns]="displayedColumns"
-[dataSource]="dataSource"
-(excluir)="deletarAnimal($event)"
-(atualizar)="atualizarAnimal($event)"></hdk-tabela>
+  [displayedColumns]="displayedColumns"
+  [dataSource]="dataSource"
+  (excluir)="deletarAnimal($event)"
+  (atualizar)="atualizarAnimal($event)"
+  (visualizar)="visualizarDetalhes($event)"
+  [exibirAcaoVisualizar]="true"> 
+</hdk-tabela>
 
-<!-- ADICIONE ESTA LINHA AO FINAL DO SEU ARQUIVO -->
 <app-hdk-modal-feedback></app-hdk-modal-feedback>

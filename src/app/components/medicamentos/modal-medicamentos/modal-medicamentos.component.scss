@@ -2,6 +2,7 @@
 @import '../../hdk/cores.scss';
 @import '../../hdk/fontes.scss';
 
+// Estilos gerais da modal (adaptado do seu exemplo)
 .modal {
   position: fixed;
   top: 0;
@@ -12,47 +13,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999;
 }
 
 .modal-content {
+  background: #fff;
   display: flex;
   flex-direction: row;
   border-radius: 8px;
   text-align: center;
   width: auto;
   padding: 30px;
-}
-
-.realizarCadastro{
-  background-color: $verde;
-  width: 15vw;
-  display: flex;
-  justify-content: center;
-  .items{
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-  }
-}
-
-.formularioLogin{
-  background-color: $verdeOpaco;
-  width: 30vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  h2{
-    color: $creme;
-  }
-}
-
-.form{
-  width: 15vw;
-}
-
-.hypnosButtom{
-  background-color: $verde;
 }
 
 .bg-azul{
@@ -65,15 +36,64 @@ footer{
   justify-content: space-between;
   width: 80%;
   align-self: center;
-  justify-self: center;
   margin-top: 1em;
 }
 
 .form-group{
   margin: 1em 0;
-
   label{
     display: flex;
     align-items: start;
   }
+}
+
+// --- ESTILOS DO DROPDOWN (COPIADOS DO MODAL DE ANIMAIS) ---
+
+// Container que posiciona a lista suspensa
+.autocomplete-container {
+  position: relative; 
+  width: 100%;
+}
+
+// A lista suspensa (<ul>)
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  right: 0;
+  z-index: 1000; // Garante que a lista fique sobre os outros campos
+  
+  // Aparência da caixa
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+  padding: 0;
+  margin: 4px 0 0;
+  max-height: 200px; 
+  overflow-y: auto; // Adiciona barra de rolagem se a lista for grande
+  text-align: left; // Alinha o texto dos itens à esquerda
+}
+
+// Itens individuais da lista (<li>)
+.dropdown-item, .dropdown-item-disabled {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// Efeito ao passar o mouse sobre um item
+.dropdown-item:hover {
+  background-color: #f0f0f0; 
+}
+
+// Estilo para itens não-selecionáveis (ex: "Nenhum resultado")
+.dropdown-item-disabled {
+  cursor: default;
+  color: #999;
 }

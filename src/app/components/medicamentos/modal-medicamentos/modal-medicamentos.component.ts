@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { Location } from '@angular/common';
 import { Medicamento } from 'src/app/models/medicamento.model';
 import { ModalErroComponent } from '../../hdk/modal-erro/modal-erro.component';
+// --- 1. IMPORTAR O SERVIÇO E O MODELO DA CATEGORIA ---
+import { CategoriasMedicamento } from 'src/app/models/CategoriaMedicamento';
+import { CategoriasMedicamentoService } from 'src/app/services/categoriasMedicamento.service';
 
 @Component({
   selector: 'app-modal-medicamentos',
@@ -14,55 +16,123 @@ import { ModalErroComponent } from '../../hdk/modal-erro/modal-erro.component';
   standalone: true,
   imports:[FormsModule, CommonModule, HdkButtonComponent, ModalErroComponent]
 })
-export class ModalMedicamentosComponent {
+export class ModalMedicamentosComponent implements OnInit { // Adicionado OnInit
   @ViewChild(ModalErroComponent) modalErro!: ModalErroComponent;
+
+  // --- Propriedades da Modal ---
   isCadastroModalOpen = false;
   isModalCadastro = true;
   isModalAtualizar = false;
-  medicamento: Medicamento | undefined;
+  medicamento?: Medicamento;
+
+  // --- Campos do Formulário ---
   nome?: string;
-  concentracao?:number;
-  categoriaRemedio = 1;
+  concentracao?: number;
   fabricante?: string;
-  lote = 0;
+  lote?: number;
   validade?: string;
   dose_min?: number;
   dose_max?: number;
-  quantidade = 0;
-  categoria_medicamento_id?: number;
+  quantidade?: number;
+  categoria_medicamento_id?: number | null; // Alterado para aceitar null
+
+  // --- 2. NOVAS PROPRIEDADES PARA O DROPDOWN DE CATEGORIA ---
+  isDropdownCategoriaAberto = false;
+  buscaCategoria = '';
+  todasAsCategorias: CategoriasMedicamento[] = [];
+  categoriasFiltradas: CategoriasMedicamento[] = [];
 
   @Output() cadastrar = new EventEmitter<Medicamento>();
   @Output() atualizar = new EventEmitter<Medicamento>();
 
-  constructor(private authService: AuthService, private location: Location ) {}
+  constructor(
+    private location: Location,
+    // --- 3. INJETAR O SERVIÇO DE CATEGORIAS ---
+    private categoriasService: CategoriasMedicamentoService
+  ) {}
+
+  // --- 4. BUSCAR AS CATEGORIAS AO INICIALIZAR ---
+  ngOnInit(): void {
+    this.categoriasService.getCategoriasMedicamento().subscribe((data) => {
+      this.todasAsCategorias = data;
+      this.categoriasFiltradas = data;
+    });
+  }
+
+  // --- 5. MÉTODOS PARA CONTROLAR O DROPDOWN DE CATEGORIA ---
+  filtrarCategorias(): void {
+    if (!this.buscaCategoria) {
+      this.categoriasFiltradas = this.todasAsCategorias;
+      this.categoria_medicamento_id = null; // Limpa o ID se o campo estiver vazio
+    } else {
+      this.categoriasFiltradas = this.todasAsCategorias.filter(cat =>
+        cat.descricao.toLowerCase().includes(this.buscaCategoria.toLowerCase())
+      );
+    }
+  }
+
+  abrirDropdownCategoria(): void {
+    this.isDropdownCategoriaAberto = true;
+  }
+
+  selecionarCategoria(categoria: CategoriasMedicamento): void {
+    this.buscaCategoria = categoria.descricao;
+    this.categoria_medicamento_id = categoria.id; // Armazena o ID
+    this.isDropdownCategoriaAberto = false;
+  }
+
+  deselecionarCategoria(): void {
+    this.buscaCategoria = '';
+    this.categoria_medicamento_id = null;
+    this.isDropdownCategoriaAberto = false;
+  }
+
+  // --- 6. ATUALIZAÇÕES NOS MÉTODOS EXISTENTES ---
 
   cadastrarMedicamento() {
-    if (!this.nome || !this.concentracao || !this.dose_min || !this.dose_max) {
+    if (!this.nome || this.concentracao == null || this.dose_min == null || this.dose_max == null || !this.categoria_medicamento_id) {
       this.modalErro.abrir('Por favor, preencha todos os campos obrigatórios (*).');
       return;
     }
     const medicamento: Medicamento = {
       id: this.medicamento?.id ?? 0,
-      nome: this.nome || '',
+      nome: this.nome,
       concentracao: this.concentracao,
-      categoria_id: this.categoriaRemedio,
       fabricante: this.fabricante || '',
-      lote: this.lote,
+      lote: this.lote || 0,
       validade: this.validade || '',
-      dose_min: this.dose_min || 0,
-      dose_max: this.dose_max || 0,
-      quantidade: this.quantidade,
-      categoria_medicamento_id: this.categoria_medicamento_id || 0,
+      dose_min: this.dose_min,
+      dose_max: this.dose_max,
+      quantidade: this.quantidade || 0,
+      categoria_medicamento_id: this.categoria_medicamento_id, // Usa o ID selecionado
+      categoria_id: 0, // Ajuste conforme seu modelo, se necessário
       categoria_medicamento: null
     };
-    console.log(`Medicamentos a serem enviados: ${medicamento}`)
-  
-    if (this.isModalAtualizar) {
-      this.atualizar.emit(medicamento);
-    } else {
-      this.cadastrar.emit(medicamento);
+
+    this.cadastrar.emit(medicamento);
+    this.closeCadastro();
+  }
+
+  atualizarMedicamento() {
+    if (!this.medicamento) return;
+    if (!this.nome || this.concentracao == null || this.dose_min == null || this.dose_max == null || !this.categoria_medicamento_id) {
+      this.modalErro.abrir('Por favor, preencha todos os campos obrigatórios (*).');
+      return;
     }
-  
+    const medicamentoAtualizado: Medicamento = {
+      ...this.medicamento,
+      nome: this.nome,
+      concentracao: this.concentracao,
+      fabricante: this.fabricante || '',
+      lote: this.lote || 0,
+      validade: this.validade || '',
+      quantidade: this.quantidade || 0,
+      dose_min: this.dose_min,
+      dose_max: this.dose_max,
+      categoria_medicamento_id: this.categoria_medicamento_id, // Usa o ID selecionado
+    };
+
+    this.atualizar.emit(medicamentoAtualizado);
     this.closeCadastro();
   }
 
@@ -70,48 +140,21 @@ export class ModalMedicamentosComponent {
     this.medicamento = med;
     this.nome = med.nome;
     this.concentracao = med.concentracao;
-    this.categoriaRemedio = med.categoria_id;
     this.fabricante = med.fabricante;
     this.lote = med.lote;
     this.validade = med.validade;
     this.quantidade = med.quantidade;
     this.dose_min = med.dose_min;
     this.dose_max = med.dose_max;
-  
-    this.isModalAtualizar = true;
-  
+    
+    // Preenche o campo de busca da categoria com a descrição correta
+    const categoriaSelecionada = this.todasAsCategorias.find(c => c.id === med.categoria_medicamento_id);
+    this.buscaCategoria = categoriaSelecionada ? categoriaSelecionada.descricao : '';
+    this.categoria_medicamento_id = med.categoria_medicamento_id;
+    
     this.isModalCadastro = false;
     this.isModalAtualizar = true;
     this.isCadastroModalOpen = true;
-  }
-
-  voltar(){
-    this.location.back();
-  }
-
-  atualizarMedicamento() {
-    if (!this.medicamento) return;
-  
-    if (!this.nome || !this.concentracao || !this.dose_min || !this.dose_max) {
-      alert('Por favor, preencha todos os campos obrigatórios (*).');
-      return;
-    }
-  
-    const medicamentoAtualizado: Medicamento = {
-      ...this.medicamento,
-      nome: this.nome || '',
-      concentracao: this.concentracao,
-      categoria_id: this.categoriaRemedio,
-      fabricante: this.fabricante || '',
-      lote: this.lote,
-      validade: this.validade || '',
-      quantidade: this.quantidade,
-      dose_min: this.dose_min,
-      dose_max: this.dose_max
-    };
-  
-    this.atualizar.emit(medicamentoAtualizado);
-    this.closeCadastro();
   }
 
   openCadastro() {
@@ -123,21 +166,22 @@ export class ModalMedicamentosComponent {
   
   resetCampos() {
     this.nome = '';
-    this.concentracao = 0;
-    this.categoriaRemedio = 1;
+    this.concentracao = undefined;
     this.fabricante = '';
-    this.lote = 0;
+    this.lote = undefined;
     this.validade = '';
-    this.quantidade = 0;
+    this.quantidade = undefined;
+    this.dose_min = undefined;
+    this.dose_max = undefined;
+    // Reseta os campos da categoria
+    this.buscaCategoria = '';
+    this.categoria_medicamento_id = null;
+    this.isDropdownCategoriaAberto = false;
+    this.categoriasFiltradas = this.todasAsCategorias;
   }
 
   closeCadastro() {
     this.isCadastroModalOpen = false;
-  }
-
-  loginMock() {
-    this.authService.loginMock();
+    this.isDropdownCategoriaAberto = false; // Garante que o dropdown feche
   }
 }
-
-

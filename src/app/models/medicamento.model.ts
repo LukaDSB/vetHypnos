@@ -1,7 +1,5 @@
-export interface CategoriaMedicamento {
-  id: number;
-  descricao: string;
-}
+import { CategoriasMedicamento } from "./CategoriaMedicamento";
+
 
 export interface  Medicamento {
   id: number;
@@ -15,5 +13,5 @@ export interface  Medicamento {
   quantidade: number;
   categoria_id: number;
   categoria_medicamento_id: number;
-  categoria_medicamento: CategoriaMedicamento | null;
+  categoria_medicamento: CategoriasMedicamento | null;
 }

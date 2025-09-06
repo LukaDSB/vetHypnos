@@ -8,19 +8,23 @@
     </div>
     <div class="campo">
       <label>Nome</label>
-      <div class="valor">{{ dadosRecebidos?.nome }}</div>
+      <div class="valor">{{ dadosRecebidos?.nome || 'Não informado' }}</div>
     </div>
     <div class="campo">
-      <label>Especie</label>
-      <div class="valor">{{ dadosRecebidos?.especie_id }}</div>
+      <label>Espécie</label>
+      <div class="valor">{{ dadosRecebidos?.especie_id || 'Não informado' }}</div>
     </div>
     <div class="campo">
       <label>Peso</label>
-      <div class="valor">{{ dadosRecebidos?.peso }}</div>
+      <div class="valor">{{ dadosRecebidos?.peso }} kg</div>
     </div>
     <div class="campo">
       <label>Sexo</label>
-      <div class="valor">{{ dadosRecebidos?.sexo }}</div>
+      <div class="valor">{{ dadosRecebidos?.sexo || 'Não informado' }}</div>
+    </div>
+    <div class="campo">
+      <label>Tutor</label>
+      <div class="valor">{{ dadosRecebidos?.tutor_id || 'Não informado' }}</div>
     </div>
   </div>
 
@@ -32,23 +36,19 @@
     </div>
 
     <div class="btn-duplo">
-      
       <hdk-button color="hdk-bg-verde" text="Gerar nova prescrição" (click)="novaPrescricao()"></hdk-button>
       <hdk-button color="hdk-bg-verde" text="Editar animal" (click)="editarAnimal()"></hdk-button>
-    </div>  
+    </div>
   </div>
 </section>
 
+<!-- Seção de histórico agora usa a hdk-tabela -->
 <section class="historico-container">
   <h2>Histórico do animal</h2>
-  <div class="container-cards">
-    <div class="card-historico" *ngFor="let procedimento of historicoProcedimentos">
-      <div class="cabecalho">
-        <div class="id">{{ procedimento.id }}</div>
-        <div class="tipo" style="text-transform: uppercase;">{{ procedimento.tipo }}</div>
-        <div class="data">{{ procedimento.data }}</div>
-      </div>
-      <div class="medico">{{ procedimento.nomeMedico }}</div>
-    </div>
-  </div>
+
+  <hdk-tabela
+    [dataSource]="historicoDataSource"
+    [displayedColumns]="historicoDisplayedColumns">
+  </hdk-tabela>
+
 </section>

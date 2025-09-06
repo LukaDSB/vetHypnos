@@ -5,27 +5,50 @@
       
       <div class="form-group">
         <label for="nome">Nome do medicamento *</label>
-        <input type="search" class="bg-azul col-2 form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="alo" required/>
+        <input type="search" class="bg-azul col-2 form-control" id="nome" [(ngModel)]="nome" name="nome" required/>
       </div>
 
       <div class="form-group">
-        <label for="concentracao">Concentração (mg/ml)*</label>
-        <input type="number" class="bg-azul col-2 form-control" id="concentracao" [(ngModel)]="concentracao" name="concentracao" placeholder="100" required/>
+        <label for="concentracao">Concentração (mg/ml) *</label>
+        <input type="number" class="bg-azul col-2 form-control" id="concentracao" [(ngModel)]="concentracao" name="concentracao" required/>
       </div>
 
       <div class="form-group">
-        <label for="doseMin">Dosagem mínima (mg/kg)*</label>
-        <input type="number" class="bg-azul col-2 form-control" id="doseMin" [(ngModel)]="dose_min" name="doseMin" placeholder="100" required/>
+        <label for="doseMin">Dosagem mínima (mg/kg) *</label>
+        <input type="number" class="bg-azul col-2 form-control" id="doseMin" [(ngModel)]="dose_min" name="doseMin" required/>
       </div>
 
       <div class="form-group">
-        <label for="doseMax">Dosagem máxima (mg/kg)*</label>
-        <input type="number" class="bg-azul col-2 form-control" id="doseMax" [(ngModel)]="dose_max" name="doseMax" placeholder="100" required/>
+        <label for="doseMax">Dosagem máxima (mg/kg) *</label>
+        <input type="number" class="bg-azul col-2 form-control" id="doseMax" [(ngModel)]="dose_max" name="doseMax" required/>
       </div>
 
+      <!-- ALTERAÇÃO AQUI: Substituição do input pelo dropdown com busca -->
       <div class="form-group">
-        <label for="categoria_medicamento_id">Categoria do remédio</label>
-        <input type="number" class="bg-azul col-2 form-control" id="categoria_medicamento_id" [(ngModel)]="categoria_medicamento_id" name="categoriaRemedio" />
+        <label for="categoria_medicamento_id">Categoria do remédio *</label>
+        <div class="autocomplete-container">
+          <input
+            type="text"
+            class="bg-azul col-2 form-control"
+            [(ngModel)]="buscaCategoria"
+            (ngModelChange)="filtrarCategorias()"
+            (focus)="abrirDropdownCategoria()"
+            name="categoriaRemedioInput"
+            placeholder="Digite para buscar uma categoria..."
+            autocomplete="off"
+          />
+          <ul *ngIf="isDropdownCategoriaAberto" class="autocomplete-dropdown">
+            <li class="dropdown-item" (click)="deselecionarCategoria()">
+              Nenhuma categoria
+            </li>
+            <li *ngIf="categoriasFiltradas.length === 0 && buscaCategoria" class="dropdown-item-disabled">
+              Nenhuma categoria encontrada
+            </li>
+            <li *ngFor="let cat of categoriasFiltradas" class="dropdown-item" (click)="selecionarCategoria(cat)">
+              {{ cat.descricao }}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="form-group">
@@ -49,23 +72,56 @@
       </footer>
     </form>
   </div>
+
   <div *ngIf="isModalAtualizar" class="modal-content">
     <form>
       <h1 class="hipnosText--TituloGrande">Atualizar medicamento</h1>
       
       <div class="form-group">
         <label for="nome">Nome do medicamento *</label>
-        <input type="search" class="bg-azul col-2 form-control" id="nome" [(ngModel)]="nome" name="nome" placeholder="alo"/>
+        <input type="search" class="bg-azul col-2 form-control" id="nome" [(ngModel)]="nome" name="nome" required/>
       </div>
 
       <div class="form-group">
-        <label for="concentracao">Concentração (mg/ml)*</label>
-        <input type="number" class="bg-azul col-2 form-control" id="concentracao" [(ngModel)]="concentracao" name="concentracao" />
+        <label for="concentracao">Concentração (mg/ml) *</label>
+        <input type="number" class="bg-azul col-2 form-control" id="concentracao" [(ngModel)]="concentracao" name="concentracao" required/>
       </div>
 
       <div class="form-group">
-        <label for="categoriaRemedio">Categoria do remédio</label>
-        <input type="number" class="bg-azul col-2 form-control" id="categoriaRemedio" [(ngModel)]="categoriaRemedio" name="categoriaRemedio" />
+        <label for="doseMin">Dosagem mínima (mg/kg) *</label>
+        <input type="number" class="bg-azul col-2 form-control" id="doseMin" [(ngModel)]="dose_min" name="doseMin" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="doseMax">Dosagem máxima (mg/kg) *</label>
+        <input type="number" class="bg-azul col-2 form-control" id="doseMax" [(ngModel)]="dose_max" name="doseMax" required/>
+      </div>
+      
+      <div class="form-group">
+        <label for="categoria_medicamento_id">Categoria do remédio *</label>
+        <div class="autocomplete-container">
+          <input
+            type="text"
+            class="bg-azul col-2 form-control"
+            [(ngModel)]="buscaCategoria"
+            (ngModelChange)="filtrarCategorias()"
+            (focus)="abrirDropdownCategoria()"
+            name="categoriaRemedioInput"
+            placeholder="Digite para buscar uma categoria..."
+            autocomplete="off"
+          />
+          <ul *ngIf="isDropdownCategoriaAberto" class="autocomplete-dropdown">
+            <li class="dropdown-item" (click)="deselecionarCategoria()">
+              Nenhuma categoria
+            </li>
+            <li *ngIf="categoriasFiltradas.length === 0 && buscaCategoria" class="dropdown-item-disabled">
+              Nenhuma categoria encontrada
+            </li>
+            <li *ngFor="let cat of categoriasFiltradas" class="dropdown-item" (click)="selecionarCategoria(cat)">
+              {{ cat.descricao }}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="form-group">

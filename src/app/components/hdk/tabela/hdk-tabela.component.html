@@ -62,14 +62,6 @@
         <td mat-cell *matCellDef="let element"> {{ element.status || 'Não informado'}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef> Acoes </th>
-        <td mat-cell *matCellDef="let element" >
-          <i class="me-2 fa-solid fa-pencil" (click)="onAtualizar(element)"></i>
-          <i class="fa-solid fa-trash"  (click)="onExcluir(element)"></i>
-        </td>
-      </ng-container>
-
       <ng-container matColumnDef="data_nascimento">
         <th mat-header-cell *matHeaderCellDef> Nascimento </th>
          <td mat-cell *matCellDef="let element"> {{ element.data_nascimento ? (element.data_nascimento | date: 'dd/MM/yyyy') : 'Não informado' }} </td>
@@ -95,6 +87,21 @@
         <td mat-cell *matCellDef="let element"> {{ element.especie?.especie || 'Não informado'}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+        <td mat-cell *matCellDef="let element"> {{ element.tipo }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let element"> {{ element.data | date: 'dd/MM/yyyy' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nomeMedico">
+        <th mat-header-cell *matHeaderCellDef> Médico Responsável </th>
+        <td mat-cell *matCellDef="let element"> {{ element.nomeMedico }} </td>
+      </ng-container>
+
       <ng-container matColumnDef="selecionar">
         <th mat-header-cell *matHeaderCellDef> Selecionar </th>
         <td mat-cell *matCellDef="let element">
@@ -102,6 +109,15 @@
             [checked]="element.selecionado"
             (change)="onCheckboxChange(element, $event.checked)">
           </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef> Acoes </th>
+        <td mat-cell *matCellDef="let element" >
+          <i *ngIf="exibirAcaoVisualizar" class="me-2 fa-solid fa-eye" (click)="onVisualizar(element)" title="Visualizar Detalhes"></i>
+          <i class="me-2 fa-solid fa-pencil" (click)="onAtualizar(element)" title="Editar"></i>
+          <i class="fa-solid fa-trash"  (click)="onExcluir(element)" title="Excluir"></i>
         </td>
       </ng-container>
       

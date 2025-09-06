@@ -11,6 +11,8 @@ import { TutorService } from 'src/app/services/tutor.service';
 import { forkJoin, Subscription } from 'rxjs';
 import { Tutor } from 'src/app/models/tutor.model';
 import { HdkModalFeedbackComponent } from '../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
+// --- 1. IMPORTAR O ROUTER ---
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-animais',
@@ -32,42 +34,50 @@ export class AnimaisComponent implements OnInit {
   constructor(
     private animalService: AnimalService,
     private tutorService: TutorService,
-    private location: Location
+    private location: Location,
+    // --- 2. INJETAR O ROUTER NO CONSTRUTOR ---
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.carregarDados();
   }
 
-  // --- ALTERAÇÃO 1: NOVA FUNÇÃO PARA FORMATAR A DATA ---
+  // --- 3. IMPLEMENTAR A FUNÇÃO DE REDIRECIONAMENTO ---
   /**
-   * Converte uma data no formato 'dd/MM/yyyy' para 'yyyy-MM-dd'.
-   * @param data A string da data a ser formatada.
-   * @returns A data formatada para o padrão da API ou a string original se o formato for inválido.
+   * Chamado quando o evento (visualizar) é emitido pela hdk-tabela.
+   * Navega para a página de detalhes, passando os dados do animal.
+   * @param animal O objeto do animal que foi clicado na tabela.
    */
+  visualizarDetalhes(animal: Animal) {
+    const rotaDestino = '/animais/detalhes';
+    
+    console.log('Redirecionando para detalhes do animal:', animal);
+    
+    // Usa o router para navegar para a rota e envia os dados via 'state'
+    this.router.navigate([rotaDestino], {
+      state: { dadosSelecionados: [animal] }
+    });
+  }
+
+  // O restante do seu código permanece o mesmo
   private formatarDataParaAPI(data: string): string {
     if (!data || typeof data !== 'string' || !data.includes('/')) {
-      return data; // Retorna o valor original se não for uma string de data esperada
+      return data;
     }
-
     const partes = data.split('/');
     if (partes.length !== 3) {
-      return data; // Formato inválido
+      return data;
     }
-
     const [dia, mes, ano] = partes;
     return `${ano}-${mes}-${dia}`;
   }
 
-
-  // --- ALTERAÇÃO 2: USAR A FUNÇÃO DE FORMATAÇÃO NO CADASTRO ---
   cadastrarAnimal(animal: Animal) {
-    // Cria uma cópia do objeto animal para não modificar o original
     const animalParaAPI = {
       ...animal,
       data_nascimento: this.formatarDataParaAPI(animal.data_nascimento)
     };
-
     this.animalService.cadastrarAnimal(animalParaAPI).subscribe({
       next: () => {
         this.carregarDados();
@@ -81,14 +91,11 @@ export class AnimaisComponent implements OnInit {
     });
   }
 
-  // --- ALTERAÇÃO 3: USAR A FUNÇÃO DE FORMATAÇÃO NA ATUALIZAÇÃO ---
   enviarAtualizacao(animal: Animal) {
-    // Cria uma cópia do objeto animal para não modificar o original
     const animalParaAPI = {
         ...animal,
         data_nascimento: this.formatarDataParaAPI(animal.data_nascimento)
     };
-
     this.animalService.atualizarAnimal(animalParaAPI).subscribe({
       next: () => {
         this.carregarDados();
@@ -102,10 +109,8 @@ export class AnimaisComponent implements OnInit {
     });
   }
 
-
   deletarAnimal(animal: Animal) {
     this.confirmacaoSubscription?.unsubscribe();
-
     this.modalFeedback.open(
       'confirmacao',
       'Confirmar Exclusão',
@@ -113,7 +118,6 @@ export class AnimaisComponent implements OnInit {
       'Sim, Excluir',
       'Cancelar'
     );
-
     this.confirmacaoSubscription = this.modalFeedback.confirmado.subscribe(() => {
       this.animalService.deletarAnimal(animal.id).subscribe({
         next: () => {
@@ -128,8 +132,6 @@ export class AnimaisComponent implements OnInit {
     });
   }
 
-
-  // O resto do seu componente permanece igual...
   atualizarAnimal(animal: Animal) {
     this.modalAnimalComponent.openAtualizar(animal);
   }
