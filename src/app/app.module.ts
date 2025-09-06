@@ -26,6 +26,7 @@ import { ProntuarioProvisorioComponent } from './components/prontuario-provisori
 import { SelecionarMedicamentosComponent } from './components/prontuarios/selecionar-medicamentos/selecionar-medicamentos.component';
 import { ModalErroComponent } from './components/hdk/modal-erro/modal-erro.component';
 import { CustomCheckboxComponent } from './components/hdk/custom-checkbox/custom-checkbox.component';
+import { HdkModalFeedbackComponent } from './components/hdk/hdk-modal-feedback/hdk-modal-feedback.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { CustomCheckboxComponent } from './components/hdk/custom-checkbox/custom
     AnimaisComponent,
     SelecionarMedicamentosComponent,
     ModalErroComponent,
-    CustomCheckboxComponent
+    CustomCheckboxComponent,
+    HdkModalFeedbackComponent
 ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]
