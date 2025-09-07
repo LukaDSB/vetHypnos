@@ -66,9 +66,9 @@ export class ProntuarioParcialComponent implements OnInit {
   if (this.dadosRecebidos) {
     this.animal = this.dadosRecebidos;
 
-    // --- AJUSTE AQUI ---
-    // A string 'YYYY-MM-DD' pode ser passada diretamente para o construtor do Date.
-    // Verificamos se a data existe antes de criar o objeto.
+    
+    
+    
     const dataNascimento = this.animal.data_nascimento 
         ? new Date(this.animal.data_nascimento) 
         : null;
@@ -116,7 +116,7 @@ export class ProntuarioParcialComponent implements OnInit {
       }
     });
 
-    const usuarioLogado = { id: 1, nome: this.medicoResponsavel };
+    const usuarioLogado = { id: 16, nome: this.medicoResponsavel };
 
     const prontuarioParaEnviar: any = {
       animal_id: this.animal.id,

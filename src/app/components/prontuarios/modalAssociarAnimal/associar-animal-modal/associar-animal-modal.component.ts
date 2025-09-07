@@ -1,4 +1,4 @@
-// associar-animal-modal.component.ts
+
 
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
@@ -27,9 +27,9 @@ export class AssociarAnimalModalComponent {
   nome = '';
   dataSource: MatTableDataSource<Animal> = new MatTableDataSource<Animal>([]);
   
-  // ALTERAÇÃO: Usar um 'setter' para o ViewChild.
-  // Isso garante que a função `openModal()` da modal filha seja chamada
-  // assim que ela for renderizada pelo *ngIf.
+  
+  
+  
   @ViewChild('modalAssociarAnimalExistente') set modalAssociarAnimalExistente(comp: ModalAssociarAnimalExistenteComponent) {
     if (comp) {
       comp.openModal();
@@ -48,7 +48,7 @@ export class AssociarAnimalModalComponent {
     this.modalAssociar = false;
   }
 
-  // Esta função agora só precisa mudar a flag. O 'setter' acima cuida de abrir a modal.
+  
   isModalSelecionarAnimal() {
     this.modalSelecionarPaciete = true;
     this.modalAssociar = false;

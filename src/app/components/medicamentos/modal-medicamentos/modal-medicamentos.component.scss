@@ -2,7 +2,7 @@
 @import '../../hdk/cores.scss';
 @import '../../hdk/fontes.scss';
 
-// Estilos gerais da modal (adaptado do seu exemplo)
+
 .modal {
   position: fixed;
   top: 0;
@@ -47,23 +47,23 @@ footer{
   }
 }
 
-// --- ESTILOS DO DROPDOWN (COPIADOS DO MODAL DE ANIMAIS) ---
 
-// Container que posiciona a lista suspensa
+
+
 .autocomplete-container {
   position: relative; 
   width: 100%;
 }
 
-// A lista suspensa (<ul>)
+
 .autocomplete-dropdown {
   position: absolute;
   top: 100%; 
   left: 0;
   right: 0;
-  z-index: 1000; // Garante que a lista fique sobre os outros campos
+  z-index: 1000; 
   
-  // Aparência da caixa
+  
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -72,11 +72,11 @@ footer{
   padding: 0;
   margin: 4px 0 0;
   max-height: 200px; 
-  overflow-y: auto; // Adiciona barra de rolagem se a lista for grande
-  text-align: left; // Alinha o texto dos itens à esquerda
+  overflow-y: auto; 
+  text-align: left; 
 }
 
-// Itens individuais da lista (<li>)
+
 .dropdown-item, .dropdown-item-disabled {
   padding: 8px 12px;
   cursor: pointer;
@@ -87,12 +87,12 @@ footer{
   }
 }
 
-// Efeito ao passar o mouse sobre um item
+
 .dropdown-item:hover {
   background-color: #f0f0f0; 
 }
 
-// Estilo para itens não-selecionáveis (ex: "Nenhum resultado")
+
 .dropdown-item-disabled {
   cursor: default;
   color: #999;

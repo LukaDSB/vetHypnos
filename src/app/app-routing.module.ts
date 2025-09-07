@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'principal', component: AppPrincipal },
   { path: 'prontuarios', component: ProntuariosComponent },
   { path: 'prontuarios/prontuarioParcial', component: ProntuarioParcialComponent},
+  { path: 'prontuarios/finalizarProntuario', component: PageProntuarioComponent},
   { path: 'prontuarios/selecionarMedicamentos', component: SelecionarMedicamentosComponent},
   { path: 'pageProntuario', component: PageProntuarioComponent },
   { path: 'prontuarios/gerarProntuario', component: ProntuarioProvisorioComponent },

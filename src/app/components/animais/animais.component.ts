@@ -11,7 +11,6 @@ import { TutorService } from 'src/app/services/tutor.service';
 import { forkJoin, Subscription } from 'rxjs';
 import { Tutor } from 'src/app/models/tutor.model';
 import { HdkModalFeedbackComponent } from '../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
-// --- 1. IMPORTAR O ROUTER ---
 import { Router } from '@angular/router';
 
 @Component({
@@ -35,7 +34,6 @@ export class AnimaisComponent implements OnInit {
     private animalService: AnimalService,
     private tutorService: TutorService,
     private location: Location,
-    // --- 2. INJETAR O ROUTER NO CONSTRUTOR ---
     private router: Router
   ) {}
 
@@ -43,24 +41,16 @@ export class AnimaisComponent implements OnInit {
     this.carregarDados();
   }
 
-  // --- 3. IMPLEMENTAR A FUNÇÃO DE REDIRECIONAMENTO ---
-  /**
-   * Chamado quando o evento (visualizar) é emitido pela hdk-tabela.
-   * Navega para a página de detalhes, passando os dados do animal.
-   * @param animal O objeto do animal que foi clicado na tabela.
-   */
   visualizarDetalhes(animal: Animal) {
     const rotaDestino = '/animais/detalhes';
     
     console.log('Redirecionando para detalhes do animal:', animal);
     
-    // Usa o router para navegar para a rota e envia os dados via 'state'
     this.router.navigate([rotaDestino], {
       state: { dadosSelecionados: [animal] }
     });
   }
 
-  // O restante do seu código permanece o mesmo
   private formatarDataParaAPI(data: string): string {
     if (!data || typeof data !== 'string' || !data.includes('/')) {
       return data;

@@ -8,6 +8,7 @@ import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { AssociarAnimalModalComponent } from './modalAssociarAnimal/associar-animal-modal/associar-animal-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prontuarios',
@@ -20,7 +21,7 @@ export class ProntuariosComponent implements OnInit {
   dataSource:MatTableDataSource<Prontuario> = new MatTableDataSource<Prontuario>([]);
   displayedColumns: string[] = ['id', 'usuario_nome','animal_nome', 'data_prontuario', 'procedimento', 'status', 'acoes'];
 
-  constructor(public dialog: MatDialog, private prontuarioService: ProntuarioService){}
+  constructor(public dialog: MatDialog, private prontuarioService: ProntuarioService, private router: Router){}
 
   ngOnInit(): void {
     this.carregarDados();

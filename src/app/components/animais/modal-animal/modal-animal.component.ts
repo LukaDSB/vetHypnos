@@ -66,7 +66,7 @@ export class ModalAnimalComponent implements OnInit{
     }
   }
 
-  // Métodos para Espécie
+  
   filtrarEspecies(): void {
     if (!this.buscaEspecie) {
       this.especiesFiltradas = this.especies;
@@ -94,9 +94,9 @@ export class ModalAnimalComponent implements OnInit{
     this.isDropdownEspecieAberto = false;
   }
 
-  // Métodos para Tutor
+  
   filtrarTutores(): void {
-    // LÓGICA AJUSTADA AQUI
+    
     if (!this.buscaTutor) {
       this.tutoresFiltrados = this.todosOsTutores;
       this.TutorAnimal = null;
@@ -117,14 +117,14 @@ export class ModalAnimalComponent implements OnInit{
     this.isDropdownTutorAberto = false;
   }
 
-  // NOVO MÉTODO ADICIONADO AQUI
+  
   deselecionarTutor(): void {
     this.buscaTutor = '';
     this.TutorAnimal = null;
     this.isDropdownTutorAberto = false;
   }
 
-  // Métodos do Modal
+  
   salvarAnimal() {
     if(!this.nomeAnimal || !this.PesoAnimal) {
       alert('Por favor, preencha todos os campos obrigatórios antes de salvar.');

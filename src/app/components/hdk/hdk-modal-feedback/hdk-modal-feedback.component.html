@@ -1,26 +1,18 @@
-<!-- A modal só é exibida quando a propriedade 'isOpen' for verdadeira -->
 <div *ngIf="isOpen" class="modal-backdrop">
   <div class="modal-content">
 
-    <!-- Ícone dinâmico baseado no tipo de modal -->
     <div class="icon-container">
-      <!-- Ícone de Sucesso -->
       <svg *ngIf="tipo === 'sucesso'" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon--sucesso"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
 
-      <!-- Ícone de Erro -->
       <svg *ngIf="tipo === 'erro'" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon--erro"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
 
-      <!-- Ícone de Confirmação -->
       <svg *ngIf="tipo === 'confirmacao'" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon--confirmacao"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
     </div>
 
-    <!-- Título e Mensagem -->
     <h2 class="hypnosText--TituloGrande modal-title">{{ titulo }}</h2>
     <p class="modal-message">{{ mensagem }}</p>
 
-    <!-- Rodapé com botões dinâmicos -->
     <footer class="modal-footer">
-      <!-- Botão de Cancelar/Fechar (sempre visível para erro e confirmação) -->
       <hdk-button
         *ngIf="tipo === 'confirmacao'"
         [text]="textoCancelar"
@@ -28,7 +20,6 @@
         (click)="onCancel()">
       </hdk-button>
 
-      <!-- Botão de Confirmar (apenas para confirmação) -->
       <hdk-button
         *ngIf="tipo === 'confirmacao'"
         [text]="textoConfirmar"
@@ -36,7 +27,6 @@
         (click)="onConfirm()">
       </hdk-button>
       
-      <!-- Botão Único para Sucesso e Erro -->
       <hdk-button
         *ngIf="tipo === 'sucesso' || tipo === 'erro'"
         text="Fechar"

@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; // Garante que a modal fique por cima de tudo
+  z-index: 1000; 
 }
 
 .modal-content {
@@ -20,24 +20,24 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   text-align: center;
   width: 90%;
-  max-width: 450px; // Largura máxima da modal
+  max-width: 450px; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem; // Espaçamento entre os elementos
+  gap: 1rem; 
 }
 
 .icon-container {
   margin-bottom: 0.5rem;
   .icon {
     &--sucesso {
-      color: #28a745; // Verde
+      color: #28a745; 
     }
     &--erro {
-      color: #dc3545; // Vermelho
+      color: #dc3545; 
     }
     &--confirmacao {
-      color: #17a2b8; // Azul/Ciano informativo
+      color: #17a2b8; 
     }
   }
 }
@@ -57,7 +57,7 @@
 .modal-footer {
   margin-top: 1.5rem;
   display: flex;
-  gap: 1rem; // Espaçamento entre os botões
+  gap: 1rem; 
   justify-content: center;
   width: 100%;
 }

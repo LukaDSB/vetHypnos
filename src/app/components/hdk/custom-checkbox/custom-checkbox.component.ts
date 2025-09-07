@@ -1,5 +1,3 @@
-// ARQUIVO: src/app/custom-checkbox/custom-checkbox.component.ts
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 

@@ -1,6 +1,5 @@
-// modal-associar-animal-existente.component.ts
 
-import { Component, EventEmitter, Output } from '@angular/core'; // 1. Importar EventEmitter e Output
+import { Component, EventEmitter, Output } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { TabelaComponent } from '../../hdk/tabela/hdk-tabela.component';

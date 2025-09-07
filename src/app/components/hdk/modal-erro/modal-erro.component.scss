@@ -4,7 +4,7 @@
 
 .modal {
   position: fixed;
-  z-index: 1000; // Garante que a modal fique por cima de outros elementos
+  z-index: 1000; 
   top: 0;
   left: 0;
   width: 100%;
@@ -20,7 +20,7 @@
   border-radius: 8px;
   padding: 30px 40px;
   width: auto;
-  max-width: 400px; // Limita a largura para melhor leitura
+  max-width: 400px; 
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
@@ -31,7 +31,7 @@
   text-align: center;
   
   h1 {
-    color: $vermelho; // Título em vermelho para chamar atenção
+    color: $vermelho; 
     margin-bottom: 16px;
   }
 
@@ -44,7 +44,7 @@
 
   footer {
     display: flex;
-    justify-content: center; // Centraliza o botão
+    justify-content: center; 
     width: 100%;
   }
 }
