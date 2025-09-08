@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'vetHypnos';
   isLoginModalOpen = true;
+  isLoggedIn$: Observable<boolean>;
+
+  constructor(private authService: AuthService) {
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 
   menuItems = [
     { text: 'Animais', icon: 'fa-solid fa-address-card', route: '/animais' },

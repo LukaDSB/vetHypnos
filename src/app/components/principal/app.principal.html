@@ -1,8 +1,7 @@
-<h5 class="mb-3">Dashboard</h5 >
+<app-autenticacao-modal *ngIf="!(isLoggedIn$ | async)"></app-autenticacao-modal>
 
-<dashboardCard class="scrollCards" [cardItems]="cardItems"></dashboardCard>
+<div *ngIf="isLoggedIn$ | async">
+    <h5>Dashboard</h5>
+    <dashboardCard class="scrollCards" [cardItems]="cardItems"></dashboardCard>
 
-<div class="conteudoPrincipal mt-3">
-    <app-autenticacao-modal></app-autenticacao-modal>
 </div>
-    

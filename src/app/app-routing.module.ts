@@ -12,16 +12,17 @@ import { ProntuarioParcialComponent } from './components/prontuarios/prontuario-
 import { AnimaisComponent } from './components/animais/animais.component';
 import { ProntuarioProvisorioComponent } from './components/prontuario-provisorio/prontuario-provisorio.component';
 import { SelecionarMedicamentosComponent } from './components/prontuarios/selecionar-medicamentos/selecionar-medicamentos.component';
+import { authGuard } from './services/auth/auth.guard';
 
 
 const routes: Routes = [
   { path: 'animais', component: AnimaisComponent },
   { path: 'animais/detalhes', component: DetalhesAnimalComponent},
-  { path: 'medicamentos', component: MedicamentosComponent },
+  { path: 'medicamentos', component: MedicamentosComponent},
   { path: 'principal', component: AppPrincipal },
   { path: 'prontuarios', component: ProntuariosComponent },
   { path: 'prontuarios/prontuarioParcial', component: ProntuarioParcialComponent},
-  { path: 'prontuarios/finalizarProntuario', component: PageProntuarioComponent},
+  { path: 'prontuarios/finalizarProntuario', component: PageProntuarioComponent, canActivate:[authGuard]},
   { path: 'prontuarios/selecionarMedicamentos', component: SelecionarMedicamentosComponent},
   { path: 'pageProntuario', component: PageProntuarioComponent },
   { path: 'prontuarios/gerarProntuario', component: ProntuarioProvisorioComponent },

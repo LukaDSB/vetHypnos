@@ -13,7 +13,7 @@ import { TutoresComponent } from './components/tutores/tutores.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HdkDivisor } from './components/hdk/divisor/hdk-divisor.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { MedicamentosComponent } from './components/medicamentos/medicamentos.component';
@@ -27,6 +27,7 @@ import { SelecionarMedicamentosComponent } from './components/prontuarios/seleci
 import { ModalErroComponent } from './components/hdk/modal-erro/modal-erro.component';
 import { CustomCheckboxComponent } from './components/hdk/custom-checkbox/custom-checkbox.component';
 import { HdkModalFeedbackComponent } from './components/hdk/hdk-modal-feedback/hdk-modal-feedback.component';
+import { authInterceptor } from './services/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { HdkModalFeedbackComponent } from './components/hdk/hdk-modal-feedback/h
     CustomCheckboxComponent,
     HdkModalFeedbackComponent
 ],
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

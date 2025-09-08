@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Medicamento } from 'src/app/models/medicamento.model';
 import { ProntuarioService } from 'src/app/services/prontuario.service';
 import { MedicoesClinicas } from 'src/app/models/MedicoesClinicas.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-prontuario-parcial',
@@ -38,10 +39,11 @@ export class ProntuarioParcialComponent implements OnInit {
   dataProcedimento = new Date().toISOString().split('T')[0];
   animalIdade: number | null = null;
   duracaoProcedimento = '4 horas';
+  usuarioLogado: { id: number, nome: string } | null = null;
 
   @ViewChild('modalAdicionarMedicamentos') modalAdicionarMedicamentos!: ProntuarioParcialModalAdicionarMedicamentosComponent;
   
-  constructor(private router: Router, private prontuarioService: ProntuarioService) {
+  constructor(private router: Router, private prontuarioService: ProntuarioService,private authService: AuthService) {
     this.dataSource = this.parametros.map((param) => {
       const row: any = { parametro: param };
       for (let i = 1; i <= 10; i++) {
@@ -63,12 +65,13 @@ export class ProntuarioParcialComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  this.usuarioLogado = this.authService.getDadosUsuario();
   if (this.dadosRecebidos) {
+    if (this.usuarioLogado) {
+        this.medicoResponsavel = this.usuarioLogado.nome;
+      }
     this.animal = this.dadosRecebidos;
-
-    
-    
-    
+  
     const dataNascimento = this.animal.data_nascimento 
         ? new Date(this.animal.data_nascimento) 
         : null;
@@ -80,11 +83,26 @@ export class ProntuarioParcialComponent implements OnInit {
   }
 }
 
+onValorChange(columnIndex: number): void {
+    // Verifica se já existe um horário para esta coluna.
+    // Se não houver (!this.horarios[columnIndex]), define a hora atual.
+    if (!this.horarios[columnIndex]) {
+      const agora = new Date();
+      const horas = agora.getHours().toString().padStart(2, '0');
+      const minutos = agora.getMinutes().toString().padStart(2, '0');
+      this.horarios[columnIndex] = `${horas}:${minutos}`;
+    }
+  }
+
   abrirModalCadastro() {
     this.modalAdicionarMedicamentos.openCadastro();
   }
 
   finalizarProntuario() {
+    if (!this.usuarioLogado) {
+      alert('Erro: Usuário não identificado. Por favor, faça login novamente.');
+      return;
+    }
 
     if (!this.dadosRecebidos || !this.dadosRecebidos.peso) {
       alert('Não é possível finalizar o prontuário sem os dados e o peso do animal.');
@@ -106,21 +124,20 @@ export class ProntuarioParcialComponent implements OnInit {
       for (let i = 0; i < 10; i++) {
         const valor = row['col' + (i + 1)];
         const horarioStr = this.horarios[i];
-        if (valor && horarioStr) {
+        if (valor) {
           medicoes_clinicas.push({
             parametro_id: parametroMap[row.parametro],
             valor: valor.toString(),
-            horario: `${this.dataProcedimento} ${horarioStr}:00` 
+            horario: `${this.dataProcedimento} ${horarioStr}:00`
           });
         }
       }
     });
 
-    const usuarioLogado = { id: 16, nome: this.medicoResponsavel };
 
     const prontuarioParaEnviar: any = {
       animal_id: this.animal.id,
-      usuario_id: usuarioLogado.id,
+      usuario_id: this.usuarioLogado.id,
       data_prontuario: this.dataProcedimento,
       observacoes: this.observacoes,
       statusProntuario: 1,

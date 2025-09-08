@@ -1,8 +1,7 @@
 <div class="layout">
-  <app-navbar [menuItems]="menuItems"></app-navbar>
+  <app-navbar [menuItems]="menuItems" (logoff)="logout()"></app-navbar>
 
   <div class="content">
     <router-outlet></router-outlet>
-    <!-- <app-autenticacao-modal></app-autenticacao-modal> -->
   </div>
 </div>

@@ -41,8 +41,8 @@ export class HdkModalComponent {
     this.isLoginModalOpen = true;
   }
 
-  loginMock() {
-    this.authService.loginMock();
-    this.isLoginModalOpen = false;
-  }
+  // loginMock() {
+  //   this.authService.loginMock();
+  //   this.isLoginModalOpen = false;
+  // }
 }
