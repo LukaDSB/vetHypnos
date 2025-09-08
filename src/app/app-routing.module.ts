@@ -13,6 +13,7 @@ import { AnimaisComponent } from './components/animais/animais.component';
 import { ProntuarioProvisorioComponent } from './components/prontuario-provisorio/prontuario-provisorio.component';
 import { SelecionarMedicamentosComponent } from './components/prontuarios/selecionar-medicamentos/selecionar-medicamentos.component';
 import { authGuard } from './services/auth/auth.guard';
+import { ProntuarioFinalizadoComponent } from './components/prontuarios/prontuario-finalizado/prontuario-finalizado.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'principal', component: AppPrincipal },
   { path: 'prontuarios', component: ProntuariosComponent },
   { path: 'prontuarios/prontuarioParcial', component: ProntuarioParcialComponent},
-  { path: 'prontuarios/finalizarProntuario', component: PageProntuarioComponent, canActivate:[authGuard]},
+  { path: 'prontuarios/prontuarioFinalizado/:id', component: ProntuarioFinalizadoComponent},
   { path: 'prontuarios/selecionarMedicamentos', component: SelecionarMedicamentosComponent},
   { path: 'pageProntuario', component: PageProntuarioComponent },
   { path: 'prontuarios/gerarProntuario', component: ProntuarioProvisorioComponent },

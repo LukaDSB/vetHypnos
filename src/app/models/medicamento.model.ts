@@ -14,4 +14,6 @@ export interface  Medicamento {
   categoria_id: number;
   categoria_medicamento_id: number;
   categoria_medicamento: CategoriasMedicamento | null;
+  volume_min?: number;
+  volume_max?: number;
 }

@@ -28,6 +28,7 @@ import { ModalErroComponent } from './components/hdk/modal-erro/modal-erro.compo
 import { CustomCheckboxComponent } from './components/hdk/custom-checkbox/custom-checkbox.component';
 import { HdkModalFeedbackComponent } from './components/hdk/hdk-modal-feedback/hdk-modal-feedback.component';
 import { authInterceptor } from './services/auth/auth.interceptor';
+import { ProntuarioFinalizadoComponent } from './components/prontuarios/prontuario-finalizado/prontuario-finalizado.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { authInterceptor } from './services/auth/auth.interceptor';
     SelecionarMedicamentosComponent,
     ModalErroComponent,
     CustomCheckboxComponent,
-    HdkModalFeedbackComponent
+    HdkModalFeedbackComponent,
+    ProntuarioFinalizadoComponent
 ],
   providers: [provideNgxMask(), provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent]

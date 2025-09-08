@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Prontuario } from '../models/prontuario';
+import { ProntuarioCompletoApiResponse } from '../models/api/prontuario-completo-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,10 @@ export class ProntuarioService {
 
   getProntuarios(): Observable<Prontuario[]> {
     return this.http.get<Prontuario[]>(`${this.apiUrl}/prontuario`);
+  }
+  
+  getProntuarioById(id: number): Observable<ProntuarioCompletoApiResponse> {
+    return this.http.get<ProntuarioCompletoApiResponse>(`${this.apiUrl}/prontuario/${id}`);
   }
 
   criarProntuario(prontuario:Prontuario):Observable<Prontuario>{

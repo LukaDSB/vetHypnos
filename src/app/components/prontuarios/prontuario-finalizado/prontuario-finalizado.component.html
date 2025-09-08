@@ -1,0 +1,86 @@
+<div *ngIf="prontuario" class="container-prontuario poppins-bold">
+  <div class="hypnosText--TituloGrande titulo">PRONTUÁRIO MÉDICO</div>
+  <div class="hypnosText--fonte1 num-prontuario">Número: {{ prontuario.id }}</div>
+
+  <div class="section-titulo ">Informações do paciente</div>
+  <div class="section-content">
+    <div><div class="label">Id</div><div class="value">{{ prontuario.animal.id }}</div></div>
+    <div><div class="label">Nome</div><div class="value">{{ prontuario.animal.nome }}</div></div>
+    <div><div class="label">Espécie</div><div class="value">{{ prontuario.animal.especie || '?' }}</div></div>
+    <div><div class="label">Idade</div><div class="value">{{ animalIdade }} anos</div></div>
+    <div><div class="label">Peso</div><div class="value">{{ prontuario.animal.peso }} kg</div></div>
+    <div><div class="label">Sexo</div><div class="value">{{ prontuario.animal.sexo || '?'}}</div></div>
+  </div>
+
+  <div class="section-titulo">Detalhes do procedimento</div>
+  <div class="section-content-2">
+    <div><div class="label-2">Médico</div><div class="value-2">{{ prontuario.procedimento.medico_nome }}</div></div>
+    <div><div class="label-2">Tipo de Procedimento</div><div class="value-2">{{ prontuario.procedimento.tipo }}</div></div>
+    <div><div class="label-2">Data do Procedimento</div><div class="value-2">{{ prontuario.data_prontuario | date:'dd/MM/yyyy' }}</div></div>
+    <div><div class="label-2">Duração</div><div class="value-2">{{ prontuario.procedimento.duracao || '?'}}</div></div>
+  </div>
+
+  <div class="section-titulo">Parâmetros Clínicos</div>
+  <div class="tabela-clinica-wrapper">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length > 0">
+      <ng-container matColumnDef="parametro"><th mat-header-cell *matHeaderCellDef> Parâmetro </th><td mat-cell *matCellDef="let element"> {{ element.parametro }} </td></ng-container>
+      <ng-container *ngFor="let horario of horariosDasColunas" [matColumnDef]="horario">
+        <th mat-header-cell *matHeaderCellDef class="table-time-header">{{ horario | date:'HH:mm' }}</th>
+        <td mat-cell *matCellDef="let element">{{ (element[horario] | number:'1.0-3') || '-' }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div *ngIf="dataSource.length === 0" class="sem-medicoes-aviso">Nenhum parâmetro clínico foi registrado.</div>
+  </div>
+
+  <div class="medicamentos-section">
+    <div class="section-titulo">Medicamentos</div>
+    <div *ngIf="prontuario.medicamentos && prontuario.medicamentos.length > 0; else semMedicamentos">
+      
+      <div *ngFor="let grupo of medicamentosAgrupados | keyvalue">
+        
+        <div class="section-subTitulo hypnosText--fonte1">{{ grupo.key }}</div>
+    
+        <div class="section-content-2 text-align-center">
+          <div class="justify-content-between d-flex text-center">
+            <div class="hypnosText--fonte1 label-2">Nome</div>
+            <div class="hypnosText--fonte1 label-2">Volume mínimo</div>
+            <div class="hypnosText--fonte1 label-2">Volume máximo</div>
+          </div>
+        </div>
+    
+        <div *ngFor="let med of grupo.value" class="section-content-3">
+          <div class="justify-content-between d-flex">
+            <div class="hypnosText--fonte1 label-2">{{ med.nome }}</div>
+            <div class="hypnosText--fonte1 label-2">{{ (med.volume_min | number:'1.2-4') + 'ml' }}</div>
+            <div class="hypnosText--fonte1 label-2">{{ (med.volume_max | number:'1.2-4') + 'ml' }}</div>
+          </div>
+        </div>
+    
+      </div>
+
+    </div>
+    <ng-template #semMedicamentos><p class="sem-medicamentos-aviso">Nenhum medicamento administrado.</p></ng-template>
+  </div>
+  
+  <hdk-divisor></hdk-divisor>
+
+  <div>
+    <h2 class="hypnosText--fonte1 obs">Observações</h2>
+  </div>
+  <div class="obs-area form-group">
+    <textarea class="obs-area-input bg-azul form-control" [value]="prontuario.observacoes" readonly></textarea>
+  </div>
+
+  <hdk-button
+    text="Voltar para a lista"
+    color="hdk-bg-verde"
+    class="d-flex m-4 button"
+    (click)="voltar()">
+  </hdk-button>
+</div>
+
+<div *ngIf="!prontuario" class="loading-container">
+  <p>Carregando dados do prontuário...</p>
+</div>

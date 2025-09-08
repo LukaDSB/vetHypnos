@@ -27,8 +27,9 @@
 <hdk-divisor [hideDivisor]="true"></hdk-divisor>
 
 <hdk-tabela 
-[displayedColumns]="displayedColumns" 
-[dataSource]="dataSource" 
-[exibirAcaoVisualizar]="true" 
-(excluir)="deletarProntuario($event)"
+  [displayedColumns]="displayedColumns" 
+  [dataSource]="dataSource" 
+  [exibirAcaoVisualizar]="true" 
+  (excluir)="deletarProntuario($event)"
+  (visualizar)="visualizarProntuario($event)"
 />

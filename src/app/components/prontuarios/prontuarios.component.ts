@@ -1,3 +1,5 @@
+// src/app/pages/prontuarios/prontuarios.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -27,19 +29,15 @@ export class ProntuariosComponent implements OnInit {
     this.carregarDados();
   }
 
-  criarProntuario(prontuario: Prontuario){
-    this.prontuarioService.criarProntuario(prontuario).subscribe({
-      next: () => {
-        this.carregarDados();
-      },
-      error: (err) => {
-        console.error('Erro ao criar prontuário: ', err);
-      }
-    })
+  visualizarProntuario(prontuario: Prontuario): void {
+    // ALTERADO: Adicionamos o objeto 'state' para passar os dados completos do prontuário
+    this.router.navigate(['/prontuarios/prontuarioFinalizado', prontuario.id], {
+      state: { prontuarioData: prontuario } 
+    });
   }
 
   deletarProntuario(prontuario: Prontuario){
-    if (confirm(`Deseja realmente excluir "${prontuario.id}"?`)){
+    if (confirm(`Deseja realmente excluir o prontuário "${prontuario.id}"?`)){
       this.prontuarioService.deletarProntuario(prontuario.id).subscribe({
         next: () => {
           console.log(`Prontuario com ID ${prontuario.id} excluído.`);
@@ -54,12 +52,12 @@ export class ProntuariosComponent implements OnInit {
 
   carregarDados(){
     this.prontuarioService.getProntuarios().subscribe((data) => {
+      console.log('Dados recebidos para a tabela:', data);
       this.dataSource = new MatTableDataSource(data);
     })
   }
 
   abrirModal(): void {
-    console.log('Modal abriu');
     const dialogRef = this.dialog.open(AssociarAnimalModalComponent, {
       width: '400px',
       data: {}
@@ -69,5 +67,4 @@ export class ProntuariosComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-
 }
