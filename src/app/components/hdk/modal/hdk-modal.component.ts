@@ -40,9 +40,4 @@ export class HdkModalComponent {
     this.isCadastroModalOpen = false;
     this.isLoginModalOpen = true;
   }
-
-  // loginMock() {
-  //   this.authService.loginMock();
-  //   this.isLoginModalOpen = false;
-  // }
 }

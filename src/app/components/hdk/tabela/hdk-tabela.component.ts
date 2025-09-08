@@ -32,7 +32,7 @@ export class TabelaComponent<T> implements AfterViewInit {
 
   @Input() displayedColumns?: string[];
   @Input() pageSize = 10;
-  @Input() exibirAcaoVisualizar = false; // Por padrão, o ícone não é exibido
+  @Input() exibirAcaoVisualizar = false; 
 
   @Output() excluir: EventEmitter<T> = new EventEmitter<T>();
   @Output() atualizar: EventEmitter<T> = new EventEmitter<T>();

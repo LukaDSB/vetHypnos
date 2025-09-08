@@ -84,8 +84,6 @@ export class ProntuarioParcialComponent implements OnInit {
 }
 
 onValorChange(columnIndex: number): void {
-    // Verifica se já existe um horário para esta coluna.
-    // Se não houver (!this.horarios[columnIndex]), define a hora atual.
     if (!this.horarios[columnIndex]) {
       const agora = new Date();
       const horas = agora.getHours().toString().padStart(2, '0');

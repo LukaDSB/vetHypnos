@@ -33,12 +33,12 @@ export class AutenticacaoModalComponent {
     });
   }
 
-  cadastrar() { // Crie este método que estava faltando
+  cadastrar() { 
     const dados = { nome: this.nome, email: this.email, senha: this.senha };
     this.authService.registrar(dados).subscribe({
       next: () => {
         console.log('Cadastro realizado com sucesso!');
-        // Muda para a tela de login para o usuário entrar
+        
         this.closeCadastro();
       },
       error: (err) => console.error('Falha no cadastro', err)
@@ -55,8 +55,4 @@ export class AutenticacaoModalComponent {
     this.isLoginModalOpen = true;
   }
 
-//   loginMock() {
-//     this.authService.loginMock();
-//     this.isLoginModalOpen = false;
-//   }
 }

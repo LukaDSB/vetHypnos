@@ -66,12 +66,14 @@
 }
 
 .checkbox-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  max-height: 17vh;
-  gap: 5px;
-  justify-content: space-between;
+  /* Define a largura ideal para cada coluna. O navegador criará quantas colunas couberem. */
+  column-width: 300px; 
+
+  /* Define o espaço entre as colunas */
+  column-gap: 20px;
+
+  /* Um preenchimento interno para os checkboxes não colarem nas bordas */
+  padding: 10px;
 }
 
 .box .mini-titulo-accordion{

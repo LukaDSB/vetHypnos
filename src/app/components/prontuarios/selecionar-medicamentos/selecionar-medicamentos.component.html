@@ -27,10 +27,6 @@
 <hr>
 
 <div class="scroll">
-  <!-- 
-    1. O CDKAccordion agora permite que múltiplos itens sejam abertos.
-    2. Usamos *ngFor para criar dinamicamente cada seção do accordion.
-  -->
   <cdk-accordion class="example-accordion poppins-bold" [multi]="true">
     <cdk-accordion-item
       *ngFor="let secao of secoesDoAccordion"
@@ -40,10 +36,6 @@
       tabindex="0"
       [expanded]="secao.expanded">
       
-      <!-- 
-        3. O clique agora altera a propriedade 'expanded' do item específico da iteração,
-           fazendo com que cada accordion abra e feche de forma independente.
-      -->
       <div class="example-accordion-item-header" (click)="secao.expanded = !secao.expanded">
         {{ secao.titulo }}
       </div>
@@ -51,12 +43,7 @@
       <div class="example-accordion-item-body inter" role="region"
         [style.display]="secao.expanded ? '' : 'none'">
         
-        <!-- Renderiza a seção apenas se houver medicamentos para ela -->
         <div *ngIf="secao.medicamentosAgrupados.size > 0; else semMedicamentos">
-          <!-- 
-            4. O loop interno agora itera sobre os 'medicamentosAgrupados' daquela seção específica,
-               mostrando apenas os medicamentos já filtrados.
-          -->
           <div *ngFor="let grupo of secao.medicamentosAgrupados | keyvalue" style="padding: 10px;" class="inter">
             <p class="mini-titulo-accordion inter">{{ grupo.key }}</p>
             <div class="checkbox-container">
@@ -64,14 +51,14 @@
                 <mat-checkbox 
                     class="box inter"
                     (change)="onSelectionChange($event, med.id)">
-                  {{ med.nome }} {{ med.concentracao ? med.concentracao + 'mg/ml' : '' }}
+                  {{ med.nome }} 
+                  <!-- {{ med.concentracao ? med.concentracao + 'mg/ml' : '' }} -->
                 </mat-checkbox>
               </div>
             </div>
           </div>
         </div>
         
-        <!-- Mensagem exibida se não houver medicamentos para esta seção -->
         <ng-template #semMedicamentos>
           <p class="sem-medicamentos-aviso">Nenhum medicamento disponível para esta categoria.</p>
         </ng-template>
