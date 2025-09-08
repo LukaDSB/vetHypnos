@@ -15,6 +15,12 @@
   font-style: normal;
 }
 
+.example-accordion{
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
 .example-accordion-item {
   display: block;
 }

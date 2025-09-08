@@ -38,31 +38,60 @@ export class SelecionarMedicamentosComponent implements OnInit {
   secoesDoAccordion: AccordionSection[] = [
     {
       titulo: 'Medicação pré anestésica',
-      categoriasPermitidas: ['Fenotiazínico', 'Butirofenonas', 'Opióides'],
+      categoriasPermitidas: [
+        'Fenotiazinico',
+        'Butirofenonas',
+        'Benzodiazepinicos',
+        'Alfa 2 Agonistas',
+        'Opioides',
+        'Anticolinergicos'
+      ],
       medicamentosAgrupados: new Map(),
       expanded: false
     },
     {
       titulo: 'Indução anestésica',
-      categoriasPermitidas: [],
+      categoriasPermitidas: [
+        'Barbituricos',
+        'Nao Barbituricos',
+        'Anestesicos Dissociativos'
+      ],
       medicamentosAgrupados: new Map(),
       expanded: false
     },
     {
       titulo: 'Manutenção anestésica (bomba infusora)',
-      categoriasPermitidas: [],
+      categoriasPermitidas: [
+        'Não Barbitúricos',
+        'Opioides',
+        'Anestesicos Dissociativos',
+        'Anestesicos Locais'
+      ],
       medicamentosAgrupados: new Map(),
       expanded: false
     },
     {
       titulo: 'Anestesia Epidural',
-      categoriasPermitidas: [],
+      categoriasPermitidas: [
+        'Anestesicos Locais',
+        'Opioides'
+      ],
       medicamentosAgrupados: new Map(),
       expanded: false
     },
     {
       titulo: 'Medicação de emergência',
-      categoriasPermitidas: [],
+      categoriasPermitidas: [
+        'Anticolinergicos',
+        'Broncodilatadores',
+        'Beta Bloqueadores',
+        'Simpatomimeticos',
+        'Outros antiarritmicos',
+        'Glicocorticoides',
+        'Antagonistas opioides',
+        'Diureticos',
+        'Antagonistas alfa 2'
+      ],
       medicamentosAgrupados: new Map(),
       expanded: false
     },
