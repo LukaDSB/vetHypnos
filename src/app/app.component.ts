@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,13 @@ export class AppComponent {
   isLoginModalOpen = true;
   isLoggedIn$: Observable<boolean>;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
   }
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/principal']);
   }
 
   menuItems = [

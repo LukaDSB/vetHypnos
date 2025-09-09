@@ -1,6 +1,9 @@
 <div class="navbar">
   <div class="logo">
-    <h1 class="hypnosText--TituloGrande hdk-amarelo">vetHypnos</h1>
+    <h1 class="hypnosText--TituloGrande hdk-amarelo">
+      <span class="logo-text-completo">vetHypnos</span>
+      <span class="logo-text-mini">VH</span>
+    </h1>
   </div>
 
   <div class="user-card" [routerLink]="'/usuario'">
@@ -13,21 +16,28 @@
     </div>
   </div>
 
-  <button class="painelPrincipal hypnosText--fonte1" type="button" [routerLink]="'/principal'"><i class="fa-solid fa-chart-line"></i>Painel principal</button>
+  <button class="painelPrincipal hypnosText--fonte1" type="button" [routerLink]="'/principal'">
+    <i class="fa-solid fa-chart-line"></i>
+    <span class="nav-text">Painel principal</span>
+  </button>
 
   <ul class="nav flex-column">
     <li class="nav-item hypnosText--fonte1" *ngFor="let item of menuItems">
       <a class="nav-link" [routerLink]="item.route">
-        <i  [ngClass]="item.icon"></i> {{ item.text }}
+        <i [ngClass]="item.icon"></i>
+        <span class="nav-text">{{ item.text }}</span>
       </a>
     </li>
   </ul>
 
   <div class="logout">
-    <button class="hypnosText--fonte1" (click)="logout()"><i class="fa-solid fa-power-off"></i> Sair</button>
+    <button class="hypnosText--fonte1" (click)="logout()">
+      <i class="fa-solid fa-power-off"></i>
+      <span class="nav-text">Sair</span>
+    </button>
   </div>
 
   <footer>
-    <p>&copy; 2024 vetHypnos</p>
+    <p class="nav-text">&copy; 2024 vetHypnos</p>
   </footer>
 </div>

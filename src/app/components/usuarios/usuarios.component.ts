@@ -6,6 +6,7 @@ import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { EditarFotoUsuarioModalComponent } from './editar-foto-usuario-modal/editar-foto-usuario-modal.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -17,15 +18,15 @@ import { Usuario } from 'src/app/models/usuario.model';
   standalone: true
 })
 export class UsuariosComponent implements OnInit {
-   editable = false;
-   isEditUserProfilePictureModalOpen = false;
-   dataSource: Usuario[] = [];
+  editable = false;
+  isEditUserProfilePictureModalOpen = false;
+  dataSource: Usuario[] = [];
+  usuarioLogado: { id: number, nome: string } | null = null;
 
-  constructor(private usuarioService: UsuarioService, private location: Location ) {}
-
-
+  constructor(private usuarioService: UsuarioService, private location: Location, private authService: AuthService) {}
    ngOnInit() {
     this.carregarDados();
+    this.usuarioLogado = this.authService.getDadosUsuario()
   }
 
   camposInfo = [

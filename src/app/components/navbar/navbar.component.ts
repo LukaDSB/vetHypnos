@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,15 +11,40 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   @Input() menuItems: { text: string; icon: string; route: string }[] = [];
   @Output() logoff = new EventEmitter<void>();
+
+  private authSubscription!: Subscription;
+
   usuarioLogado: { id: number, nome: string } | null = null;
+
+  isMenuOpen = false;
 
   constructor(private authService: AuthService){}
 
-  ngOnInit():void{
-     this.usuarioLogado = this.authService.getDadosUsuario();
+  ngOnInit(): void {
+    this.authSubscription = this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        this.usuarioLogado = this.authService.getDadosUsuario();
+      } else {
+        this.usuarioLogado = null;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen = false;
   }
 
   logout() {

@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Ações para "{{ data.itemName }}"</h2>
+
+<mat-dialog-content class="actions-container">
+  <button *ngIf="data.showVisualizar" mat-flat-button class="action-button visualizar-btn" (click)="onActionClick('visualizar')">
+    <i class="fa-solid fa-eye"></i> Visualizar
+  </button>
+  
+  <button mat-flat-button class="action-button editar-btn" (click)="onActionClick('atualizar')">
+    <i class="fa-solid fa-pencil"></i> Editar
+  </button>
+
+  <button mat-flat-button class="action-button excluir-btn" (click)="onActionClick('excluir')">
+    <i class="fa-solid fa-trash"></i> Excluir
+  </button>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+</mat-dialog-actions>

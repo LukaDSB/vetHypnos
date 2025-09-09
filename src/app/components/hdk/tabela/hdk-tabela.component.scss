@@ -25,5 +25,24 @@ table {
   position: relative;
 }
 
+/* ... (seus estilos existentes para 'table', 'mat-table', etc.) ... */
 td i{
-  cursor: pointer;}
+  cursor: pointer;
+}
+
+// NOVO: Estilo para a linha quando estiver no modo mobile
+.mobile-row {
+  cursor: pointer;
+  
+  &:hover {
+    background-color: #f5f5f5; // Efeito de hover para indicar que é clicável
+  }
+}
+
+// NOVO: Media Query para telas pequenas (largura de tablets para baixo)
+@media (max-width: 1190px) {
+  // Esconde a coluna de ações inteira (cabeçalho e células)
+  .mat-column-acoes {
+    display: none;
+  }
+}

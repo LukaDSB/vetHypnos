@@ -137,4 +137,19 @@ app-navbar {
   padding: 20px 40px;
   overflow-y: auto;
   background-color: $bg-creme;
+  width: 100%;
+  padding: 24px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+@media (min-width: 993px) {
+  .content {
+    margin-left: 300px;
+  }
+}
+
+@media (max-width: 992px) {
+  .content {
+    margin-left: 80px;
+  }
 }

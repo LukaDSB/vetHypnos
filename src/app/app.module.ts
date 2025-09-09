@@ -29,6 +29,7 @@ import { CustomCheckboxComponent } from './components/hdk/custom-checkbox/custom
 import { HdkModalFeedbackComponent } from './components/hdk/hdk-modal-feedback/hdk-modal-feedback.component';
 import { authInterceptor } from './services/auth/auth.interceptor';
 import { ProntuarioFinalizadoComponent } from './components/prontuarios/prontuario-finalizado/prontuario-finalizado.component';
+import { AcoesModalComponent } from './components/hdk/acoes-modal/acoes-modal.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ProntuarioFinalizadoComponent } from './components/prontuarios/prontuar
     ModalErroComponent,
     CustomCheckboxComponent,
     HdkModalFeedbackComponent,
-    ProntuarioFinalizadoComponent
+    ProntuarioFinalizadoComponent,
+    AcoesModalComponent
 ],
   providers: [provideNgxMask(), provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent]

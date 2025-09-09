@@ -1,7 +1,7 @@
 @import './app/components/hdk/cores.scss';
 @import './app/components/hdk/fontes.scss';
 @import 'node_modules/bootstrap/scss/bootstrap';
-
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 *{
   margin: 0;
@@ -10,4 +10,10 @@
 
 body{
   overflow: hidden;
+}
+
+.acoes-modal-panel .mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }

@@ -1,0 +1,65 @@
+// Suas variáveis de cor (ajuste se necessário)
+$verde: #359830;
+$verde-hover: #2a7a26;
+$vermelho: #e74c3c;
+$vermelho-hover: #c0392b;
+$azul: #3498db;
+$azul-hover: #2980b9;
+
+// Estiliza o contêiner dos botões
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 10px;
+}
+
+// Estilo base para todos os botões de ação
+.action-button {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  border: none;
+  
+  // Remove a sombra padrão do mat-flat-button para um visual mais limpo
+  box-shadow: none !important;
+}
+
+// Cores específicas para cada botão
+.visualizar-btn {
+  background-color: $verde;
+  &:hover {
+    background-color: $verde-hover;
+  }
+}
+
+.editar-btn {
+  background-color: $azul;
+  &:hover {
+    background-color: $azul-hover;
+  }
+}
+
+.excluir-btn {
+  background-color: $vermelho;
+  &:hover {
+    background-color: $vermelho-hover;
+  }
+}
+
+// Ajusta o alinhamento do título
+h2[mat-dialog-title] {
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+}
+
+// Ajusta o botão de cancelar
+mat-dialog-actions {
+  padding: 0 24px 16px;
+}

@@ -1,25 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit, Output, EventEmitter, OnInit } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout'; // Importe apenas o que precisamos
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { HdkModalComponent } from '../modal/hdk-modal.component';
-import { DateMaskPipe } from './pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Animal } from 'src/app/models/animal.model';
 import { CommonModule, DatePipe } from '@angular/common';
+import { AcoesModalComponent } from '../acoes-modal/acoes-modal.component';
+import { Animal } from 'src/app/models/animal.model';
 
 @Component({
-  imports: [MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, DateMaskPipe, MatCheckboxModule, DatePipe, CommonModule],
+  imports: [MatTableModule, RouterModule, MatPaginatorModule, MatDialogModule, MatCheckboxModule, DatePipe, CommonModule],
   templateUrl: 'hdk-tabela.component.html',
   styleUrls: ['hdk-tabela.component.scss'],
   selector: 'hdk-tabela',
   standalone: true
 })
-export class TabelaComponent<T> implements AfterViewInit {
+export class TabelaComponent<T extends { id: any, nome?: any }> implements AfterViewInit, OnInit {
   private _dataSource: MatTableDataSource<T> = new MatTableDataSource<T>([]);
+  public isMobile = false;
 
   @Input()
   set dataSource(data: MatTableDataSource<T>) {
@@ -40,11 +41,21 @@ export class TabelaComponent<T> implements AfterViewInit {
   @Output() selecionadosChange = new EventEmitter<Animal[]>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  
   selecionados: any[] = [];
   
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private breakpointObserver: BreakpointObserver
+  ) {}
   
+  ngOnInit(): void {
+    // ALTERADO: Usamos a mesma query do CSS para garantir consistência.
+    this.breakpointObserver.observe(['(max-width: 1190px)']).subscribe(result => {
+      this.isMobile = result.matches;
+    });
+  }
+
   ngAfterViewInit() {
     this.connectPaginator();
   }
@@ -54,11 +65,34 @@ export class TabelaComponent<T> implements AfterViewInit {
       this._dataSource.paginator = this.paginator;
     }
   }
+  
+  onRowClick(element: T): void {
+    if (!this.isMobile) {
+      return;
+    }
 
-  onVisualizar(element: T): void {
-    this.visualizar.emit(element);
+    const dialogRef = this.dialog.open(AcoesModalComponent, {
+      width: '280px',
+      // ALTERADO: Adiciona a classe do painel que criamos no styles.scss
+      panelClass: 'acoes-modal-panel', 
+      data: { 
+        itemName: element.nome || `ID: ${element.id}`,
+        showVisualizar: this.exibirAcaoVisualizar 
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      switch (result) {
+        case 'visualizar': this.onVisualizar(element); break;
+        case 'atualizar': this.onAtualizar(element); break;
+        case 'excluir': this.onExcluir(element); break;
+      }
+    });
   }
 
+  onVisualizar(element: T): void { this.visualizar.emit(element); }
+  onExcluir(element: T) { this.excluir.emit(element); }
+  onAtualizar(element: T){ this.atualizar.emit(element); }
   onCheckboxChange(element: any, checked: boolean) {
     element.selecionado = checked;
     if (checked) {
@@ -68,19 +102,4 @@ export class TabelaComponent<T> implements AfterViewInit {
     }
     this.selecionadosChange.emit(this.selecionados);
   }
-  
-  onExcluir(element: T) {
-    this.excluir.emit(element);
-  }
-
-  onAtualizar(element: T){
-    this.atualizar.emit(element);
-  }
-  
-  abrirModal(): void {
-    const dialogRef = this.dialog.open(HdkModalComponent, { width: '400px', data: {} });
-    dialogRef.afterClosed().subscribe(() => { console.log('The dialog was closed'); });
-  }
-
-  fecharModal(): void {}
 }

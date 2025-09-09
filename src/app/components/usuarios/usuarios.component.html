@@ -5,8 +5,7 @@
 
 <div class="wrapper">
     
-<!-- <h2 class="hypnosText--TituloGrande mb-2"  *ngFor="let usuario of dataSource"> {{usuario.nome}} • NomeClinica</h2> -->
-<h2 class="hypnosText--TituloGrande mb-2"> NomeUsuario • NomeClinica</h2>
+<h2 class="hypnosText--TituloGrande mb-2"> {{usuarioLogado?.nome}} • NomeClinica</h2>
 
 
 <div class="usuario-info d-flex flex-row align-items-center flex-wrap my-4">
@@ -85,5 +84,4 @@
     <hdk-button [text]="botaoTexto" color="hdk-bg-verde" (click)="editarDadosUsuario()" />
 
 </div>
-
 </div>
