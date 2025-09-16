@@ -1,87 +1,98 @@
-<app-editar-foto-usuario-modal 
+<app-editar-foto-usuario-modal
   *ngIf="isEditUserProfilePictureModalOpen"
   (fecharModal)="onCloseModal()">
 </app-editar-foto-usuario-modal>
 
-<div class="wrapper">
-    
-<h2 class="hypnosText--TituloGrande mb-2"> {{usuarioLogado?.nome}} • NomeClinica</h2>
+<div *ngIf="dataSource" class="wrapper">
 
+  <h2 class="hypnosText--TituloGrande mb-2">
+    {{ dataSource.nome }} • {{ dataSource.clinica?.nome || 'Sem Clínica' }}
+  </h2>
 
-<div class="usuario-info d-flex flex-row align-items-center flex-wrap my-4">
-   <div class="user-avatar d-flex justify-content-center align-items-center">
-        <img src="../../../assets/images/userImg.png" alt="Foto Usuário">
-        <i class="fa-solid fa-user-pen fa-2x" (click)="openModalEditarImagemUsuario()"></i>
+  <div class="usuario-info d-flex flex-row align-items-center flex-wrap my-4">
+    <div class="user-avatar d-flex justify-content-center align-items-center">
+      <img src="../../../assets/images/userImg.png" alt="Foto Usuário">
+      <i class="fa-solid fa-user-pen fa-2x" (click)="openModalEditarImagemUsuario()"></i>
     </div>
 
-    <div class="group-form d-flex flex-row mx-5">
-        <div class="d-flex flex-column me-5" *ngFor="let campo of camposInfo">
-            <label [for]="campo.id">{{ campo.label }}</label>
-            <input
-            type="search"
-            class="bg-azul form-control"
-            [id]="campo.id"
-            [disabled]="!editable"
-            />
-        </div>
+    <div class="group-form d-flex flex-row mx-5 flex-wrap">
+      <div class="d-flex flex-column me-5" *ngIf="dataSource.id">
+        <label for="id">Id</label>
+        <input type="text" class="bg-azul form-control" id="id" [(ngModel)]="dataSource.id" disabled />
+      </div>
+      <div class="d-flex flex-column me-5" *ngIf="dataSource.especialidade">
+        <label for="especialidade">Especialização / Cargo</label>
+        <input type="text" class="bg-azul form-control" id="especialidade" [(ngModel)]="dataSource.especialidade.nome" disabled />
+      </div>
+      <div class="d-flex flex-column me-5" *ngIf="dataSource.crmv">
+        <label for="crmv">CRMV</label>
+        <input type="text" class="bg-azul form-control" id="crmv" [(ngModel)]="dataSource.crmv" [disabled]="!editable" />
+      </div>
+      <div class="d-flex flex-column me-5" *ngIf="dataSource.cpf">
+        <label for="cpf">CPF</label>
+        <input type="text" class="bg-azul form-control" id="cpf" [(ngModel)]="dataSource.cpf" [disabled]="!editable" />
+      </div>
     </div>
+  </div>
 
-</div>
+  <hdk-divisor></hdk-divisor>
 
-<hdk-divisor></hdk-divisor>
-
-<div class="usuario-endereco flex-wrap">
+  <div *ngIf="dataSource.clinica?.endereco as endereco" class="usuario-endereco flex-wrap">
     <h5 class="hypnosText--fonte2">Endereço</h5>
+    <div class="group-form d-flex flex-row flex-wrap">
+      <div class="d-flex flex-column me-5 my-3">
+        <label for="rua">Rua</label>
+        <input type="text" class="bg-azul form-control" id="rua" [(ngModel)]="endereco.rua" [disabled]="!editable" />
+      </div>
+      <div class="d-flex flex-column me-5 my-3">
+        <label for="numero">Número</label>
+        <input type="text" class="bg-azul form-control" id="numero" [(ngModel)]="endereco.numero" [disabled]="!editable" />
+      </div>
+      <div class="d-flex flex-column me-5 my-3">
+        <label for="bairro">Bairro</label>
+        <input type="text" class="bg-azul form-control" id="bairro" [(ngModel)]="endereco.bairro" [disabled]="!editable" />
+      </div>
+      <div class="d-flex flex-column me-5 my-3" *ngIf="endereco.cidade">
+        <label for="cidade">Cidade</label>
+        <input type="text" class="bg-azul form-control" id="cidade" [(ngModel)]="endereco.cidade.nome" [disabled]="!editable" />
+      </div>
+      <!-- <div class="d-flex flex-column me-5 my-3" *ngIf="dataSource.clinica?.endereco?.cidade?.estado?.nome">
+        <label for="estado">Estado</label>
+        <input type="text" class="bg-azul form-control" id="estado" [(ngModel)]="endereco.cidade.estado.nome" [disabled]="!editable" />
+      </div> -->
+    </div>
+  </div>
+
+  <hdk-divisor></hdk-divisor>
+
+  <div class="usuario-contatos d-flex row flex-wrap">
+    <h5 class="hypnosText--fonte2">Redes sociais / contatos</h5>
 
     <div class="group-form d-flex flex-row">
-        <div class="d-flex flex-column me-5 my-3" *ngFor="let campo of camposEndereco">
-            <label [for]="campo.id">{{ campo.label }}</label>
-            <input
-            type="search"
-            class="bg-azul form-control"
-            [id]="campo.id"
-            [disabled]="!editable"
-            />
-        </div>
-    </div>
+      <div *ngIf="telefoneContato" class="d-flex flex-column me-5 my-4">
+        <label for="telefone">Telefone</label>
+        <input 
+          type="text" 
+          class="bg-azul form-control" 
+          id="telefone" 
+          [(ngModel)]="telefoneContato.descricao" 
+          [disabled]="!editable" />
+      </div>
 
-    <div class="group-form d-flex flex-row">
-        <div class="d-flex flex-column me-5 my-3" *ngFor="let campo of camposLogradouro">
-            <label [for]="campo.id">{{ campo.label }}</label>
-            <input
-            type="search"
-            class="bg-azul form-control"
-            [id]="campo.id"
-            [disabled]="!editable"
-            />
-        </div>
+      <div *ngIf="emailContato" class="d-flex flex-column me-5 my-4">
+        <label for="email-contato">Email</label>
+        <input 
+          type="email" 
+          class="bg-azul form-control" 
+          id="email-contato" 
+          [(ngModel)]="emailContato.descricao" 
+          [disabled]="!editable" />
+      </div>
     </div>
+  </div>
+
 </div>
 
-<hdk-divisor></hdk-divisor>
-
-<div class="usuario-contatos d-flex row flex-wrap">
-<h5 class="hypnosText--fonte2">Redes sociais / contatos</h5>
-    <div class="group-form d-flex flex-row">
-        <div class="d-flex flex-column me-5 my-4" *ngFor="let campo of camposContatos">
-            <label [for]="campo.id">{{ campo.label }}</label>
-            <input
-            type="search"
-            class="bg-azul form-control"
-            [id]="campo.id"
-            [disabled]="!editable"
-            />
-        </div>
-    </div>
-</div>
-
-<hdk-divisor></hdk-divisor>
-
-<div class="usuario-btns d-flex flex-row justify-content-between flex-wrap">
-
-    <hdk-button text="Voltar" color="hdk-bg-verde" (click)="voltar()" />
-
-    <hdk-button [text]="botaoTexto" color="hdk-bg-verde" (click)="editarDadosUsuario()" />
-
-</div>
+<div *ngIf="!dataSource">
+  Carregando...
 </div>
