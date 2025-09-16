@@ -11,24 +11,17 @@ export class AnimalService {
 
   constructor(private http: HttpClient) {}
 
-  // getAnimais(): Observable<Animal[]> {
-  //   return this.http.get<Animal[]>(`${this.apiUrl}/animal`);
-  // }
-
   getAnimais(filtros?: any): Observable<Animal[]> {
     let params = new HttpParams();
 
     if (filtros) {
-      // Itera sobre as chaves do objeto de filtros (ex: 'nome')
       Object.keys(filtros).forEach(key => {
-        // Adiciona o parâmetro apenas se ele tiver um valor
         if (filtros[key]) {
           params = params.append(key, filtros[key]);
         }
       });
     }
 
-    // O objeto { params } é adicionado às opções da requisição GET
   return this.http.get<Animal[]>(`${this.apiUrl}/animal`, { params });
   }
 
