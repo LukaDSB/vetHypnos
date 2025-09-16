@@ -12,18 +12,21 @@ import { forkJoin, Subscription } from 'rxjs';
 import { Tutor } from 'src/app/models/tutor.model';
 import { HdkModalFeedbackComponent } from '../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-animais',
   templateUrl: './animais.component.html',
   styleUrls: ['./animais.component.scss'],
   standalone: true,
-  imports: [ModalAnimalComponent, HdkButtonComponent, HdkDivisor, TabelaComponent, HdkModalFeedbackComponent],
+  imports: [ModalAnimalComponent, HdkButtonComponent, HdkDivisor, TabelaComponent, HdkModalFeedbackComponent, FormsModule],
 })
 export class AnimaisComponent implements OnInit {
-
   dataSource: MatTableDataSource<Animal> = new MatTableDataSource<Animal>([]);
   displayedColumns: string[] = ['id', 'nome', 'especie_id', 'data_nascimento', 'tutor_id', 'peso', 'sexo', 'acoes'];
+
+  nomeFiltro: string = '';
+  especieFiltro: string = '';
 
   @ViewChild('modalAnimal') modalAnimalComponent!: ModalAnimalComponent;
   @ViewChild(HdkModalFeedbackComponent) modalFeedback!: HdkModalFeedbackComponent;
@@ -40,6 +43,16 @@ export class AnimaisComponent implements OnInit {
   ngOnInit() {
     this.carregarDados();
   }
+
+  buscarAnimais() {
+    const filtros = {
+      nome: this.nomeFiltro.trim(),
+      especie: this.especieFiltro.trim()
+    };
+    
+    this.carregarDados(filtros);
+  }
+
 
   visualizarDetalhes(animal: Animal) {
     const rotaDestino = '/animais/detalhes';
@@ -126,9 +139,9 @@ export class AnimaisComponent implements OnInit {
     this.modalAnimalComponent.openAtualizar(animal);
   }
 
-  carregarDados() {
+  carregarDados(filtros: any = {}) {
     forkJoin({
-      animais: this.animalService.getAnimais(),
+      animais: this.animalService.getAnimais(filtros), 
       tutores: this.tutorService.getTutores()
     }).subscribe(({ animais, tutores }) => {
       const tutoresMap = new Map<number, Tutor>(tutores.map(t => [t.id, t]));
