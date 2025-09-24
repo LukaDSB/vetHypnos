@@ -1,4 +1,12 @@
+import { Contato, Endereco } from "./usuario.model";
+
 export interface Tutor {
   id: number;
-  tutor_nome: string;
+  nome: string;
+  cpf: string;
+  endereco_id: number;
+  contato_id:number;
+  endereco: Endereco;
+  contatos: Contato[];
+
 }

@@ -37,7 +37,6 @@ export class ProntuarioParcialComponent implements OnInit {
   medicamentosRecebidos: Medicamento[] = [];
   medicamentosAgrupados = new Map<string, MedicamentoCalculado[]>();
   
-  // NOVO: Propriedade para armazenar os tipos de procedimento vindos da API
   tiposDeProcedimento: TipoProcedimento[] = [];
   
   dadosRecebidos: Animal | undefined;
@@ -45,7 +44,7 @@ export class ProntuarioParcialComponent implements OnInit {
   animal: Animal | undefined;
   observacoes = '';
   medicoResponsavel = '';
-  tipo_procedimento_id: number | null = null; // Inicie como null ou um valor padrão
+  tipo_procedimento_id: number | null = null;
   dataProcedimento = new Date().toISOString().split('T')[0];
   animalIdade: number | null = null;
   duracaoProcedimento = '4 horas';
@@ -57,7 +56,7 @@ export class ProntuarioParcialComponent implements OnInit {
     private router: Router, 
     private prontuarioService: ProntuarioService, 
     private authService: AuthService,
-    private tipoProcedimentoService: TipoProcedimentoService // NOVO: Injete o serviço
+    private tipoProcedimentoService: TipoProcedimentoService 
   ) {
     this.dataSource = this.parametros.map(param => {
       const row: any = { parametro: param };
@@ -78,7 +77,6 @@ export class ProntuarioParcialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // NOVO: Chama o método para carregar os tipos de procedimento
     this.carregarTiposDeProcedimento();
 
     this.usuarioLogado = this.authService.getDadosUsuario();
@@ -94,12 +92,10 @@ export class ProntuarioParcialComponent implements OnInit {
     }
   }
 
-  // NOVO: Método para buscar os dados da API
   carregarTiposDeProcedimento(): void {
     this.tipoProcedimentoService.getTipoProcedimento().subscribe({
       next: (data) => {
         this.tiposDeProcedimento = data;
-        // Opcional: define um valor padrão para o dropdown após carregar
         if (this.tiposDeProcedimento.length > 0) {
           this.tipo_procedimento_id = this.tiposDeProcedimento[0].id;
         }
@@ -117,7 +113,7 @@ export class ProntuarioParcialComponent implements OnInit {
           this.medicamentosAgrupados.set(categoria, []);
         }
 
-        const concentracaoMgMl = (med.concentracao ?? 0) * 10;
+        const concentracaoMgMl = (med.concentracao ?? 0);
         let volume_min = 0;
         let volume_max = 0;
 

@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { HdkButtonComponent } from './components/hdk/button/hdk-button.component';
 import { TabelaComponent } from './components/hdk/tabela/hdk-tabela.component';
 import { HdkModalComponent } from './components/hdk/modal/hdk-modal.component';
-import { TutoresComponent } from './components/tutores/tutores.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -30,12 +29,14 @@ import { HdkModalFeedbackComponent } from './components/hdk/hdk-modal-feedback/h
 import { authInterceptor } from './services/auth/auth.interceptor';
 import { ProntuarioFinalizadoComponent } from './components/prontuarios/prontuario-finalizado/prontuario-finalizado.component';
 import { AcoesModalComponent } from './components/hdk/acoes-modal/acoes-modal.component';
+import { ModalTutoresComponent } from './components/tutores/modal-tutores/modal-tutores.component';
+import { TutoresComponent } from './components/tutores/tutores.component';
+import { DetalhesTutorComponent } from './components/tutores/detalhes-tutor/detalhes-tutor.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
     RelatoriosComponent, 
-    TutoresComponent, 
     ProntuarioProvisorioComponent, 
   ],
   imports: [
@@ -63,7 +64,10 @@ import { AcoesModalComponent } from './components/hdk/acoes-modal/acoes-modal.co
     CustomCheckboxComponent,
     HdkModalFeedbackComponent,
     ProntuarioFinalizadoComponent,
-    AcoesModalComponent
+    AcoesModalComponent,
+    ModalTutoresComponent,
+    TutoresComponent,
+    DetalhesTutorComponent
 ],
   providers: [provideNgxMask(), provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent]

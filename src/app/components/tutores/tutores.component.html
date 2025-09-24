@@ -1,1 +1,54 @@
-<p>tutores works!</p>
+<h2 class="hypnosText--TituloGrande mb-2">Buscar Tutor</h2>
+<div class="search-container">
+  <div class="form-group">
+    <label for="id">Id</label>
+    <input type="search" class="form-control" id="id">
+  </div>
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input type="search" class="form-control" id="nome">
+  </div>
+  <div class="form-group">
+    <label for="cpf">CPF</label>
+    <input type="search" class="form-control" id="cpf">
+  </div>
+  <div class="form-group">
+    <label for="endereco">Endereço</label>
+    <input type="search" class="form-control" id="endereco">
+  </div>
+  <hdk-button
+    icon="fa-solid fa-search"
+    text="Buscar"
+    color="hdk-bg-verde">
+  </hdk-button>
+</div>
+
+<hdk-divisor></hdk-divisor>
+
+<div class="underDivisor">
+  <hdk-button
+    text="Voltar"
+    color="hdk-bg-verde"
+    (click)="voltar()">
+  </hdk-button>
+  <hdk-button
+    text="Cadastrar novo tutor"
+    color="hdk-bg-verde"
+    (click)="abrirModalCadastro()"
+    >
+  </hdk-button>
+</div>
+
+<hdk-divisor [hideDivisor]="true"></hdk-divisor>
+
+<hdk-tabela
+  [displayedColumns]="displayedColumns"
+  [dataSource]="dataSource"
+  (visualizar)="visualizarDetalhes($event)"
+  (excluir)="deletarTutor($event)"
+  [exibirAcaoVisualizar]="true"> 
+</hdk-tabela>
+
+<app-hdk-modal-feedback></app-hdk-modal-feedback>
+
+<app-modal-tutores #modalTutor (cadastrar)="cadastrarTutor($event)"></app-modal-tutores>

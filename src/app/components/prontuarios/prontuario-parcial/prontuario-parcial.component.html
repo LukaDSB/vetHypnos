@@ -131,7 +131,7 @@
       </div>
       <div *ngFor="let med of grupo.value" class="section-content-3">
         <div class="justify-content-between d-flex">
-          <div class="hypnosText--fonte1 label-2">{{ med.nome }} {{ med.concentracao ? med.concentracao + '%' : '' }}</div>
+          <div class="hypnosText--fonte1 label-2">{{ med.nome.split(' ')[0] }} {{ med.concentracao ? (med.concentracao * 0.1) + '(mg/ml)' : '' }}</div>
           <div class="hypnosText--fonte1 label-2">{{ (med.volume_min | number:'1.2-4') + 'ml' }}</div>
           <div class="hypnosText--fonte1 label-2">{{ (med.volume_max | number:'1.2-4') + 'ml' }}</div>
         </div>

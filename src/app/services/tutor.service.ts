@@ -14,4 +14,12 @@ export class TutorService {
   getTutores(): Observable<Tutor[]> {
       return this.http.get<Tutor[]>(`${this.apiUrl}/tutor`);
   }
+
+  deletarTutor(id: number): Observable<Tutor[]> {
+      return this.http.delete<Tutor[]>(`${this.apiUrl}/tutor/${id}`);
+  }
+
+  cadastrarTutor(tutor: Tutor): Observable<Tutor> {
+    return this.http.post<Tutor>(`${this.apiUrl}/tutor/`, tutor);
+  }
 }

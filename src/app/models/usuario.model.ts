@@ -1,5 +1,3 @@
-// Este arquivo agora define a estrutura completa da resposta da API
-
 export interface Estado {
   id: number;
   nome: string;
@@ -34,7 +32,7 @@ export interface Clinica {
   id: number;
   nome: string;
   endereco: Endereco | null;
-  contatos: Contato[]; // <-- MUDANÇA: de 'contato: Contato' para 'contatos: Contato[]'
+  contatos: Contato[];
 }
 
 export interface Especialidade {

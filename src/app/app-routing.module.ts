@@ -14,6 +14,7 @@ import { ProntuarioProvisorioComponent } from './components/prontuario-provisori
 import { SelecionarMedicamentosComponent } from './components/prontuarios/selecionar-medicamentos/selecionar-medicamentos.component';
 import { authGuard } from './services/auth/auth.guard';
 import { ProntuarioFinalizadoComponent } from './components/prontuarios/prontuario-finalizado/prontuario-finalizado.component';
+import { DetalhesTutorComponent } from './components/tutores/detalhes-tutor/detalhes-tutor.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'prontuarios/gerarProntuario', component: ProntuarioProvisorioComponent },
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'tutores', component: TutoresComponent },
+  { path: 'tutores/detalhes', component: DetalhesTutorComponent },
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
   { path: 'usuario', component: UsuariosComponent },
 ];

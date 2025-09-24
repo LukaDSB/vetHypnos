@@ -1,0 +1,95 @@
+<div *ngIf="isCadastroModalOpen" class="modal" (click)="onBackdropClick($event)" id="modal-background" [ngClass]="{'modal': true, 'modal-open': isCadastroModalOpen}">
+  <div class="modal-content">
+
+    <form #animalForm="ngForm">
+      <h1 class="hipnosText--TituloGrande">
+        {{ isAtualizarModal ? 'Atualizar Tutor' : 'Cadastrar novo Tutor' }}
+      </h1>
+
+      <div class="form-group">
+        <label for="nome">Nome *</label>
+        <input type="search" class="bg-azul col-2 form-control" [(ngModel)]="nome" name="nome" required />
+      </div>
+
+      <div class="form-group">
+        <label for="cpf">CPF *</label>
+        <input
+          type="text"
+          [(ngModel)]="cpf"
+          name="cpf"
+          class="bg-azul col-2 form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          class="bg-azul col-2 form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input
+          type="text"
+          [(ngModel)]="telefone"
+          name="telefone"
+          class="bg-azul col-2 form-control"
+        />
+      </div>
+
+
+      <div class="form-group">
+        <label for="bairro">Bairro</label>
+        <input
+          type="text"
+          [(ngModel)]="bairro"
+          name="bairro"
+          class="bg-azul col-2 form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="rua">Rua</label>
+        <input
+          type="text"
+          [(ngModel)]="rua"
+          name="rua"
+          class="bg-azul col-2 form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="numero">Numero</label>
+        <input
+          type="text"
+          [(ngModel)]="numero"
+          name="numero"
+          class="bg-azul col-2 form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="cidade_nome">Nome da Cidade</label>
+        <input type="text" [(ngModel)]="cidade_nome" name="cidade_nome" class="bg-azul col-2 form-control" />
+      </div>
+      <div class="form-group">
+        <label for="estado_nome">Nome do Estado</label>
+        <input type="text" [(ngModel)]="estado_nome" name="estado_nome" class="bg-azul col-2 form-control" />
+      </div>
+
+
+      <footer>
+          <hdk-button
+            [text]="isAtualizarModal ? 'Atualizar' : 'Cadastrar'"
+            color="hdk-bg-verde"
+            (click)="salvarTutor()"
+            />
+        <hdk-button text="Cancelar" color="hdk-bg-vermelho" (click)="closeCadastro()"/>
+      </footer>
+    </form>
+  </div>
+</div>

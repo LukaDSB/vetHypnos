@@ -102,7 +102,7 @@ export class ModalAnimalComponent implements OnInit{
       this.TutorAnimal = null;
     } else {
       this.tutoresFiltrados = this.todosOsTutores.filter(tutor =>
-        tutor.tutor_nome.toLowerCase().includes(this.buscaTutor.toLowerCase())
+        tutor.nome.toLowerCase().includes(this.buscaTutor.toLowerCase())
       );
     }
   }
@@ -112,7 +112,7 @@ export class ModalAnimalComponent implements OnInit{
   }
 
   selecionarTutor(tutor: Tutor): void {
-    this.buscaTutor = tutor.tutor_nome;
+    this.buscaTutor = tutor.nome;
     this.TutorAnimal = tutor.id;
     this.isDropdownTutorAberto = false;
   }
@@ -167,7 +167,7 @@ export class ModalAnimalComponent implements OnInit{
     this.nomeAnimal = animal.nome;
 
     const tutorSelecionado = this.todosOsTutores.find(t => t.id === animal.tutor_id);
-    this.buscaTutor = tutorSelecionado ? tutorSelecionado.tutor_nome : '';
+    this.buscaTutor = tutorSelecionado ? tutorSelecionado.nome : '';
 
     const especieSelecionada = this.especies.find(e => e.especie_id === animal.especie_id);
     this.buscaEspecie = especieSelecionada ? especieSelecionada.especie : '';

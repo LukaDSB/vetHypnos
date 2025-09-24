@@ -50,7 +50,6 @@ export class TabelaComponent<T extends { id: any, nome?: any }> implements After
   ) {}
   
   ngOnInit(): void {
-    // ALTERADO: Usamos a mesma query do CSS para garantir consistência.
     this.breakpointObserver.observe(['(max-width: 1190px)']).subscribe(result => {
       this.isMobile = result.matches;
     });
@@ -58,6 +57,7 @@ export class TabelaComponent<T extends { id: any, nome?: any }> implements After
 
   ngAfterViewInit() {
     this.connectPaginator();
+    console.log(this.dataSource)
   }
 
   private connectPaginator() {
@@ -73,7 +73,6 @@ export class TabelaComponent<T extends { id: any, nome?: any }> implements After
 
     const dialogRef = this.dialog.open(AcoesModalComponent, {
       width: '280px',
-      // ALTERADO: Adiciona a classe do painel que criamos no styles.scss
       panelClass: 'acoes-modal-panel', 
       data: { 
         itemName: element.nome || `ID: ${element.id}`,
