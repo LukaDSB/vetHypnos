@@ -93,6 +93,7 @@ export class AnimaisComponent implements OnInit {
         console.error('Erro ao cadastrar animal:', err);
       }
     });
+    this.carregarDados();
   }
 
   enviarAtualizacao(animal: Animal) {

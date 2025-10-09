@@ -20,8 +20,8 @@ export class ModalTutoresComponent {
   bairro?: string;
   rua?: string;
   numero?: number;
-  cidade_nome?: number;
-  estado_nome?: number;
+  cidade_nome?: string;
+  estado_nome?: string;
 
   isAtualizarModal = false;
   isCadastroModalOpen = false;
@@ -62,9 +62,9 @@ export class ModalTutoresComponent {
       numero: this.numero,
       bairro: this.bairro,
       cidade: {
-        nome: this.cidade_nome,
+        cidade_nome: this.cidade_nome,
         estado: {
-          nome: this.estado_nome
+          estado_nome: this.estado_nome
         }
       }
     };
