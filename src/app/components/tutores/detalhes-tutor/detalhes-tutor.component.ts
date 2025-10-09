@@ -101,7 +101,7 @@ export class DetalhesTutorComponent implements OnInit {
    private extrairTelefone(): void {
     if (this.dadosRecebidos?.contatos) {
       const contatoTelefone = this.dadosRecebidos.contatos.find(
-        (contato) => contato.tipo_contato?.descricao.toLowerCase() === 'telefone'
+        (contato: any) => contato.tipoContato?.descricao?.toLowerCase() === 'telefone'
       );
 
       if (contatoTelefone) {
