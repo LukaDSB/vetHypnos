@@ -1,5 +1,4 @@
-// src/app/pages/prontuarios/prontuario-finalizado/prontuario-finalizado.component.ts
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';

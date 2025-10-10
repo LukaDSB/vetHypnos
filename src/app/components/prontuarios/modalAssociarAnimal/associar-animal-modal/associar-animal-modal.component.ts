@@ -1,5 +1,3 @@
-
-
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -26,9 +24,6 @@ export class AssociarAnimalModalComponent {
   senha = '';
   nome = '';
   dataSource: MatTableDataSource<Animal> = new MatTableDataSource<Animal>([]);
-  
-  
-  
   
   @ViewChild('modalAssociarAnimalExistente') set modalAssociarAnimalExistente(comp: ModalAssociarAnimalExistenteComponent) {
     if (comp) {

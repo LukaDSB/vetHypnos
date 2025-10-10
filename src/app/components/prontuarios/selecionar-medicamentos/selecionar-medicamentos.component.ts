@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MedicamentoService } from 'src/app/services/medicamento.service';
@@ -7,7 +7,7 @@ import { Animal } from 'src/app/models/animal.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HdkButtonComponent } from "../../hdk/button/hdk-button.component";
-
+import { FormsModule } from '@angular/forms';
 
 interface AccordionSection {
   titulo: string;
@@ -26,6 +26,7 @@ interface AccordionSection {
     CdkAccordionModule,
     MatCheckboxModule,
     HdkButtonComponent,
+    FormsModule // Importado
   ],
 })
 export class SelecionarMedicamentosComponent implements OnInit {
@@ -33,7 +34,7 @@ export class SelecionarMedicamentosComponent implements OnInit {
   medicamentosSelecionados = new Set<number>();
   private todosMedicamentos: Medicamento[] = [];
 
-
+  tipoInfusao: 'bomba' | 'macrogotas' | 'microgotas' = 'bomba';
 
   secoesDoAccordion: AccordionSection[] = [
     {
@@ -126,13 +127,10 @@ export class SelecionarMedicamentosComponent implements OnInit {
 
 
   private prepararSecoesDoAccordion(): void {
-
     for (const secao of this.secoesDoAccordion) {
-
       const medicamentosDaSecao = this.todosMedicamentos.filter(med =>
         med.categoria_medicamento && secao.categoriasPermitidas.includes(med.categoria_medicamento.descricao)
       );
-
 
       const grupos = new Map<string, Medicamento[]>();
       for (const med of medicamentosDaSecao) {
@@ -142,12 +140,9 @@ export class SelecionarMedicamentosComponent implements OnInit {
         }
         grupos.get(categoria)!.push(med);
       }
-
       secao.medicamentosAgrupados = grupos;
     }
   }
-
-
 
   onSelectionChange(event: { checked: boolean }, medId: number): void {
     if (event.checked) {
@@ -171,7 +166,8 @@ export class SelecionarMedicamentosComponent implements OnInit {
     this.router.navigate(['/prontuarios/prontuarioParcial'], {
       state: {
         animal: this.dadosRecebidos,
-        medicamentos: medicamentosParaEnviar
+        medicamentos: medicamentosParaEnviar,
+        tipoInfusao: this.tipoInfusao
       }
     });
   }

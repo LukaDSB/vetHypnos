@@ -1,1 +1,50 @@
 @import '../../hdk/cores.scss';
+
+.scrollCards{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; 
+  gap: 1.5vw;
+  justify-content: flex-start; 
+}
+
+.card-responsive {
+    min-width: 10rem;
+    width: 18%; 
+    flex-grow: 1; 
+    height: auto; 
+    min-height: 80px; 
+    margin-bottom: 10px; 
+}
+
+.card-icon {
+    font-size: 3em; 
+}
+
+@media (max-width: 992px) {
+    .card-responsive {
+        width: 45%; 
+    }
+    .card-icon {
+        font-size: 2em; 
+    }
+    .card-number {
+        font-size: 1.2em;
+    }
+    .card-label {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-responsive {
+        width: 100%; 
+    }
+    
+    .card-body {
+        justify-content: center !important; 
+    }
+    .card-number, .card-label {
+        text-align: left;
+    }
+}

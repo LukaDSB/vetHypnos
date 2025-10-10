@@ -17,7 +17,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TipoProcedimento } from 'src/app/models/tipoProcedimento.model';
 import { TipoProcedimentoService } from 'src/app/services/tipoProcedimento.service';
 
-
 interface MedicamentoCalculado extends Medicamento {
   volume_min: number;
   volume_max: number;
@@ -36,9 +35,9 @@ export class ProntuarioParcialComponent implements OnInit {
   dataSource: any[];
   medicamentosRecebidos: Medicamento[] = [];
   medicamentosAgrupados = new Map<string, MedicamentoCalculado[]>();
-  
+
   tiposDeProcedimento: TipoProcedimento[] = [];
-  
+
   dadosRecebidos: Animal | undefined;
   horarios: string[] = Array(10).fill('');
   animal: Animal | undefined;
@@ -49,14 +48,17 @@ export class ProntuarioParcialComponent implements OnInit {
   animalIdade: number | null = null;
   duracaoProcedimento = '4 horas';
   usuarioLogado: { id: number, nome: string } | null = null;
+  
+  // NOVO: Propriedade para rastrear o tipo de infusão (padrão 'bomba')
+  tipoInfusao: 'bomba' | 'macrogotas' | 'microgotas' = 'bomba';
 
   @ViewChild('modalAdicionarMedicamentos') modalAdicionarMedicamentos!: ProntuarioParcialModalAdicionarMedicamentosComponent;
-  
+
   constructor(
-    private router: Router, 
-    private prontuarioService: ProntuarioService, 
+    private router: Router,
+    private prontuarioService: ProntuarioService,
     private authService: AuthService,
-    private tipoProcedimentoService: TipoProcedimentoService 
+    private tipoProcedimentoService: TipoProcedimentoService
   ) {
     this.dataSource = this.parametros.map(param => {
       const row: any = { parametro: param };
@@ -67,12 +69,18 @@ export class ProntuarioParcialComponent implements OnInit {
     });
 
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { animal: Animal, medicamentos: Medicamento[] };
-    
-    if (state && state.animal && state.animal.peso) { 
-        this.dadosRecebidos = state.animal; 
-        this.medicamentosRecebidos = state.medicamentos;
-        this.agruparECalcularMedicamentos(this.dadosRecebidos.peso);
+    const state = navigation?.extras.state as { animal: Animal, medicamentos: Medicamento[], tipoInfusao?: 'bomba' | 'macrogotas' | 'microgotas' };
+
+    if (state && state.animal && state.animal.peso) {
+      this.dadosRecebidos = state.animal;
+      this.medicamentosRecebidos = state.medicamentos;
+      
+      // Recebe o tipoInfusao da navegação
+      if (state.tipoInfusao) {
+        this.tipoInfusao = state.tipoInfusao;
+      }
+      
+      this.agruparECalcularMedicamentos(this.dadosRecebidos.peso);
     }
   }
 
@@ -105,6 +113,15 @@ export class ProntuarioParcialComponent implements OnInit {
   }
 
   private agruparECalcularMedicamentos(pesoAnimal: number): void {
+    this.medicamentosAgrupados.clear(); // Limpa antes de recalcular
+
+    let fatorMultiplicacao = 1;
+    if (this.tipoInfusao === 'macrogotas') {
+      fatorMultiplicacao = 20;
+    } else if (this.tipoInfusao === 'microgotas') {
+      fatorMultiplicacao = 60;
+    }
+
     for (const med of this.medicamentosRecebidos) {
       if (med.categoria_medicamento?.descricao) {
         const categoria = med.categoria_medicamento.descricao;
@@ -118,12 +135,17 @@ export class ProntuarioParcialComponent implements OnInit {
         let volume_max = 0;
 
         if (concentracaoMgMl > 0 && med.dose_min) {
-            volume_min = (pesoAnimal * med.dose_min) / concentracaoMgMl;
-            volume_max = med.dose_max ? (pesoAnimal * med.dose_max) / concentracaoMgMl : volume_min;
+          // Cálculo base (mL)
+          const base_min = (pesoAnimal * med.dose_min) / concentracaoMgMl;
+          const base_max = med.dose_max ? (pesoAnimal * med.dose_max) / concentracaoMgMl : base_min;
+
+          // Aplica o fator de multiplicação (transforma mL em gotas, se necessário)
+          volume_min = base_min * fatorMultiplicacao;
+          volume_max = base_max * fatorMultiplicacao;
         }
 
         const medCalculado: MedicamentoCalculado = {
-          ...med, 
+          ...med,
           volume_min: volume_min,
           volume_max: volume_max
         };
@@ -176,11 +198,11 @@ export class ProntuarioParcialComponent implements OnInit {
     });
 
     const todosMedicamentosCalculados = Array.from(this.medicamentosAgrupados.values()).flat();
-    
+
     const medicamentosParaEnviar = todosMedicamentosCalculados.map(med => ({
-        medicamento_id: med.id, 
-        volume_min: med.volume_min,
-        volume_max: med.volume_max
+      medicamento_id: med.id,
+      volume_min: med.volume_min,
+      volume_max: med.volume_max
     }));
 
     const prontuarioParaEnviar: any = {
@@ -193,7 +215,7 @@ export class ProntuarioParcialComponent implements OnInit {
       medicamentos: medicamentosParaEnviar,
       medicoes_clinicas: medicoes_clinicas
     };
-    
+
     console.log('✅ Objeto pronto para ser enviado:', prontuarioParaEnviar);
 
     this.prontuarioService.criarProntuario(prontuarioParaEnviar).subscribe({

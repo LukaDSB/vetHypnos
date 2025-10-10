@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-
 .poppins-bold {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -44,7 +43,6 @@
   font-size: 37px;
 }
 
-
 .example-accordion-item-body {
   background-color: white;
   border-bottom-left-radius: 20px;
@@ -60,25 +58,37 @@
   font-size: 24px;
 }
 
+.tipo-infusao-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 10px;
+    background-color: #E3EDF9; 
+    border-top: 1px solid #000000;
+}
+
+.infusao-option {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    
+    white-space: nowrap; 
+}
+
 .box{
   font-size: 22px;
   color: #2F007B;
 }
 
 .checkbox-container {
-  /* Define a largura ideal para cada coluna. O navegador criará quantas colunas couberem. */
   column-width: 300px; 
-
-  /* Define o espaço entre as colunas */
   column-gap: 20px;
-
-  /* Um preenchimento interno para os checkboxes não colarem nas bordas */
   padding: 10px;
 }
 
-.box .mini-titulo-accordion{
+.mini-titulo-accordion{
   font-size: 16px;
-  font-style: bold;
+  font-weight: bold; 
 }
 
 .mini-titulo-accordion-2{
@@ -88,13 +98,14 @@
 }
 
 :host ::ng-deep .box.mat-mdc-checkbox {
-  .mdc-checkbox {
-    --mdc-checkbox-size: 20px; 
-  }
-  
+  --mdc-checkbox-size: 20px; 
+  --mdc-checkbox-unselected-icon-color: #ccccccb1; 
   --mdc-checkbox-selected-icon-color: #4CAF50;
-  --mdc-checkbox-unselected-icon-color: #ccccccb1;
   --mdc-checkbox-selected-checkmark-color: white;
+  
+  .mdc-form-field {
+    align-items: center;
+  }
 }
 
 .example-accordion-item:first-child {
@@ -143,83 +154,6 @@ hr {
   border: none;
   height: 3px;
   background-color: #a9a9a9;
-}
-
-.botoes-acao {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-button {
-  padding: 15px 25px;
-  border: none;
-  border-radius: 17px;
-  font-weight: 600;
-  font-size: 20px;
-  color: white;
-  cursor: pointer;
-}
-
-.btn-duplo{
-  display: flex;
-  gap: 30px;
-}
-
-.historico-container {
-  background-color: #f9f4ed;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.historico-container h2 {
-  font-size: 30px;
-  margin: 20px 0px;
-}
-
-.container-cards{
-  margin: 4em 8em;
-  overflow-y: auto;
-  height: 400px;
-  scroll-behavior: smooth;
-  border-radius: 8px;
-}
-
-.card-historico {
-  background-color: white;
-  border-radius: 32px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  padding: 18px 22px;
-  margin-bottom: 20px;
-  text-align: center;
-  margin: 30px 50px 10px 50px;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.425);
-}
-
-.cabecalho {
-  background-color: #239b3a;
-  color: white;
-  border-radius: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  font-size: 20px;
-  margin-bottom: 10px;
-  margin: 10px 50px 10px 50px;
-}
-
-.cabecalho div {
-  flex: 1;
-  text-align: center;
-  margin: 5px 25px 5px 25px;
-}
-
-.medico {
-  font-weight: 500;
-  color: #333;
-  font-size: 20px;
 }
 
 .salvar-container{

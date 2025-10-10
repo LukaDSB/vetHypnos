@@ -29,7 +29,7 @@
 <div class="scroll">
   <cdk-accordion class="example-accordion poppins-bold" [multi]="true">
     <cdk-accordion-item
-      *ngFor="let secao of secoesDoAccordion"
+      *ngFor="let secao of secoesDoAccordion; let i = index"
       class="example-accordion-item"
       #accordionItem="cdkAccordionItem"
       role="button"
@@ -43,6 +43,28 @@
       <div class="example-accordion-item-body inter" role="region"
         [style.display]="secao.expanded ? '' : 'none'">
         
+        <div *ngIf="i === 2 && secao.titulo === 'Manutenção anestésica (bomba infusora)'">
+            <p class="subtitulo-accordion inter"> Opções de Infusão</p>
+
+            <div class="tipo-infusao-container">
+                <div class="infusao-option" (click)="tipoInfusao = 'bomba'">
+                    <mat-checkbox class="box inter" [checked]="tipoInfusao === 'bomba'">
+                        Bomba de infusão(ml/h)
+                    </mat-checkbox>
+                </div>
+                <div class="infusao-option" (click)="tipoInfusao = 'macrogotas'">
+                    <mat-checkbox class="box inter" [checked]="tipoInfusao === 'macrogotas'">
+                        Macrogotas(20 gotas/ml)
+                    </mat-checkbox>
+                </div>
+                <div class="infusao-option" (click)="tipoInfusao = 'microgotas'">
+                    <mat-checkbox class="box inter" [checked]="tipoInfusao === 'microgotas'">
+                        Microgotas(60 gotas/ml)
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+        
         <div *ngIf="secao.medicamentosAgrupados.size > 0; else semMedicamentos">
           <div *ngFor="let grupo of secao.medicamentosAgrupados | keyvalue" style="padding: 10px;" class="inter">
             <p class="mini-titulo-accordion inter">{{ grupo.key }}</p>
@@ -52,7 +74,6 @@
                     class="box inter"
                     (change)="onSelectionChange($event, med.id)">
                   {{ med.nome }} 
-                  <!-- {{ med.concentracao ? med.concentracao + 'mg/ml' : '' }} -->
                 </mat-checkbox>
               </div>
             </div>
