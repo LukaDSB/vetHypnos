@@ -24,6 +24,7 @@ export class ModalTutoresComponent {
   cidade_nome: string = '';
   estado_nome: string = '';
 
+
   isAtualizarModal = false;
   isCadastroModalOpen = false;
   isDropdownTutorAberto = false;
@@ -40,6 +41,10 @@ export class ModalTutoresComponent {
   }
 
   openAtualizar(tutor: Tutor) {
+    console.log('Tutor para atualizar:', tutor);
+
+    
+    
     this.isAtualizarModal = true;
     this.tutorId = tutor.id;
     this.nome = tutor.nome;
@@ -57,11 +62,25 @@ export class ModalTutoresComponent {
       }
     }
 
-    const telefoneContato = tutor.contatos?.find(c => Number(c.tipo_contato) === 2);
-    this.telefone = telefoneContato?.descricao || '';
+    if (tutor?.contatos) {
+      const contatoTelefone = tutor.contatos.find(
+        (contato: any) => contato.tipoContato?.descricao?.toLowerCase() === 'telefone'
+      );
 
-    const emailContato = tutor.contatos?.find(c => Number(c.tipo_contato) === 1);
-    this.email = emailContato?.descricao || '';
+      if (contatoTelefone) {
+        this.telefone = contatoTelefone.descricao;
+      }
+    }
+
+    if (tutor?.contatos) {
+      const contatoEmail = tutor.contatos.find(
+        (contato: any) => contato.tipoContato?.descricao?.toLowerCase() === 'email'
+      );
+
+      if (contatoEmail) {
+        this.email = contatoEmail.descricao;
+      }
+    }
 
     this.isCadastroModalOpen = true;
   }
