@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,11 +16,15 @@ export class TutorService {
       return this.http.get<Tutor[]>(`${this.apiUrl}/tutor`);
   }
 
-  deletarTutor(id: number): Observable<Tutor[]> {
-      return this.http.delete<Tutor[]>(`${this.apiUrl}/tutor/${id}`);
+  deletarTutor(id: number): Observable<any> {
+      return this.http.delete<any>(`${this.apiUrl}/tutor/${id}`);
   }
 
   cadastrarTutor(tutor: Tutor): Observable<Tutor> {
     return this.http.post<Tutor>(`${this.apiUrl}/tutor/`, tutor);
+  }
+
+  atualizarTutor(tutor: Tutor): Observable<Tutor> {
+    return this.http.put<Tutor>(`${this.apiUrl}/tutor/${tutor.id}`, tutor);
   }
 }

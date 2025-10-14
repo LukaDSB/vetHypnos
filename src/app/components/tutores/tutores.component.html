@@ -45,10 +45,14 @@
   [displayedColumns]="displayedColumns"
   [dataSource]="dataSource"
   (visualizar)="visualizarDetalhes($event)"
+  (atualizar)="editarTutor($event)"
   (excluir)="deletarTutor($event)"
   [exibirAcaoVisualizar]="true"> 
 </hdk-tabela>
 
 <app-hdk-modal-feedback></app-hdk-modal-feedback>
 
-<app-modal-tutores #modalTutor (cadastrar)="cadastrarTutor($event)"></app-modal-tutores>
+<app-modal-tutores #modalTutor 
+  (cadastrar)="cadastrarTutor($event)"
+  (atualizar)="atualizarTutor($event)">
+</app-modal-tutores>

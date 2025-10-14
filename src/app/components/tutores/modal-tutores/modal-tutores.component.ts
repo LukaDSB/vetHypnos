@@ -13,15 +13,16 @@ import { Tutor } from 'src/app/models/tutor.model';
   imports:[FormsModule, HdkButtonComponent, CommonModule]
 })
 export class ModalTutoresComponent {
-  nome?: string;
-  cpf?: string;
-  telefone?: string;
-  email?: string;
-  bairro?: string;
-  rua?: string;
-  numero?: number;
-  cidade_nome?: string;
-  estado_nome?: string;
+  tutorId?: number;
+  nome: string = '';
+  cpf: string = '';
+  telefone: string = '';
+  email: string = '';
+  bairro: string = '';
+  rua: string = '';
+  numero: number = 0;
+  cidade_nome: string = '';
+  estado_nome: string = '';
 
   isAtualizarModal = false;
   isCadastroModalOpen = false;
@@ -35,6 +36,33 @@ export class ModalTutoresComponent {
   openCadastro() {
     this.isAtualizarModal = false;
     this.resetCampos();
+    this.isCadastroModalOpen = true;
+  }
+
+  openAtualizar(tutor: Tutor) {
+    this.isAtualizarModal = true;
+    this.tutorId = tutor.id;
+    this.nome = tutor.nome;
+    this.cpf = tutor.cpf;
+    
+    if (tutor.endereco) {
+      this.bairro = tutor.endereco.bairro;
+      this.rua = tutor.endereco.rua;
+      this.numero = Number(tutor.endereco.numero) || 0;
+      if (tutor.endereco.cidade) {
+        this.cidade_nome = tutor.endereco.cidade.nome;
+        if (tutor.endereco.cidade.estado) {
+          this.estado_nome = tutor.endereco.cidade.estado.nome;
+        }
+      }
+    }
+
+    const telefoneContato = tutor.contatos?.find(c => Number(c.tipo_contato) === 2);
+    this.telefone = telefoneContato?.descricao || '';
+
+    const emailContato = tutor.contatos?.find(c => Number(c.tipo_contato) === 1);
+    this.email = emailContato?.descricao || '';
+
     this.isCadastroModalOpen = true;
   }
 
@@ -100,15 +128,16 @@ export class ModalTutoresComponent {
   }
 
   resetCampos(){
-    this.nome = undefined;
-    this.cpf = undefined;
-    this.telefone = undefined;
-    this.email = undefined;
-    this.bairro = undefined;
-    this.rua = undefined;
-    this.numero = undefined;
-    this.cidade_nome = undefined;
-    this.estado_nome = undefined;
+    this.tutorId = undefined;
+    this.nome = '';
+    this.cpf = '';
+    this.telefone = '';
+    this.email = '';
+    this.bairro = '';
+    this.rua = '';
+    this.numero = 0;
+    this.cidade_nome = '';
+    this.estado_nome = '';
   }
 
 }

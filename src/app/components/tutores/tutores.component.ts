@@ -46,9 +46,28 @@ export class TutoresComponent implements OnInit, OnDestroy {
     this.tutorService.cadastrarTutor(tutor).subscribe({
       next: () => {
         this.carregarDados();
+        this.modalFeedback.open('sucesso', 'Sucesso', 'Tutor cadastrado com sucesso!');
       },
       error: (err) => {
         console.error('Erro ao cadastrar tutor:', err);
+        this.modalFeedback.open('erro', 'Erro', 'Erro ao cadastrar tutor.');
+      }
+    });
+  }
+
+  editarTutor(tutor: Tutor) {
+    this.modalTutorComponent.openAtualizar(tutor);
+  }
+
+  atualizarTutor(tutor: Tutor) {
+    this.tutorService.atualizarTutor(tutor).subscribe({
+      next: () => {
+        this.carregarDados();
+        this.modalFeedback.open('sucesso', 'Sucesso', 'Tutor atualizado com sucesso!');
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar tutor:', err);
+        this.modalFeedback.open('erro', 'Erro', 'Erro ao atualizar tutor.');
       }
     });
   }
