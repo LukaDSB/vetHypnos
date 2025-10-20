@@ -21,10 +21,12 @@ export class TutorService {
   }
 
   cadastrarTutor(tutor: Tutor): Observable<Tutor> {
+    console.log('Objeto Tutor sendo enviado para cadastro:', tutor);
     return this.http.post<Tutor>(`${this.apiUrl}/tutor/`, tutor);
   }
 
   atualizarTutor(tutor: Tutor): Observable<Tutor> {
+    console.log('Objeto Tutor sendo enviado para atualização:', tutor);
     return this.http.put<Tutor>(`${this.apiUrl}/tutor/${tutor.id}`, tutor);
   }
 }

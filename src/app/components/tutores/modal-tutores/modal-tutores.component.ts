@@ -24,6 +24,13 @@ export class ModalTutoresComponent {
   cidade_nome: string = '';
   estado_nome: string = '';
 
+  idContatoTelefone?: number;
+  idContatoEmail?: number;
+  
+  idEndereco?: number;
+  idCidade?: number;
+  idEstado?: number;
+
 
   isAtualizarModal = false;
   isCadastroModalOpen = false;
@@ -42,8 +49,6 @@ export class ModalTutoresComponent {
 
   openAtualizar(tutor: Tutor) {
     console.log('Tutor para atualizar:', tutor);
-
-    
     
     this.isAtualizarModal = true;
     this.tutorId = tutor.id;
@@ -51,34 +56,39 @@ export class ModalTutoresComponent {
     this.cpf = tutor.cpf;
     
     if (tutor.endereco) {
+      this.idEndereco = tutor.endereco.id;
       this.bairro = tutor.endereco.bairro;
       this.rua = tutor.endereco.rua;
       this.numero = Number(tutor.endereco.numero) || 0;
+
       if (tutor.endereco.cidade) {
         this.cidade_nome = tutor.endereco.cidade.nome;
+        this.idCidade = tutor.endereco.cidade.id;
+
         if (tutor.endereco.cidade.estado) {
           this.estado_nome = tutor.endereco.cidade.estado.nome;
+          this.idEstado = tutor.endereco.cidade.estado.id;
         }
       }
+    } else {
+        this.idEndereco = undefined;
     }
 
     if (tutor?.contatos) {
       const contatoTelefone = tutor.contatos.find(
         (contato: any) => contato.tipoContato?.descricao?.toLowerCase() === 'telefone'
       );
-
       if (contatoTelefone) {
         this.telefone = contatoTelefone.descricao;
+        this.idContatoTelefone = contatoTelefone.id;
       }
-    }
 
-    if (tutor?.contatos) {
       const contatoEmail = tutor.contatos.find(
         (contato: any) => contato.tipoContato?.descricao?.toLowerCase() === 'email'
       );
-
       if (contatoEmail) {
         this.email = contatoEmail.descricao;
+        this.idContatoEmail = contatoEmail.id;
       }
     }
 
@@ -99,39 +109,59 @@ export class ModalTutoresComponent {
     }
 
     const tutor: any = {
+      id: this.tutorId,
       nome: this.nome,
       cpf: this.cpf
     };
 
     if (this.rua || this.numero || this.bairro || this.cidade_nome || this.estado_nome) {
-    tutor.endereco = {
-      rua: this.rua,
-      numero: this.numero,
-      bairro: this.bairro,
-      cidade: {
-        cidade_nome: this.cidade_nome,
-        estado: {
-          estado_nome: this.estado_nome
+      tutor.endereco = {
+        ...(this.isAtualizarModal && this.idEndereco ? { id: this.idEndereco } : {}), 
+        
+        rua: this.rua,
+        numero: this.numero.toString(),
+        bairro: this.bairro,
+        
+        cidade: {
+          ...(this.isAtualizarModal && this.idCidade ? { id: this.idCidade } : {}), 
+          nome: this.cidade_nome,
+          
+          estado: {
+            ...(this.isAtualizarModal && this.idEstado ? { id: this.idEstado } : {}),
+            nome: this.estado_nome
+          }
         }
-      }
-    };
-  }else {
+      };
+    } else {
       tutor.endereco = null;
     }
 
+    // 2. Estrutura dos CONTATOS (Ajustado para o JSON esperado)
     tutor.contatos = [];
+    
     if (this.telefone) {
-      tutor.contatos.push({
+      const contatoTelefone: any = {
         descricao: this.telefone,
-        tipo_contato_id: 2
-      });
+        tipoContato: { id: 2, descricao: "telefone" } // ID 2 para telefone (assumido)
+      };
+      
+      // Adiciona o ID do contato se for atualização
+      if (this.isAtualizarModal && this.idContatoTelefone) {
+        contatoTelefone.id = this.idContatoTelefone;
+      }
+      tutor.contatos.push(contatoTelefone);
     }
 
     if (this.email) {
-      tutor.contatos.push({
+      const contatoEmail: any = {
         descricao: this.email,
-        tipo_contato_id: 1
-      });
+        tipoContato: { id: 1, descricao: "email" }
+      };
+
+      if (this.isAtualizarModal && this.idContatoEmail) {
+        contatoEmail.id = this.idContatoEmail;
+      }
+      tutor.contatos.push(contatoEmail);
     }
 
     if (this.isAtualizarModal){
@@ -157,6 +187,12 @@ export class ModalTutoresComponent {
     this.numero = 0;
     this.cidade_nome = '';
     this.estado_nome = '';
+    
+    this.idContatoTelefone = undefined;
+    this.idContatoEmail = undefined;
+    this.idEndereco = undefined;
+    this.idCidade = undefined;
+    this.idEstado = undefined;
   }
 
 }
