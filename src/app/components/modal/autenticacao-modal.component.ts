@@ -18,6 +18,9 @@ export class AutenticacaoModalComponent {
   email = '';
   senha = '';
   nome = '';
+  cpf = '';
+  crmv = '';
+  especialidade = '';
 
   constructor(private authService: AuthService) {}
 
@@ -34,7 +37,7 @@ export class AutenticacaoModalComponent {
   }
 
   cadastrar() { 
-    const dados = { nome: this.nome, email: this.email, senha: this.senha };
+    const dados = { nome: this.nome, email: this.email, senha: this.senha, cpf: this.cpf, crmv: this.crmv};
     this.authService.registrar(dados).subscribe({
       next: () => {
         console.log('Cadastro realizado com sucesso!');

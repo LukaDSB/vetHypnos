@@ -44,7 +44,6 @@
 
 <div *ngIf="isCadastroModalOpen" class="modal">
   <div class="modal-content">
-
     <div class="realizarCadastro">
       <div class="items">
         <h1 class="hypnosText--fonte1">Cadastre-se!</h1>
@@ -74,13 +73,40 @@
             <input [(ngModel)]="email" type="text" class="form-control text-center" placeholder="Email">
           </div>
         </div>
+        
+        <div class="mb-3 row">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input [(ngModel)]="cpf" type="text" class="form-control text-center" placeholder="CPF">
+          </div>
+        </div>
 
         <div class="mb-3 row">
           <div class="input-group">
             <span class="input-group-text">
               <i class="fa-solid fa-lock"></i>
             </span>
-            <input [(ngModel)]="senha" type="text" class="form-control text-center" placeholder="Senha">
+            <input [(ngModel)]="crmv" type="text" class="form-control text-center" placeholder="Crmv">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input [(ngModel)]="especialidade" type="text" class="form-control text-center" placeholder="Especialidade">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input [(ngModel)]="senha" type="text" class="form-control text-center" placeholder="senha">
           </div>
         </div>
 
