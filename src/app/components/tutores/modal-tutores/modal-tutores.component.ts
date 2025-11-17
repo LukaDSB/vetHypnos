@@ -1,21 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { CommonModule } from '@angular/common';
 import { Tutor } from 'src/app/models/tutor.model';
+import { HdkModalFeedbackComponent } from '../../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
 
 @Component({
   selector: 'app-modal-tutores',
   templateUrl: './modal-tutores.component.html',
   styleUrls: ['./modal-tutores.component.scss'],
   standalone: true,
-  imports:[FormsModule, HdkButtonComponent, CommonModule]
+  imports:[FormsModule, HdkButtonComponent, CommonModule, HdkModalFeedbackComponent]
 })
 export class ModalTutoresComponent {
   tutorId?: number;
-  nome: string = '';
-  cpf: string = '';
+  nome?: string;
+  cpf?: string;
   telefone: string = '';
   email: string = '';
   bairro: string = '';
@@ -39,6 +40,8 @@ export class ModalTutoresComponent {
 
   @Output() cadastrar = new EventEmitter<Tutor>();
   @Output() atualizar = new EventEmitter<Tutor>();
+  @ViewChild(HdkModalFeedbackComponent) modalFeedback!: HdkModalFeedbackComponent;
+  
 
 
   openCadastro() {
@@ -104,7 +107,7 @@ export class ModalTutoresComponent {
 
   salvarTutor() {
     if(!this.nome || !this.cpf) {
-      alert('Por favor, preencha todos os campos obrigatórios (nome e cpf) antes de salvar.');
+      this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha todos os campos obrigatórios (*).');
       return;
     }
 
@@ -136,16 +139,14 @@ export class ModalTutoresComponent {
       tutor.endereco = null;
     }
 
-    // 2. Estrutura dos CONTATOS (Ajustado para o JSON esperado)
     tutor.contatos = [];
     
     if (this.telefone) {
       const contatoTelefone: any = {
         descricao: this.telefone,
-        tipoContato: { id: 2, descricao: "telefone" } // ID 2 para telefone (assumido)
+        tipoContato: { id: 2, descricao: "telefone" }
       };
       
-      // Adiciona o ID do contato se for atualização
       if (this.isAtualizarModal && this.idContatoTelefone) {
         contatoTelefone.id = this.idContatoTelefone;
       }

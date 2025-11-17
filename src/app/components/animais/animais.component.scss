@@ -1,5 +1,39 @@
-.underDivisor{
+.underDivisor {
     display: flex;
     justify-content: space-between;
     width: 100%;
+}
+
+.search-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background-color: #f8f9fa;
+    }
+
+    &#id { width: 80px; }
+    &#nome { flex-grow: 1; }
+    &#cpf { width: 200px; }
+    &#endereco { flex-grow: 1; }
+}
+
+hdk-button {
+    margin-bottom: 2px;
 }

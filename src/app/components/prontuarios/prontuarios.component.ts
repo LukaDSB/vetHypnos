@@ -30,7 +30,6 @@ export class ProntuariosComponent implements OnInit {
   }
 
   visualizarProntuario(prontuario: Prontuario): void {
-    // ALTERADO: Adicionamos o objeto 'state' para passar os dados completos do prontuário
     this.router.navigate(['/prontuarios/prontuarioFinalizado', prontuario.id], {
       state: { prontuarioData: prontuario } 
     });
@@ -66,5 +65,9 @@ export class ProntuariosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
+  }
+
+  buscarProntuarios(): void {
+    
   }
 }

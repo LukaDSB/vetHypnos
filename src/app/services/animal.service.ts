@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -25,9 +26,9 @@ export class AnimalService {
   return this.http.get<Animal[]>(`${this.apiUrl}/animal`, { params });
   }
 
-  cadastrarAnimal(animal: Animal): Observable<Animal>{
-    return this.http.post<Animal>(`${this.apiUrl}/animal`, animal);
-  }
+  cadastrarAnimal(animal: Animal): Observable<any> {
+    return this.http.post(`${this.apiUrl}/animal`, animal, { responseType: 'text' as 'json' }); 
+}
 
   deletarAnimal(id:number): Observable<void>{
     return this.http.delete<void>(`${this.apiUrl}/animal/${id}`);

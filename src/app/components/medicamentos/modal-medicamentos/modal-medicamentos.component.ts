@@ -7,16 +7,18 @@ import { Medicamento } from 'src/app/models/medicamento.model';
 import { ModalErroComponent } from '../../hdk/modal-erro/modal-erro.component';
 import { CategoriasMedicamento } from 'src/app/models/CategoriaMedicamento';
 import { CategoriasMedicamentoService } from 'src/app/services/categoriasMedicamento.service';
+import { HdkModalFeedbackComponent } from '../../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
 
 @Component({
   selector: 'app-modal-medicamentos',
   templateUrl: './modal-medicamentos.component.html',
   styleUrls: ['./modal-medicamentos.component.scss'],
   standalone: true,
-  imports:[FormsModule, CommonModule, HdkButtonComponent, ModalErroComponent]
+  imports: [FormsModule, CommonModule, HdkButtonComponent, ModalErroComponent, HdkModalFeedbackComponent]
 })
 export class ModalMedicamentosComponent implements OnInit { 
-  @ViewChild(ModalErroComponent) modalErro!: ModalErroComponent;
+  @ViewChild(HdkModalFeedbackComponent) modalFeedback!: HdkModalFeedbackComponent;
+  
 
   
   isCadastroModalOpen = false;
@@ -90,7 +92,7 @@ export class ModalMedicamentosComponent implements OnInit {
 
   cadastrarMedicamento() {
     if (!this.nome || this.concentracao == null || this.dose_min == null || this.dose_max == null || !this.categoria_medicamento_id) {
-      this.modalErro.abrir('Por favor, preencha todos os campos obrigatórios (*).');
+      this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha os campos obrigatórios (*).'); 
       return;
     }
     const medicamento: Medicamento = {
@@ -107,6 +109,7 @@ export class ModalMedicamentosComponent implements OnInit {
       categoria_id: 0, 
       categoria_medicamento: null
     };
+    this.modalFeedback.open('sucesso', 'Cadastro Realizado', 'Medicamento cadastrado com sucesso.');
 
     this.cadastrar.emit(medicamento);
     this.closeCadastro();
@@ -115,7 +118,7 @@ export class ModalMedicamentosComponent implements OnInit {
   atualizarMedicamento() {
     if (!this.medicamento) return;
     if (!this.nome || this.concentracao == null || this.dose_min == null || this.dose_max == null || !this.categoria_medicamento_id) {
-      this.modalErro.abrir('Por favor, preencha todos os campos obrigatórios (*).');
+      this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha o Nome e Peso do animal.'); 
       return;
     }
     const medicamentoAtualizado: Medicamento = {

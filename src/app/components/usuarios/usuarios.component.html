@@ -20,10 +20,16 @@
         <label for="id">Id</label>
         <input type="text" class="bg-azul form-control" id="id" [(ngModel)]="dataSource.id" disabled />
       </div>
-      <div class="d-flex flex-column me-5" *ngIf="dataSource.especialidade">
-        <label for="especialidade">Especialização / Cargo</label>
-        <input type="text" class="bg-azul form-control" id="especialidade" [(ngModel)]="dataSource.especialidade.nome" disabled />
-      </div>
+      <div class="d-flex flex-column me-5" *ngIf="dataSource.especialidade_id">
+  <label for="especialidade">Especialização / Cargo</label>
+  <input
+    type="text"
+    class="bg-azul form-control"
+    id="especialidade"
+    [value]="especialidadeNome"
+    disabled
+  />
+</div>
       <div class="d-flex flex-column me-5" *ngIf="dataSource.crmv">
         <label for="crmv">CRMV</label>
         <input type="text" class="bg-azul form-control" id="crmv" [(ngModel)]="dataSource.crmv" [disabled]="!editable" />

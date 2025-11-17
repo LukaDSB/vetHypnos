@@ -8,12 +8,11 @@ import { TipoProcedimento } from '../models/tipoProcedimento.model';
   providedIn: 'root',
 })
 export class TipoProcedimentoService {
-    private apiUrl = 'http://localhost:8000/minhaapi';
+  private apiUrl = 'http://localhost:8000/minhaapi';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getTipoProcedimento(): Observable<TipoProcedimento[]> {
-        return this.http.get<TipoProcedimento[]>(`${this.apiUrl}/tipo_procedimento`);
-    }
-
+  getTipoProcedimento(): Observable<TipoProcedimento[]> {
+      return this.http.get<TipoProcedimento[]>(`${this.apiUrl}/tipo_procedimento`);
+  }
 }

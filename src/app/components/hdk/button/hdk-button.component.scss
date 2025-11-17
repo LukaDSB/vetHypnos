@@ -10,6 +10,7 @@ button {
   border-radius: 8px;
   flex-wrap: nowrap;
   text-wrap: nowrap;
+  min-width: 5vw;
   i{
     color: $creme;
   }

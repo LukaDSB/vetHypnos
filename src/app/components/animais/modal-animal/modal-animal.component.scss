@@ -87,8 +87,6 @@ footer{
   -moz-appearance: textfield;
 }
 
-
-
 .autocomplete-container {
   position: relative; 
   width: 100%;
@@ -99,7 +97,7 @@ footer{
   top: 100%; 
   left: 0;
   right: 0;
-  z-index: 1000; 
+  z-index: 999; 
 
   
   background-color: white;

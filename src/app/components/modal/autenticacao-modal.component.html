@@ -28,14 +28,19 @@
             <span class="input-group-text">
               <i class="fa-solid fa-lock"></i>
             </span>
-            <input [(ngModel)]="senha" type="text" class="form-control text-center" placeholder="Senha">
+            <input [(ngModel)]="senha" type="password" class="form-control text-center" placeholder="Senha">
           </div>
         </div>
 
       </div>
 
       <div class="col-auto">
-        <button (click)="login()" type="submit" class="hypnosButtom btn btn-primary mb-3">Entrar</button>
+        <hdk-button
+          text="Entrar"
+          color="hdk-bg-verde" 
+          (click)="login()"
+        >
+        </hdk-button>
       </div>
     </div>
 
@@ -77,7 +82,7 @@
         <div class="mb-3 row">
           <div class="input-group">
             <span class="input-group-text">
-              <i class="fa-solid fa-lock"></i>
+              <i class="fa-solid fa-id-card"></i>
             </span>
             <input [(ngModel)]="cpf" type="text" class="form-control text-center" placeholder="CPF">
           </div>
@@ -86,7 +91,7 @@
         <div class="mb-3 row">
           <div class="input-group">
             <span class="input-group-text">
-              <i class="fa-solid fa-lock"></i>
+              <i class="fa-solid fa-id-card"></i>
             </span>
             <input [(ngModel)]="crmv" type="text" class="form-control text-center" placeholder="Crmv">
           </div>
@@ -95,9 +100,18 @@
         <div class="mb-3 row">
           <div class="input-group">
             <span class="input-group-text">
-              <i class="fa-solid fa-lock"></i>
+              <i class="fa-solid fa-lightbulb"></i>
             </span>
-            <input [(ngModel)]="especialidade" type="text" class="form-control text-center" placeholder="Especialidade">
+            <select 
+              [(ngModel)]="especialidadeId" 
+              name="especialidade" 
+              class="form-control text-center"
+            >
+              <option [ngValue]="null" disabled selected>Especialidade</option> 
+              <option *ngFor="let esp of especialidades" [ngValue]="esp.id">
+                {{ esp.nome }}
+              </option>
+            </select>
           </div>
         </div>
 
@@ -109,13 +123,16 @@
             <input [(ngModel)]="senha" type="text" class="form-control text-center" placeholder="senha">
           </div>
         </div>
-
       </div>
 
       <div class="col-auto">
-        <button (click)="cadastrar()" type="submit" class="hypnosButtom btn btn-primary mb-3">Cadastrar</button>
+        <hdk-button
+          text="Cadastrar"
+          color="hdk-bg-verde" 
+          (click)="cadastrar()"
+        >
+        </hdk-button>
       </div>
     </div>
-
   </div>
 </div>

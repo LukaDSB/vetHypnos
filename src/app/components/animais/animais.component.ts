@@ -9,7 +9,7 @@ import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
 import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
 import { ModalAnimalComponent } from './modal-animal/modal-animal.component';
 import { TutorService } from 'src/app/services/tutor.service';
-import { forkJoin, Subscription } from 'rxjs';
+import { catchError, forkJoin, of, Subscription } from 'rxjs';
 import { Tutor } from 'src/app/models/tutor.model';
 import { HdkModalFeedbackComponent } from '../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
 import { Router } from '@angular/router';
@@ -28,6 +28,7 @@ export class AnimaisComponent implements OnInit {
 
   nomeFiltro: string = '';
   especieFiltro: string = '';
+  tutorFiltro: string = '';
 
   @ViewChild('modalAnimal') modalAnimalComponent!: ModalAnimalComponent;
   @ViewChild(HdkModalFeedbackComponent) modalFeedback!: HdkModalFeedbackComponent;
@@ -48,7 +49,8 @@ export class AnimaisComponent implements OnInit {
   buscarAnimais() {
     const filtros = {
       nome: this.nomeFiltro.trim(),
-      especie: this.especieFiltro.trim()
+      especie: this.especieFiltro.trim(),
+      tutor: this.tutorFiltro.trim()
     };
     
     this.carregarDados(filtros);
@@ -82,20 +84,20 @@ export class AnimaisComponent implements OnInit {
       ...animal,
       data_nascimento: this.formatarDataParaAPI(animal.data_nascimento)
     };
+    
     this.animalService.cadastrarAnimal(animalParaAPI).subscribe({
       next: () => {
         this.carregarDados();
         this.modalFeedback.open('sucesso', 'Sucesso!', 'Novo animal cadastrado.');
       },
       error: (err) => {
-        const mensagemErro = err.error?.message || 'Não foi possível cadastrar o animal.';
-        this.modalFeedback.open('erro', 'Erro!', mensagemErro);
         console.error('Erro ao cadastrar animal:', err);
+
+        const mensagemErro = err.message || err.error?.message || 'Não foi possível cadastrar o animal devido a uma falha na comunicação.';
+        this.modalFeedback.open('erro', 'Erro!', mensagemErro);
       }
     });
-    this.carregarDados();
   }
-
   enviarAtualizacao(animal: Animal) {
     const animalParaAPI = {
         ...animal,
@@ -143,7 +145,12 @@ export class AnimaisComponent implements OnInit {
 
   carregarDados(filtros: any = {}) {
     forkJoin({
-      animais: this.animalService.getAnimais(filtros), 
+      animais: this.animalService.getAnimais(filtros).pipe(
+          catchError(err => {
+              console.error("Falha ao carregar animais:", err);
+              return of([] as Animal[]); 
+          })
+      ), 
       tutores: this.tutorService.getTutores()
     }).subscribe(({ animais, tutores }) => {
       const tutoresMap = new Map<number, Tutor>(tutores.map(t => [t.id, t]));

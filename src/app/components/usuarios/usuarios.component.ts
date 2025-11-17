@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
-import {HdkDivisor} from 'src/app/components/hdk/divisor/hdk-divisor.component';
+import { HdkDivisor } from 'src/app/components/hdk/divisor/hdk-divisor.component';
 import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { EditarFotoUsuarioModalComponent } from './editar-foto-usuario-modal/editar-foto-usuario-modal.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Contato, Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormsModule } from '@angular/forms';
-
-
+import { EspecialidadeUtils } from 'src/app/models/utils/especialidade-utils';
 
 @Component({
   selector: 'app-usuarios',
@@ -27,28 +26,29 @@ export class UsuariosComponent implements OnInit {
   telefoneContato?: Contato;
 
   constructor(private usuarioService: UsuarioService, private location: Location, private authService: AuthService) {}
-   ngOnInit() {
+
+  ngOnInit() {
     this.usuarioLogado = this.authService.getDadosUsuario();
     this.carregarDados();
   }
 
-  voltar(){
+  voltar() {
     this.location.back();
   }
 
-  editarDadosUsuario(){
-     this.editable = !this.editable;
+  editarDadosUsuario() {
+    this.editable = !this.editable;
   }
 
-    get botaoTexto(): string {
+  get botaoTexto(): string {
     return this.editable ? 'Salvar Dados' : 'Editar Dados';
   }
 
-  openModalEditarImagemUsuario(){
+  openModalEditarImagemUsuario() {
     this.isEditUserProfilePictureModalOpen = true;
   }
 
-  onCloseModal(){
+  onCloseModal() {
     this.isEditUserProfilePictureModalOpen = false;
   }
 
@@ -57,8 +57,7 @@ export class UsuariosComponent implements OnInit {
       this.usuarioService.getUsuarioById(this.usuarioLogado.id).subscribe((data: Usuario) => {
         console.log('Dados recebidos da API:', data);
         this.dataSource = data;
-        
-        // 3. CHAME A NOVA FUNÇÃO AQUI
+      
         if (data.clinica?.contatos) {
           this.processarContatos(data.clinica.contatos);
         }
@@ -69,7 +68,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   private processarContatos(contatos: Contato[]): void {
-     console.log('Processando contatos recebidos:', contatos);
+    console.log('Processando contatos recebidos:', contatos);
     this.emailContato = contatos.find(
       c => c.tipo_contato?.descricao.toLowerCase() === 'email'
     );
@@ -80,5 +79,8 @@ export class UsuariosComponent implements OnInit {
     console.log('Telefone encontrado:', this.telefoneContato);
   }
 
-
+  get especialidadeNome(): string {
+    if (!this.dataSource?.especialidade_id) return 'Não especificado';
+    return EspecialidadeUtils.getNome(this.dataSource.especialidade_id);
+  }
 }

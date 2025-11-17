@@ -7,21 +7,27 @@ import { ModalMedicamentosComponent } from './modal-medicamentos/modal-medicamen
 import { HdkDivisor } from '../hdk/divisor/hdk-divisor.component';
 import { HdkButtonComponent } from '../hdk/button/hdk-button.component';
 import { TabelaComponent } from '../hdk/tabela/hdk-tabela.component';
+import { HdkModalFeedbackComponent } from '../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-medicamentos',
   templateUrl: './medicamentos.component.html',
   styleUrls: ['./medicamentos.component.scss'],
   standalone: true,
-  imports: [ModalMedicamentosComponent, HdkDivisor, HdkButtonComponent, TabelaComponent],
+  imports: [ModalMedicamentosComponent, HdkDivisor, HdkButtonComponent, TabelaComponent, HdkModalFeedbackComponent],
 })
 
 export class MedicamentosComponent implements OnInit {
   dataSource: MatTableDataSource<Medicamento> = new MatTableDataSource<Medicamento>([]);
   displayedColumns: string[] = ['id', 'nome', 'concentracao', 'fabricante', 'lote', 'acoes'];
   @ViewChild('modalMedicamentos') modalMedicamentosComponent!: ModalMedicamentosComponent;
+  @ViewChild(HdkModalFeedbackComponent) modalFeedback!: HdkModalFeedbackComponent;
 
   constructor(private location: Location, private medicamentoService: MedicamentoService) {}
+
+    private confirmacaoSubscription?: Subscription;
+  
 
   ngOnInit() {
     this.carregarDados();
@@ -39,17 +45,27 @@ export class MedicamentosComponent implements OnInit {
   }
 
   deletarMedicamento(medicamento: Medicamento) {
-    if (confirm(`Deseja realmente excluir "${medicamento.nome}"?`)) {
+    this.confirmacaoSubscription?.unsubscribe();
+
+    this.modalFeedback.open(
+      'confirmacao',
+      'Confirmar Exclusão',
+      `Deseja realmente excluir o animal "${medicamento.nome}"? Esta ação não pode ser desfeita.`,
+      'Sim, Excluir',
+      'Cancelar'
+    );
+    this.confirmacaoSubscription = this.modalFeedback.confirmado.subscribe(() => {
       this.medicamentoService.deletarMedicamento(medicamento.id).subscribe({
         next: () => {
-          console.log(`Medicamento com ID ${medicamento.id} excluído.`);
+          this.modalFeedback.open('sucesso', 'Sucesso!', `O medicamento "${medicamento.nome}" foi excluído.`);
           this.carregarDados();
         },
         error: (err) => {
-          console.error('Erro ao excluir medicamento:', err);
+          this.modalFeedback.open('erro', 'Erro!', 'Ocorreu um erro ao tentar excluir o animal.');
+          console.error(`Erro ao excluir medicamento de ${medicamento.id}`, err);
         }
       });
-    }
+    });
   }
 
   enviarAtualizacao(medicamento: Medicamento) {
@@ -81,4 +97,6 @@ export class MedicamentosComponent implements OnInit {
   abrirModalCadastro(){
     this.modalMedicamentosComponent.openCadastro();
   }
+
+  buscarMedicamentos(){}
 }

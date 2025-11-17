@@ -1,16 +1,22 @@
 <h2 class="hypnosText--TituloGrande mb-2">Buscar Prontuário</h2>
-<div class="d-flex flex-row justify-content-between container-fluid">
-  <div class="form-group row">
-    <label for="nome">Nome</label>
-    <input type="search" class="bg-azul col-2 form-control" id="nome">
+
+<div class="search-container">
+  <div class="form-group">
+    <label for="medico">Médico</label>
+    <input type="search" class="bg-azul col-2 form-control" id="medico">
+  </div>
+  <div class="form-group">
+    <label for="procedimento">Procedimento</label>
+    <input type="search" class="bg-azul col-2 form-control" id="procedimento">
   </div>
   <hdk-button
     icon="fa-solid fa-search"
     text="Buscar"
-    color="hdk-bg-verde"
-    >
+    (click)="buscarProntuarios()"
+    color="hdk-bg-verde">
   </hdk-button>
 </div>
+
 <hdk-divisor></hdk-divisor>
 <div class="underDivisor">
   <hdk-button

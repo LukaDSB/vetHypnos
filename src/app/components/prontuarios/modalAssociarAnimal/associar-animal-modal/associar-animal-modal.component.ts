@@ -8,13 +8,14 @@ import { Animal } from 'src/app/models/animal.model';
 import { AnimalService } from 'src/app/services/animal.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'associar-animal-modal',
   templateUrl: './associar-animal-modal.component.html',
   styleUrls: ['./associar-animal-modal.component.scss'],
   standalone: true,
-  imports: [FormsModule, CommonModule, HdkButtonComponent, ModalAnimalComponent, ModalAssociarAnimalExistenteComponent]
+  imports: [FormsModule, CommonModule, HdkButtonComponent, ModalAnimalComponent, ModalAssociarAnimalExistenteComponent ]
 })
 export class AssociarAnimalModalComponent {
   modalAssociar = true;
@@ -35,6 +36,7 @@ export class AssociarAnimalModalComponent {
 
   constructor(
     private animalService: AnimalService,
+    private router: Router,
     public dialogRef: MatDialogRef<AssociarAnimalModalComponent>
   ) {}
 
@@ -43,6 +45,10 @@ export class AssociarAnimalModalComponent {
     this.modalAssociar = false;
   }
 
+  irParaAnimais(){
+    this.router.navigate(['/animais']);
+    this.fecharModalPrincipal();
+  }
   
   isModalSelecionarAnimal() {
     this.modalSelecionarPaciete = true;

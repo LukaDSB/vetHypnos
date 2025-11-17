@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HdkButtonComponent } from '../../hdk/button/hdk-button.component';
 import { Animal } from 'src/app/models/animal.model';
@@ -9,15 +9,19 @@ import { EspecieService } from 'src/app/services/especie.service';
 import { Especie } from 'src/app/models/especie.model';
 import { TutorService } from 'src/app/services/tutor.service';
 import { Tutor } from 'src/app/models/tutor.model';
+import { ModalErroComponent } from '../../hdk/modal-erro/modal-erro.component';
+import { HdkModalFeedbackComponent } from '../../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
 
 @Component({
   selector: 'app-modal-animal',
   templateUrl: './modal-animal.component.html',
   styleUrls: ['./modal-animal.component.scss'],
   standalone: true,
-  imports:[FormsModule, CommonModule, HdkButtonComponent, NgxMaskDirective]
+  imports: [FormsModule, CommonModule, HdkButtonComponent, NgxMaskDirective, ModalErroComponent, HdkModalFeedbackComponent]
 })
 export class ModalAnimalComponent implements OnInit{
+    @ViewChild(HdkModalFeedbackComponent) modalFeedback!: HdkModalFeedbackComponent;
+  
     isCadastroModalOpen = false;
     isAtualizarModal = false;
     isDropdownTutorAberto = false;
@@ -65,7 +69,6 @@ export class ModalAnimalComponent implements OnInit{
       this.isDropdownEspecieAberto = false;
     }
   }
-
   
   filtrarEspecies(): void {
     if (!this.buscaEspecie) {
@@ -93,7 +96,6 @@ export class ModalAnimalComponent implements OnInit{
     this.especieAnimal = null;
     this.isDropdownEspecieAberto = false;
   }
-
   
   filtrarTutores(): void {
     
@@ -117,23 +119,21 @@ export class ModalAnimalComponent implements OnInit{
     this.isDropdownTutorAberto = false;
   }
 
-  
   deselecionarTutor(): void {
     this.buscaTutor = '';
     this.TutorAnimal = null;
     this.isDropdownTutorAberto = false;
   }
-
   
   salvarAnimal() {
-    if(!this.nomeAnimal || !this.PesoAnimal) {
-      alert('Por favor, preencha todos os campos obrigatórios antes de salvar.');
+    if(!this.nomeAnimal || this.PesoAnimal <= 0) {
+      this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha o Nome e Peso do animal.'); 
       return;
     }
 
     const dataLimpa = this.DataNascAnimal.replace(/\D/g, '');
     if (this.DataNascAnimal && dataLimpa.length !== 8) {
-      alert('Por favor, insira uma data de nascimento válida no formato DD/MM/AAAA.');
+      this.modalFeedback.open('erro', 'Data Inválida', 'Por favor, insira uma data de nascimento válida no formato DD/MM/AAAA.');
       return;
     }
 
@@ -178,11 +178,12 @@ export class ModalAnimalComponent implements OnInit{
     } else {
       this.DataNascAnimal = '';
     }
-
-    this.SexoAnimal = animal.sexo;
-    this.PesoAnimal = animal.peso;
+    
     this.TutorAnimal = animal.tutor_id;
     this.especieAnimal = animal.especie_id;
+    
+    this.SexoAnimal = animal.sexo;
+    this.PesoAnimal = animal.peso;
 
     this.isCadastroModalOpen = true;
   }

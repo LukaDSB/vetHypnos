@@ -136,6 +136,8 @@
 .logout {
   margin-top: auto;
   margin-bottom: 16px;
+  align-items: center;
+  justify-content: center;
   button{
     width: 12vw;
     i{
@@ -194,7 +196,6 @@ footer {
   z-index: 999;
 }
 
-
 @media (max-width: 992px) {
   .navbar {
     width: 80px; 
@@ -223,4 +224,9 @@ footer {
   .logout button {
     width: 100%;
   }
+}
+
+.botaoSair{
+  align-items: center;
+  justify-content: center;
 }
