@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Especialidade } from 'src/app/models/especialidade.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { EspecialidadeService } from 'src/app/services/especialidade.service';
 import { HdkButtonComponent } from "../hdk/button/hdk-button.component";
+import { HdkModalFeedbackComponent } from '../hdk/hdk-modal-feedback/hdk-modal-feedback.component';
+import { HdkModalComponent } from "../hdk/modal/hdk-modal.component";
 
 
 @Component({
@@ -12,7 +14,7 @@ import { HdkButtonComponent } from "../hdk/button/hdk-button.component";
   templateUrl: './autenticacao-modal.component.html',
   styleUrls: ['./autenticacao-modal.component.scss'],
   standalone: true,
-  imports: [FormsModule, CommonModule, HdkButtonComponent]
+  imports: [FormsModule, CommonModule, HdkButtonComponent, HdkModalComponent, HdkModalFeedbackComponent]
 })
 
 export class AutenticacaoModalComponent implements OnInit {
@@ -27,8 +29,10 @@ export class AutenticacaoModalComponent implements OnInit {
   clinica_id = 1;
   especialidades: Especialidade[] = []; 
   especialidadeId: number | null = null;
+  @ViewChild(HdkModalFeedbackComponent) modalFeedback!: HdkModalFeedbackComponent;
 
   constructor(private authService: AuthService, private especialidadeService: EspecialidadeService) {}
+
 
   ngOnInit(): void {
     this.carregarEspecialidades();
@@ -56,6 +60,11 @@ export class AutenticacaoModalComponent implements OnInit {
   }
 
   cadastrar() { 
+    if (!this.nome || !this.email || !this.senha) {
+        this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha os campos obrigatórios (*)');
+        return;
+    }
+    
     const dados = { 
       nome: this.nome, 
       email: this.email, 
@@ -65,13 +74,26 @@ export class AutenticacaoModalComponent implements OnInit {
       clinica_id: this.clinica_id,
       especialidade_id: this.especialidadeId 
     };
+
     this.authService.registrar(dados).subscribe({
       next: () => {
-        console.log('Cadastro realizado com sucesso!');
-        
+        this.modalFeedback.open('sucesso', 'Sucesso!', 'Cadastro realizado com sucesso! Faça seu login.');
         this.closeCadastro();
       },
-      error: (err) => console.error('Falha no cadastro', err)
+      error: (err) => {
+        console.error('Falha no cadastro', err);
+        
+        let mensagemErro = 'Erro desconhecido no cadastro.';
+        
+        if (err.error && err.error.message) {
+          mensagemErro = err.error.message;
+        } 
+        else if (err.message && err.message.includes('Http failure response')) {
+          mensagemErro = 'Preenchimento incompleto. Verifique todos os campos obrigatórios (Nome, Email, Senha, CPF, CRMV).';
+        }
+        
+        this.modalFeedback.open('erro', 'Erro no Cadastro', mensagemErro);
+      }
     });
   }
 

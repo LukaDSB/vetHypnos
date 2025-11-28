@@ -118,7 +118,7 @@ export class ModalMedicamentosComponent implements OnInit {
   atualizarMedicamento() {
     if (!this.medicamento) return;
     if (!this.nome || this.concentracao == null || this.dose_min == null || this.dose_max == null || !this.categoria_medicamento_id) {
-      this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha o Nome e Peso do animal.'); 
+      this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha os campos obrigatórios (*).'); 
       return;
     }
     const medicamentoAtualizado: Medicamento = {

@@ -127,7 +127,7 @@ export class ModalAnimalComponent implements OnInit{
   
   salvarAnimal() {
     if(!this.nomeAnimal || this.PesoAnimal <= 0) {
-      this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha o Nome e Peso do animal.'); 
+      this.modalFeedback.open('erro', 'Campos Obrigatórios', 'Por favor, preencha os campos obrigatórios (*).'); 
       return;
     }
 
