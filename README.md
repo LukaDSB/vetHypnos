@@ -1,27 +1,80 @@
-# VetHypnos
+🅰️ VetHypnos - Frontend (Cliente Web)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Este diretório contém a interface do usuário do sistema, desenvolvida em Angular 16+. Aqui estão as telas, componentes, serviços de consumo de API e estilos.
 
-## Development server
+🚀 Como Rodar o Frontend
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O Angular precisa de um servidor de desenvolvimento Node.js rodando no terminal para funcionar.
 
-## Code scaffolding
+Passo 1: Instalar Dependências (Obrigatório na 1ª vez)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Dentro da pasta frontend, execute:
 
-## Build
+    npm install
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+Isso vai ler o arquivo package.json e baixar todas as bibliotecas necessárias para a pasta node_modules.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Passo 2: Iniciar o Servidor
 
-## Running end-to-end tests
+Para ver o site funcionando e editá-lo em tempo real:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    ng serve
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ou, se quiser abrir o navegador automaticamente:
+
+    ng serve -o
+
+
+Acesse em: http://localhost:4200/
+
+🔄 Como Atualizar o Projeto
+
+Para garantir que seu ambiente local tenha as mesmas funcionalidades e bibliotecas que o resto da equipe:
+
+Baixar atualizações do código:
+
+    git pull origin develop
+
+
+Atualizar bibliotecas (Importante):
+Se alguém instalou um novo plugin (ex: um calendário novo), o código vai quebrar se você não rodar:
+
+    npm install
+
+
+Dica: Sempre que der erro de "Module not found" após um git pull, rode este comando.
+
+🏗️ Comandos Úteis do Angular
+
+Criar um novo Componente:
+
+    ng g c components/nome-do-componente
+
+
+Criar um novo Serviço:
+
+    ng g s services/nome-do-servico
+
+
+Gerar versão final para produção (Build):
+
+    ng build
+
+
+(Isso cria a pasta dist/ com os arquivos otimizados para colocar no servidor real)
+
+📂 Estrutura de Pastas
+
+/src/app/components: Onde ficam as telas e partes visuais (Header, Modal, Tabelas).
+
+/src/app/components/hdk: É a biblioteca personalizada do projeto, contando com seus componentes genéricos.
+
+/src/app/services: Arquivos que chamam o Backend (PHP).
+
+/src/app/models: Interfaces TypeScript para tipar os dados.
+
+/src/assets: Imagens, ícones e arquivos estáticos.
+
+/src/environments: Configuração da URL da API (Local vs Produção).
